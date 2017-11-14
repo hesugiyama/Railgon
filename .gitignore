@@ -1,1 +1,7 @@
-/bin/
+./bin/Ferrovia/Ferrovia.class
+./bin/Ferrovia/Conexao.class
+./derby.log
+./ferrovia/db.lck
+./ferrovia/log/log.ctrl
+./ferrovia/log/log1.dat
+./ferrovia/log/logmirror.ctrl
