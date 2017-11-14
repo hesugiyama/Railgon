@@ -16,8 +16,12 @@ public class Ferrovia {
 		
 		Factory f = new Factory();
 		
-		
 		Vagao v = f.getVagao();
+
+		
+		/*
+		 * BATATA DO GIRO TA ASSANDO!
+		 */
 		
 		v.setBitola(Vagao.Bitola.A);
 		
