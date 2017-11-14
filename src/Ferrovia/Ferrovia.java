@@ -1,14 +1,56 @@
 package Ferrovia;
 
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import Entidades.Vagao;
+import Repositorio.*;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 		
 public class Ferrovia {
-	
+
 	public static void main (String args[]){
-	
+		
+		Factory f = new Factory();
+		
+		
+		Vagao v = f.getVagao();
+		
+		v.setBitola(Vagao.Bitola.A);
+		
+		v.setSubTipo(Vagao.SubTipo.D);
+		
+		System.out.println(v.getSubTipo());
+		
+		/*
+		 ArrayList<Locomotiva> l = new ArrayList<Locomotiva>();
+		 
+		ArrayList<Vagao> v = new ArrayList<Vagao>();
+		char[] a = {'t','i','a','g','o'};
+		char[] b = {'t','h','i','a','g','o'};
+		
+		l.add(new Locomotiva(1234567));
+		v.add(new Vagao(a));
+		v.add(new Vagao(b));
+		
+		Composicao c = new Composicao();
+		c.setCodigo("compThiago");
+		c.setLocomotivas(l);
+		c.setVagoes(v);
+		
+		Controller control = new Controller();
+		control.connect();
+		String sql = control.create(c);
+		
+		System.out.println(sql);
+		
+	}
+}
+	*/	
+		/*
 		//recebe a classe com o método de conexao
 		Connection conn = null;
 			
@@ -62,6 +104,11 @@ public class Ferrovia {
 						cont = stmt.executeUpdate(sql);
 						System.out.println("Tabela CLIENTE apagada " + cont);
 					break;
+					case 5:
+						sql = "CREATE DATABASE TESTE; USE TESTE;";
+						cont = stmt.executeUpdate(sql);
+						System.out.println("database apagado " + cont);
+					break;
 				}
 				
 			}while(resp!=0);
@@ -76,5 +123,7 @@ public class Ferrovia {
 		
 		Conexao.getInstance().Off();
 		System.exit(0);
+		
+		*/
 	}
 }	

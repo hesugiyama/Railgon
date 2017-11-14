@@ -1,24 +1,40 @@
-package Ferrovia;
+package Repositorio;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class Conexao{
+/** Realiza a conexao com o banco de dados
+ * 	@author GGTRangers
+ */
+public class Conexao{	
 	
-	//instancia da minha propria classe
+	/** Guarda a instancia da propria classe
+	 * 
+	 */
 	private static Conexao instance = null;
 	
-	//conexão com o banco
-	private Connection conn = null;
+	/** Guarda a conexão com o banco
+	 */
+	private static Connection conn = null;
 	
-	//Informar o local do banco de dados, e o cria
+	/** Informa o local do banco de dados, nome e o parâmetro para criar caso nao exista
+	 */
 	private static final String PATH = "jdbc:derby:ferrovia;create=true";
-	//Usuário do banco
+	
+	/** Usuario do banco
+	 */
 	private static final String USER = "app";
-	//Senha do uśuario do banco
+	
+	/** Senha do usuario do banco
+	 */
 	private static final String PASS = "app";
 	
-	//responsavel por instanciar a classe
+	/** Realiza a conexao com o banco de dados
+	 * @param PATH Caminho onde esta o banco de dados
+	 * @param USER Usuário do banco de dados
+	 * @param PASS Senha do usuario
+	 * @see DriverManager
+	 */
 	private Conexao(){
 		try{
 			conn = DriverManager.getConnection(PATH, USER, PASS);
@@ -27,7 +43,9 @@ public class Conexao{
 		}
 	}
 	
-	//responsavel por verificar se existe a instancia da classe, e caos não tenha, chama  o constructor
+	/** Responsavel por realizar a instancia da classe ou devolver a instancia caso ja exista
+	 * @return Conexao Retorna a conexao com o banco de dados
+	 */
 	public static Conexao getInstance(){
 		try{
 			if(instance == null){
@@ -40,7 +58,9 @@ public class Conexao{
 		
 	}
 	
-	//responsavel por devolver a conexão com o banco
+	/** Responsavel por garantir somente uma conexao com o banco
+	 * @return Connection Contem a conexao com o banco
+	 */
 	public Connection On(){
 		if(conn == null){
 			throw new RuntimeException("Conexão não realizada");
@@ -48,7 +68,8 @@ public class Conexao{
 		return conn;
 	} 
 	
-	//responsavel por desligar a conexão e encerrar a instancia
+	/** Responsavel por desligar a conexao com o banco e encerrar a instancia da classe 
+	 */
 	public void Off(){
 		try{
 			//encerra a conexão com o banco
@@ -58,7 +79,5 @@ public class Conexao{
 		}catch(Exception e){
 			throw new RuntimeException("Erro ao encerrar conexão" + e.getMessage());
 		}
-	}
-
-	
+	}	
 }
