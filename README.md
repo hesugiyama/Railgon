@@ -1,2 +1,2 @@
-# poo_ferrovia
+# Railgon
 Trabalho realizado pelos alunos Gabriel Bruno Traldi, Henrique de Oliveira Sugiyama, Leonardo Simionatto de Souza e Tiago da Silva Santana para a matéria de Programação Orientada a Objetos ministrada pelo professor Peter Jandl Junior na Faculdade de Tecnologia de Jundiaí. Este repositório contém as classes utilizadas para montar a simulação de um sistema simples de uma ferrovia, onde a funcionalidade principal é gerenciar uma composição (formada por vagões e locomotivas), assim como o arquivo executável para tal.

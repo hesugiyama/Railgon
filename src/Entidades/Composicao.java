@@ -19,6 +19,8 @@ public class Composicao {
 	 */
 	protected ArrayList<Vagao> vagoes;
 	
+	/** A A soma dos comprimentos dos elementos da composicao
+	 */
 	protected double comprimento;
 	
 	/** Obtem o codigo da Composicao
@@ -27,6 +29,10 @@ public class Composicao {
 	public String getCodigo() {
 		return codigo;
 	}
+	
+	/** A bitola da primeira locomotiva inserida na composicao
+	 */
+	private char bitola;
 	
 	/** Insere o codigo da composicao
 	 * @param codigo 
@@ -90,11 +96,25 @@ public class Composicao {
 	public void setComprimento(double comprimento) {
 		this.comprimento = comprimento;
 	}
-	
-	
-	
-	
-	
 
+	/** Responsavel por inserir um Vagao possa ser inserido na composicao
+	 * @param v
+	 */
+	public void add(Vagao v){
+		if(this.locomotivas.isEmpty()){
+			throw new RuntimeException("Nenhuma Locomotiva na composição!");
+		}
+		this.vagoes.add(v);		
+	}
+	
+	/** Responsavel por inserir uma Locomotiva dentro da composicao
+	 * @param l
+	 */
+	public void add(Locomotiva l){
+		if(this.locomotivas.isEmpty()){
+			this.bitola = l.getBitola();
+		}
+		this.locomotivas.add(l);
+	}
 }
  
