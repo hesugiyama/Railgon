@@ -14,13 +14,27 @@ public class Vagao extends VeiculoFerroviario {
 	protected Tipo tipo;
 	
 	/** SubTipo
-	 * 
 	 */
 	protected SubTipo subTipo;
 	
 	/** Proprietario 
 	 */
 	protected char[] proprietario;
+	
+	/** Construtor do Vagao
+	 * @param bitola
+	 * @param tipo
+	 * @param subtipo
+	 * @param proprietario
+	 * @param comprimento
+	 */
+	public Vagao(Bitola bitola, Tipo tipo, SubTipo subtipo, char[] proprietario, double comprimento){
+		setBitola(bitola);
+		setTipo(tipo);
+		setSubTipo(subtipo);
+		setProprietario(proprietario);
+		setComprimento(comprimento); 
+	}
 	
 	/** Responsavel por obter a identificacao
 	 * @return char[]
@@ -81,5 +95,4 @@ public class Vagao extends VeiculoFerroviario {
 	public void setProprietario(char[] proprietario) {
 		this.proprietario = proprietario;
 	}
-
 }

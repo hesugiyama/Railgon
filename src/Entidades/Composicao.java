@@ -13,56 +13,108 @@ public class Composicao {
 	
 	/** Lista com todas as locomotivas que pertencem a Composicao 
 	 */
-	protected ArrayList<Locomotiva> locomotivas;
+	protected ArrayList<Locomotiva> locomotivas = new ArrayList<>();
 	
 	/** Lista com todos os vagoes que pertencem a Composicao
 	 */
-	protected ArrayList<Vagao> vagoes;
+	protected ArrayList<Vagao> vagoes = new ArrayList<>();
 	
-	/** A A soma dos comprimentos dos elementos da composicao
+	/** A soma dos comprimentos dos elementos da composicao
 	 */
-	protected double comprimento;
+	protected double comprimento = 0.0;
 	
-	/** Obtem o codigo da Composicao
+	/** A bitola da primeira locomotiva inserida na composicao
+	 */
+	private char bitola;
+	
+	/** A soma do peso máximo das locomotivas
+	 * 
+	 */
+	private double pesoMax = 0.0;
+	
+	/** Peso atual da composicao
+	 */
+	private double pesoAtual = 0.0;
+
+	/** Maximo de locomotivas na composicao 
+	 */
+	private static final int MAXLOCOMOTIVA  = 3;
+	
+	/** Comprimento maximo de uma composicao
+	 */
+	private static final double MAXCOMPRIMENTO = 2000;
+	
+	/** Responsavel por obter a bitola da Composicao
+	 * @return char com a bitola da Composicao 
+	 */
+	public char getBitola() {
+		return bitola;
+	}
+
+	/** Responsavel por obter o peso maximo da Composicao
+	 * @return double com o peso maximo da composicao
+	 */
+	public double getPesoMax() {
+		return pesoMax;
+	}
+
+	/** Responsavel por obter o peso atual da Composicao
+	 * @return double com o peso atual da Composicao
+	 */
+	public double getPesoAtual() {
+		return pesoAtual;
+	}
+
+	/** Responsavel por obter o maximo de locomotivas que pode ser inserido em uma Composicao
+	 * @return int com o maximo de Locomotivas permitidas em uma Composicao
+	 */
+	public static int getMaxLocomotiva() {
+		return MAXLOCOMOTIVA;
+	}
+	
+	/** Responsavel por obter o comprimento maximo de uma composicao
+	 * @return double com o comprimento maximo permitido em uma composicao
+	 */	
+	public static double getMaxComprimento() {
+		return MAXCOMPRIMENTO;
+	}
+	
+	/** Responsavel por obter o codigo da Composicao
 	 * @return String com o codigo da Composicao
 	 */
 	public String getCodigo() {
 		return codigo;
 	}
 	
-	/** A bitola da primeira locomotiva inserida na composicao
-	 */
-	private char bitola;
-	
-	/** Insere o codigo da composicao
+	/** Responsavel por inserir o codigo da composicao
 	 * @param codigo 
 	 */
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 	
-	/** Obtem a lista de Locomotivas da Composicao
+	/** Responsavel por obter a lista de Locomotivas da Composicao
 	 * @return ArrayList com as Locomotivas da Composicao
 	 */
 	public ArrayList<Locomotiva> getLocomotivas() {
 		return locomotivas;
 	}
 	
-	/** Insere as Locomotivas na Composicao
+	/** Responsavel por inserir as Locomotivas na Composicao
 	 * @param locomotivas 
 	 */
 	public void setLocomotivas(ArrayList<Locomotiva> locomotivas) {
 		this.locomotivas = locomotivas;
 	}
 	
-	/** Otbtem a lista de Vagoes da Composicao
+	/** Responsavel por Obter a lista de Vagoes da Composicao
 	 * @return ArrayList com os Vagoes da composicao
 	 */
 	public ArrayList<Vagao> getVagoes() {
 		return vagoes;
 	}
 	
-	/** Insere os vagoes na composicao
+	/** Responsavel por inserir os vagoes na composicao
 	 * @param vagoes
 	 */
 	public void setVagoes(ArrayList<Vagao> vagoes) {
@@ -90,13 +142,6 @@ public class Composicao {
 		return comprimento;
 	}
 	
-	/** Responsavel por inserir o comprimento na composicao
-	 * @param comprimento
-	 */
-	public void setComprimento(double comprimento) {
-		this.comprimento = comprimento;
-	}
-
 	/** Responsavel por inserir um Vagao possa ser inserido na composicao
 	 * @param v
 	 */
@@ -104,6 +149,16 @@ public class Composicao {
 		if(this.locomotivas.isEmpty()){
 			throw new RuntimeException("Nenhuma Locomotiva na composição!");
 		}
+		
+		//verifica se o peso do vagão vai exceder o maximo permitido
+		double pesoAux = this.pesoAtual + v.getPesoMaxBitola();
+		if (pesoAux > this.pesoMax){
+			throw new RuntimeException("O vagão excede o peso máximo permitido da composição");
+		}
+		
+		valida(v);
+		
+		this.pesoAtual = pesoAux;
 		this.vagoes.add(v);		
 	}
 	
@@ -111,10 +166,69 @@ public class Composicao {
 	 * @param l
 	 */
 	public void add(Locomotiva l){
+		//se a lista de locomotiva estiver vazia, pega a bitola da primeira, caso contrario, verifica se a bitola é do mesmo tipo da primeira
 		if(this.locomotivas.isEmpty()){
 			this.bitola = l.getBitola();
 		}
-		this.locomotivas.add(l);
+		
+		//limita a tres o numero de locomotivas em uma composicao
+		if(locomotivas.size() >= Composicao.MAXLOCOMOTIVA){
+			throw new RuntimeException("Numero de locomotivas excedente!");
+		}
+		
+		valida(l);		
+		
+		this.pesoMax     += l.getPesoMax();
+		this.locomotivas.add(l);		
+	}
+	
+	/** Responsavel por validar caracteristicas da composicao em relacao aos componentes
+	 * @param vf
+	 */
+	protected void valida(VeiculoFerroviario vf){
+		//valida se o elemento a ser inserido possui a mesma bitola que a Composição
+		if(!(this.bitola == vf.getBitola())){
+			throw new RuntimeException("O elemento deve conter a mesma bitola da Composição!");
+		}
+		//verifica se o tamanho da composicao excede o maximo permitido
+		double comprimentoAux = this.comprimento + vf.getComprimento();
+		if(comprimentoAux > Composicao.MAXCOMPRIMENTO){
+			throw new RuntimeException("Comprimento da composicao excede o maximo permitido!");
+		}
+		this.comprimento = comprimentoAux;
+	}
+	
+	/** Responsavel por remover o objeto da composicao
+	 * @param l
+	 */
+	public void remove(Locomotiva l){
+		int pos = locomotivas.indexOf(l);
+		if(pos != -1){
+			double pesoAux = this.pesoMax - l.getPesoMaxBitola();
+			if(pesoAux < this.pesoAtual){
+				throw new RuntimeException("A Locomotiva não pode ser removida: O peso dos vagoes ultrapassariam o limite!");
+			}
+			locomotivas.remove(pos);
+		}else{
+			throw new RuntimeException("A Locomotiva não pertence a Composição");
+		}
+		this.comprimento-= l.getComprimento();
+		this.pesoMax -= l.getPesoMax();
+	}
+	
+	
+	/** Responsavel por remover o objeto da composicao
+	 * @param v
+	 */
+	public void remove(Vagao v){
+		int pos = vagoes.indexOf(v);
+		if(pos != -1){
+			vagoes.remove(pos);
+		}else{
+			throw new RuntimeException("O Vagão não pertence a Composicão");
+		}
+		this.comprimento-= v.getComprimento();
+		this.pesoAtual-= v.getPesoMaxBitola();
 	}
 }
  

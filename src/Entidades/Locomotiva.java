@@ -14,6 +14,25 @@ public class Locomotiva extends VeiculoFerroviario{
 	 */
 	protected String descricao;
 	
+	/** Responsavel por guardar o peso maximo admissivel pela Locomotiva
+	 */
+	protected double pesoMax;	
+	
+	/** Responsavel por instancial uma Locomotiva
+	 * @param bitola
+	 * @param classe
+	 * @param descricao
+	 * @param comprimento
+	 * @param pesoMax
+	 */
+	public Locomotiva(Bitola bitola, int classe, String descricao, double comprimento, double pesoMax){
+		setBitola(bitola);
+		setClasse(classe);
+		setDescricao(descricao);
+		setComprimento(comprimento);
+		setPesoMax(pesoMax);
+	}
+	
 	/** Responsavel por obter a classe da Locomotiva
 	 * @return int classe da Locomotivaa
 	 */
@@ -42,5 +61,25 @@ public class Locomotiva extends VeiculoFerroviario{
 		this.descricao = descricao;
 	}
 	
+	/** Responsavel por obter o peso maximo admissivel pela Locomotiva
+	 * @return char com o peso maximo admissivel pela Locomotiva
+	 */
+	public double getPesoMax() {
+		return pesoMax;
+	}
+	
+	/** Responsavel por inserir o peso maximo inserido pela Locomotiva
+	 * @param pesoMax
+	 */
+	public void setPesoMax(double pesoMax){
+		this.pesoMax = pesoMax;
+	}
+	
+	/** Responsavel por obter a distancia maxima da bitola
+	 * @return char com a distancia maxima da bitola
+	 */
+	public double getDistanciaMaxBitola() {
+		return bitola.getDistancia();
+	}
 
 }

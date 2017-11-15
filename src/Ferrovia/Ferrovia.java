@@ -4,7 +4,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Entidades.Vagao;
+import org.apache.derby.tools.sysinfo;
+
+import Entidades.*;
 import Repositorio.*;
 
 import java.sql.Connection;
@@ -14,19 +16,52 @@ public class Ferrovia {
 
 	public static void main (String args[]){
 		
+		char[] prop = {'1','1','1','1','1','1'};
+		double comp = 12.0;
+		
 		Factory f = new Factory();
+
+		Vagao v = f.getVagao(VeiculoFerroviario.Bitola.A,
+										  Vagao.Tipo.A,
+										  Vagao.SubTipo.A,
+										  prop,
+										  comp);
 		
-		Vagao v = f.getVagao();
+		Locomotiva l = f.getLocomotiva(VeiculoFerroviario.Bitola.A,
+											   1,
+											   "LOCOMOTIVA TESTE",
+											   8.0,
+											   190.0); 
 		
-		/*
-		 * BATATA DO GIRO TA ASSANDO!
-		 */
+		Composicao c = f.getComposicao();
+
+		c.add(l);
+		c.add(v);
+		c.add(v);
+		c.add(v);
+		c.add(v);
+		c.add(v);
+		c.add(v);				
 		
-		v.setBitola(Vagao.Bitola.A);
+		System.out.println(c.getCodigo());
+		System.out.println(c.getComprimento());
+		System.out.println(c.getQtdLocomotiva());
+		System.out.println(c.getQtdVagao());
+		System.out.println(c.getPesoAtual());
+		System.out.println(c.getPesoMax());
 		
-		v.setSubTipo(Vagao.SubTipo.D);
+		System.out.println("------------------------");
 		
-		System.out.println(v.getSubTipo());
+		System.out.println(c.getCodigo());
+		System.out.println(c.getComprimento());
+		System.out.println(c.getQtdLocomotiva());
+		System.out.println(c.getQtdVagao());
+		System.out.println(c.getPesoAtual());
+		System.out.println(c.getPesoMax());
+		
+		
+		
+		
 		
 		/*
 		 ArrayList<Locomotiva> l = new ArrayList<Locomotiva>();

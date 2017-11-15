@@ -5,6 +5,8 @@ package Entidades;
  */
 public abstract class VeiculoFerroviario {
 	
+	/** Bitola usado por todos os Vagoes
+	 */
 	public static enum Bitola {
 		A,B,C,D,E,F,G,P,Q,R,S,T,U;
 		
@@ -13,7 +15,7 @@ public abstract class VeiculoFerroviario {
 		/** Retorna a distancia da Bitola
 		 * @return Double com a distancia maxima permitida pela bitola
 		 */
-		public double getDistancia(){
+		protected double getDistancia(){
 			//verifica se a letra escolhida contem dentro da String
 			if(b.contains(this.name())){
 				return 1.0;
@@ -25,7 +27,7 @@ public abstract class VeiculoFerroviario {
 		/** Retorna o peso maximo da bitola
 		 * @return Double
 		 */				
-		public double getPeso(){
+		protected double getPeso(){
 			if((this.name().contains("BP"))){
 				return 47.0;
 			}
@@ -47,17 +49,10 @@ public abstract class VeiculoFerroviario {
 			return 30.0;
 		}
 	}
+	
 	/** id do Objeto utilizado na base de dados
 	 */
 	protected int id;
-	
-	/** Numero
-	 */
-	protected char[] numero;
-	
-	/** Bitola
-	 */
-	protected Bitola bitola;
 	
 	/** Comprimento
 	 */
@@ -67,34 +62,9 @@ public abstract class VeiculoFerroviario {
 	 */
 	protected int ordemComposicao;
 	
-	/** Responsavel por obter o numero
-	 * @return Char[] com o numero
+	/** Bitola
 	 */
-	public char[] getNumero() {
-		return numero;
-	}
-	
-	/** Responsavel por inserir o numero
-	 * @param numero
-	 */
-	public void setNumero(char[] numero) {
-		this.numero = numero;
-	}
-	
-	/** Responsavel por obter o peso maximo admissivel pela bitola
-	 * @return char com o peso maximo admissivel pela bitola
-	 */
-	public double getPesoMaxBitola() {
-		//return Bitola.valueOf((String.valueOf(this.bitola))).getPeso();
-		return bitola.getPeso();
-	}
-	
-	/** Responsavel por obter a distancia maxima da bitola
-	 * @return char com a distancia maxima da bitola
-	 */
-	public double getDistanciaMaxBitola() {
-		return bitola.getDistancia();
-	}
+	protected Bitola bitola;
 	
 	/** Responsavel por obter o comprimento 
 	 * @return double com o comprimento
@@ -137,7 +107,7 @@ public abstract class VeiculoFerroviario {
 	public void setComprimento(double comprimento) {
 		this.comprimento = comprimento;
 	}
-
+	
 	/** Responsavel por obter a bitola
 	 * @return char com a bitola
 	 */
@@ -150,5 +120,20 @@ public abstract class VeiculoFerroviario {
 	 */
 	public void setBitola(Bitola bitola) {
 		this.bitola = bitola;
+	}
+	
+	/** Responsavel por obter o peso maximo admissivel pela bitola
+	 * @return char com o peso maximo admissivel pela bitola
+	 */
+	public double getPesoMaxBitola() {
+		//return Bitola.valueOf((String.valueOf(this.bitola))).getPeso();
+		return bitola.getPeso();
+	}
+	
+	/** Responsavel por obter a distancia maxima da bitola
+	 * @return char com a distancia maxima da bitola
+	 */
+	public double getDistanciaMaxBitola() {
+		return bitola.getDistancia();
 	}
 }
