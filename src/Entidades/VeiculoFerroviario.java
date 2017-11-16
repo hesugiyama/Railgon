@@ -3,7 +3,7 @@ package Entidades;
 /** Representacao de caracteristicas comuns entre os Vagoes e as Locomotivas
  * @author GGTRangers
  */
-public abstract class VeiculoFerroviario {
+public abstract class VeiculoFerroviario implements IVeiculoFerroviario{
 	
 	/** Bitola usado por todos os Vagoes
 	 */
@@ -28,22 +28,22 @@ public abstract class VeiculoFerroviario {
 		 * @return Double
 		 */				
 		protected double getPeso(){
-			if((this.name().contains("BP"))){
+			if("BP".contains(this.name())){
 				return 47.0;
 			}
-			if((this.name().contains("CQ"))){
+			if("CQ".contains(this.name())){
 				return 64.0;
 			}
-			if((this.name().contains("DR"))){
+			if("DR".contains(this.name())){
 				return 80.0;
 			}
-			if((this.name().contains("ES"))){
+			if("ES".contains(this.name())){
 				return 100.0;
 			}
-			if((this.name().contains("FT"))){
+			if("FT".contains(this.name())){
 				return 119.0;
 			}
-			if((this.name().contains("GU"))){
+			if("GU".contains(this.name())){
 				return 143.0;
 			}
 			return 30.0;
@@ -120,6 +120,13 @@ public abstract class VeiculoFerroviario {
 	 */
 	public void setBitola(Bitola bitola) {
 		this.bitola = bitola;
+	}
+	
+	/** Responsavel por inserir a bitola
+	 * @param bitola
+	 */
+	public void setBitola(String bitola) {
+		this.bitola = Bitola.valueOf(bitola);
 	}
 	
 	/** Responsavel por obter o peso maximo admissivel pela bitola

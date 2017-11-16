@@ -4,7 +4,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.apache.derby.tools.sysinfo;
+import org.apache.derby.impl.sql.catalog.SYSROUTINEPERMSRowFactory;
 
 import Entidades.*;
 import Repositorio.*;
@@ -13,82 +13,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 		
 public class Ferrovia {
-
+	
 	public static void main (String args[]){
 		
-		char[] prop = {'1','1','1','1','1','1'};
-		double comp = 12.0;
-		
-		Factory f = new Factory();
-
-		Vagao v = f.getVagao(VeiculoFerroviario.Bitola.A,
-										  Vagao.Tipo.A,
-										  Vagao.SubTipo.A,
-										  prop,
-										  comp);
-		
-		Locomotiva l = f.getLocomotiva(VeiculoFerroviario.Bitola.A,
-											   1,
-											   "LOCOMOTIVA TESTE",
-											   8.0,
-											   190.0); 
-		
-		Composicao c = f.getComposicao();
-
-		c.add(l);
-		c.add(v);
-		c.add(v);
-		c.add(v);
-		c.add(v);
-		c.add(v);
-		c.add(v);				
-		
-		System.out.println(c.getCodigo());
-		System.out.println(c.getComprimento());
-		System.out.println(c.getQtdLocomotiva());
-		System.out.println(c.getQtdVagao());
-		System.out.println(c.getPesoAtual());
-		System.out.println(c.getPesoMax());
-		
-		System.out.println("------------------------");
-		
-		System.out.println(c.getCodigo());
-		System.out.println(c.getComprimento());
-		System.out.println(c.getQtdLocomotiva());
-		System.out.println(c.getQtdVagao());
-		System.out.println(c.getPesoAtual());
-		System.out.println(c.getPesoMax());
-		
-		
-		
-		
-		
 		/*
-		 ArrayList<Locomotiva> l = new ArrayList<Locomotiva>();
-		 
-		ArrayList<Vagao> v = new ArrayList<Vagao>();
-		char[] a = {'t','i','a','g','o'};
-		char[] b = {'t','h','i','a','g','o'};
-		
-		l.add(new Locomotiva(1234567));
-		v.add(new Vagao(a));
-		v.add(new Vagao(b));
-		
-		Composicao c = new Composicao();
-		c.setCodigo("compThiago");
-		c.setLocomotivas(l);
-		c.setVagoes(v);
-		
-		Controller control = new Controller();
-		control.connect();
-		String sql = control.create(c);
-		
-		System.out.println(sql);
-		
-	}
-}
-	*/	
-		/*
+		  
 		//recebe a classe com o método de conexao
 		Connection conn = null;
 			
@@ -100,9 +29,9 @@ public class Ferrovia {
 		
 		Scanner scan = new Scanner(System.in);
 		
-		int resp= 0;
+		int resp = 0;
 		int cont = 0;
-		String sql= "";
+		String sql = "";
 		
 		try {
 			

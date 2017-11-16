@@ -33,6 +33,14 @@ public class Locomotiva extends VeiculoFerroviario{
 		setPesoMax(pesoMax);
 	}
 	
+	public Locomotiva(String bitola, int classe, String descricao, double comprimento, double pesoMax){
+		setBitola(bitola);
+		setClasse(classe);
+		setDescricao(descricao);
+		setComprimento(comprimento);
+		setPesoMax(pesoMax);
+	}
+	
 	/** Responsavel por obter a classe da Locomotiva
 	 * @return int classe da Locomotivaa
 	 */
@@ -74,12 +82,38 @@ public class Locomotiva extends VeiculoFerroviario{
 	public void setPesoMax(double pesoMax){
 		this.pesoMax = pesoMax;
 	}
-	
-	/** Responsavel por obter a distancia maxima da bitola
-	 * @return char com a distancia maxima da bitola
-	 */
-	public double getDistanciaMaxBitola() {
-		return bitola.getDistancia();
-	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("CLASSE..............: ");
+		sb.append(getClasse());
+		sb.append("\n");
+		sb.append("DESCRICAO...........: ");
+		sb.append(getDescricao());
+		sb.append("\n");
+		sb.append("COMPRIMENTO.........: ");
+		sb.append(getComprimento());
+		sb.append("\n");
+		sb.append("PESO MAX:...........: ");
+		sb.append(getPesoMax());
+		sb.append("\n");
+		sb.append("BITOLA..............: ");
+		sb.append(getBitola());
+		sb.append("\n");
+		sb.append("PESO MAX BITOLA:....: ");
+		sb.append(getPesoMaxBitola());
+		sb.append("\n");
+		sb.append("DISTANCIA MAX BITOLA: ");
+		sb.append(getDistanciaMaxBitola());
+		
+		return sb.toString();
+	}
+	
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -5,11 +5,15 @@ import java.util.ArrayList;
 /** Representacao de uma Composicao
  * @author GGTRangers
  */
-public class Composicao {
+public class Composicao implements IVeiculoFerroviario {
 	
 	/** Identificador unico da Composicao 
 	 */
 	protected String codigo;
+	
+	/** Identificador unico da Composicao 
+	 */
+	protected String descricao;
 	
 	/** Lista com todas as locomotivas que pertencem a Composicao 
 	 */
@@ -43,6 +47,38 @@ public class Composicao {
 	/** Comprimento maximo de uma composicao
 	 */
 	private static final double MAXCOMPRIMENTO = 2000;
+	
+	/** Construtor da Composicao
+	 */
+	public Composicao(Locomotiva l, String descricao ){
+		add(l);
+		this.descricao = descricao;
+	}
+	
+	/** Construtor da Composicao com todas as locomotivas e vagoes
+	 */
+	public Composicao(ArrayList<Locomotiva> l, ArrayList<Vagao> v, String descricao ){
+		addLocomotivas(l);
+		addVagoes(v);
+		setDescricao(descricao);
+	}
+	
+	/** Responsavel por obter o codigo da Composicao
+	 * @return String Descricao
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	/** Responsavel por inserir a descricao na Composicao
+	 * @param descricao
+	 */
+	public void setDescricao(String descricao) {
+		if(descricao.length() > 200){
+			throw new RuntimeException("A Descrição é muito grande!");
+		}
+		this.descricao = descricao;
+	}
 	
 	/** Responsavel por obter a bitola da Composicao
 	 * @return char com a bitola da Composicao 
@@ -149,17 +185,29 @@ public class Composicao {
 		if(this.locomotivas.isEmpty()){
 			throw new RuntimeException("Nenhuma Locomotiva na composição!");
 		}
-		
 		//verifica se o peso do vagão vai exceder o maximo permitido
 		double pesoAux = this.pesoAtual + v.getPesoMaxBitola();
 		if (pesoAux > this.pesoMax){
 			throw new RuntimeException("O vagão excede o peso máximo permitido da composição");
 		}
 		
+		//verifica se o vagao ja esta na composicao
+		if(vagoes.contains(v)){
+			throw new RuntimeException("O vagao ja esta na composicao!");
+		}
 		valida(v);
 		
 		this.pesoAtual = pesoAux;
 		this.vagoes.add(v);		
+	}
+	
+	/** Responsavel por inserir a lista de vagoes na Composicao
+	 * @param v
+	 */
+	public void addVagoes(ArrayList<Vagao> v){
+		for(int i=0;i<v.size();i++){
+			this.add(v.get(i));
+		}
 	}
 	
 	/** Responsavel por inserir uma Locomotiva dentro da composicao
@@ -176,10 +224,24 @@ public class Composicao {
 			throw new RuntimeException("Numero de locomotivas excedente!");
 		}
 		
+		//verifica se a locomotiva ja esta na composicao
+		if(locomotivas.contains(l)){
+			throw new RuntimeException("A Locomotiva ja esta na composicao!");
+		}
+		
 		valida(l);		
 		
 		this.pesoMax     += l.getPesoMax();
 		this.locomotivas.add(l);		
+	}
+	
+	/** Responsavel por inserir a lista de locomotivas na Composicao
+	 * @param l
+	 */
+	public void addLocomotivas(ArrayList<Locomotiva> l){
+		for(int i=0;i<l.size();i++){
+			this.add(l.get(i));
+		}
 	}
 	
 	/** Responsavel por validar caracteristicas da composicao em relacao aos componentes
@@ -229,6 +291,41 @@ public class Composicao {
 		}
 		this.comprimento-= v.getComprimento();
 		this.pesoAtual-= v.getPesoMaxBitola();
+	}
+
+	@Override
+	public String toString(){
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("DESCRICAO......: ");
+		sb.append(getDescricao());
+		sb.append("\n");
+		sb.append("BITOLA.........: ");
+		sb.append(getBitola());		
+		sb.append("\n");
+		sb.append("COMPRIMENTO....: ");
+		sb.append(getComprimento());
+		sb.append("\n");
+		sb.append("PESO ATUAL.....: ");
+		sb.append(getPesoAtual());
+		sb.append("\n");
+		sb.append("PESO MAXIMO....: ");
+		sb.append(getPesoMax());
+		sb.append("\n");
+		sb.append("QTD LOCOMOTIVAS: ");
+		sb.append(getQtdLocomotiva());
+		sb.append("\n");
+		sb.append("QTD VAGOES.....: ");
+		sb.append(getQtdVagao());
+		sb.append("\n");
+		
+		return sb.toString();
+		
+	}
+	
+	@Override
+	public void save() {
+		 
 	}
 }
  
