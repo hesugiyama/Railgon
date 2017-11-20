@@ -12,6 +12,7 @@ public class Vagao extends VeiculoFerroviario {
 		D,P,F,M,T,S,H,C,B,N,Q,E,R,G,A,L,V;
 		
 		protected boolean valida( Tipo t){
+			
 			String tipo = t.name();
 			boolean ok = false;
 			switch (tipo) {

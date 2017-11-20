@@ -18,6 +18,7 @@ public class Ferrovia {
 		
 		
 		Factory f = new Factory();
+		
 		try{
 			Vagao v = f.getVagao("GHA80990", 80.90);
 			System.out.println(v);		
