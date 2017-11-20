@@ -16,6 +16,15 @@ public class Ferrovia {
 	
 	public static void main (String args[]){
 		
+		
+		Factory f = new Factory();
+		try{
+			Vagao v = f.getVagao("GHA80990", 80.90);
+			System.out.println(v);		
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
 		/*
 		  
 		//recebe a classe com o método de conexao

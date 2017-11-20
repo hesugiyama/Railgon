@@ -41,7 +41,6 @@ public class Controller {
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
-
 	}
 
 	/** Responsavel por inserir um Vagao no banco de dados

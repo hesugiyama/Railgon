@@ -8,7 +8,57 @@ package Entidades;
 public class Vagao extends VeiculoFerroviario {
 	
 	public static enum Tipo {G,P,T,F,I,H,A,C};
-	public static enum SubTipo {D,P,F,M,T,S,H,C,B,N,Q,E,R,G,A,L,V};
+	public static enum SubTipo {
+		D,P,F,M,T,S,H,C,B,N,Q,E,R,G,A,L,V;
+		
+		protected boolean valida( Tipo t){
+			String tipo = t.name();
+			boolean ok = false;
+			switch (tipo) {
+				case "G":
+					if("DPFMTSHCBNQ".contains(this.name())){
+						ok = true;
+					}
+				break;
+				case "P":
+					if("MEDCRTGPBANQ".contains(this.name())){
+						ok = true;
+					}
+				break;
+				case "T":
+					if("CSPFAGNQ".contains(this.name())){
+						ok = true;
+					}
+				break;
+				case "F":
+					if("RSMEHLPVNQ".contains(this.name())){
+						ok = true;
+					}
+				break;
+				case "I":
+					if("CFNQ".contains(this.name())){
+						ok = true;
+					}
+				break;
+				case "H":
+					if("FPETANQ".contains(this.name())){
+						ok = true;
+					}
+				break;
+				case "A":
+					if("CMRVDNQ".contains(this.name())){
+						ok = true;
+					}
+				break;
+				case "C":
+					if("CBNQ".contains(this.name())){
+						ok = true;
+					}
+				break;
+			}
+			return ok;
+		}
+	};
 
 	/** Tipo	
 	 */
@@ -63,10 +113,11 @@ public class Vagao extends VeiculoFerroviario {
 	 * @param identificacao
 	 */
 	protected void setIdentificacao(String identificacao) {
-		this.tipo    = Tipo.valueOf(identificacao.substring(0,1));
-		this.subTipo = SubTipo.valueOf(identificacao.substring(1,2));
-		this.bitola  = Bitola.valueOf(identificacao.substring(2,3));
-		this.proprietario = identificacao.substring(3).toCharArray();
+		setTipo(Tipo.valueOf(identificacao.substring(0,1)));
+		setSubTipo(SubTipo.valueOf(identificacao.substring(1,2)));
+		setBitola(Bitola.valueOf(identificacao.substring(2,3)));
+		setProprietario(identificacao.substring(3).toCharArray());
+		
 		this.identificacao = identificacao;
 	}
 	
@@ -107,6 +158,9 @@ public class Vagao extends VeiculoFerroviario {
 	 * @param subTipo
 	 */
 	public void setSubTipo(SubTipo subTipo) {
+		if(!subTipo.valida(this.tipo)){
+			throw new RuntimeException("Subtipo inválido para o tipo escolhido!");
+		}
 		this.subTipo = subTipo;
 	}
 	
