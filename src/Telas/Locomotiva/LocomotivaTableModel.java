@@ -53,9 +53,9 @@ public class LocomotivaTableModel extends AbstractTableModel {
         Locomotiva l = linhas.get(row);
         
         if(column == COL_ID) { return (Object) l.getId(); } else
-    	if(column == COL_Bitola) { return (Object) l.getBitola(); } else
+    	if(column == COL_Bitola) { return l.getBitola(); } else
         if(column == COL_Comprimento) { return l.getComprimento(); } else
-        if(column == COL_Classe) { return l.getClass(); } else
+        if(column == COL_Classe) { return l.getClasse(); } else
         if(column == COL_Descricao) { return l.getDescricao(); } return "";
     }
     
