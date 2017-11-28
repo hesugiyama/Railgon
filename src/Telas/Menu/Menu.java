@@ -1,9 +1,16 @@
 package Telas.Menu;
 
 import java.awt.event.*;
+import java.util.List;
+
 import javax.swing.*;
 
+import Entidades.Vagao;
+import Repositorio.Controller;
+import Repositorio.Factory;
 import Repositorio.FactoryLayout;
+import Telas.Vagao.ListarVagao;
+import Telas.Vagao.VagaoTableModel;
 
 
 public class Menu extends JFrame {
@@ -17,6 +24,13 @@ public class Menu extends JFrame {
 	
 	FactoryLayout telas = new FactoryLayout();
 	
+	private JPanel panelAdicionarVagao;
+	private JPanel panelListarVagao = telas.openListarVagao();
+	private JPanel panelAdicionarLocomotiva;
+	private JPanel panelListarLocomotiva = telas.openListarLocomotiva();
+	private JPanel panelAdicionarComposicao;
+	private JPanel panelListarComposicao;
+	
 	public Menu() {
 		
 		// Construtor passando título
@@ -25,7 +39,7 @@ public class Menu extends JFrame {
 		// Instanciando o menu
 		JMenuBar mb = new JMenuBar();
 		
-		// Ainda não sei
+		// Instanciando responsável para olhar o objeto quando esse for clicado.
 		MenuHandler mh = new MenuHandler();
 		
 		// Adicionando as opçoes no Menu, sendo Nome da opção, letra sublinhada, conjunto de itens que conterá nela e 
@@ -36,13 +50,21 @@ public class Menu extends JFrame {
 		
 		// Setando o menu
 		setJMenuBar(mb);
+
+		//panelListarVagao = telas.openListarVagao();
+		
+		// Definindo que ao clicar no X para fechar a aplicação, o programa se encerra de fato.
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// Setando o tamanho máximo da tela
 		setExtendedState(this.MAXIMIZED_BOTH);
+		
+		//panelListarVagao.add(telas.openListarVagao());
 	}
 	
 	private class MenuHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			JPanel panelBody = null;
 			String acao = ((JMenuItem) e.getSource()).getText();
 			
 			switch(acao){
@@ -50,38 +72,45 @@ public class Menu extends JFrame {
 				System.exit(0);
 			break;
 			case "Novo Vagão":
-				System.out.println("Novo Vagão");
-				telas.openAdicionarVagao();
+				panelBody = panelAdicionarVagao;
 			break;
 			case "Vagões":
-				System.out.println("Vagões");
-				telas.openListarVagao();
+				getContentPane().removeAll();
+				panelBody = panelListarVagao;	
 			break;
 			case "Nova Locomotiva":
-				System.out.println("Nova Locomotiva");
 				telas.openAdicionarLocomotiva();
 			break;
 			case "Locomotivas":
-				System.out.println("Locomotivas");
-				telas.openListarLocomotiva();
+				getContentPane().removeAll();
+				panelBody = panelListarLocomotiva;	
 			break;
 			case "Nova Composição":
-				System.out.println("Nova Composição");
 				telas.openAdicionarComposicao();
 			break;
 			case "Composições":
-				System.out.println("Composições");
 				telas.openListarComposicao();
 			break;
 			case "Sobre":
-				System.out.println("Sobre");
 				telas.openSobre();
 			break;
 			default:
-				System.err.print("Osh");
+				telas.openAlertError("Osh", "ERRO");
 			break;
 			}
+			
+			try{
+				if(panelBody != null){
+					getContentPane().add(panelBody);
+				}
+				revalidate();
+				repaint();
 				
+			}
+			catch(Exception ex){
+				telas.openAlertError("ERRO - Corpo do painel", "Erro: " + ex.getMessage());
+			}
+			
 		}
 	}
 

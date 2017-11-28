@@ -3,11 +3,20 @@ package Telas.Composicao;
 import java.awt.*;
 import javax.swing.*;
 
-public class ListarComposicao extends JFrame{
+import Telas.Interface.ITelas;
+
+public class ListarComposicao extends JFrame implements ITelas{
 	
 	public ListarComposicao() {
 		super("Listar Composição"); // ajusta título
-		setSize(400, 100);
+		
+		// Todo código aqui 
+	}
+
+	@Override
+	public JPanel GetPanel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -76,7 +76,7 @@ public abstract class VeiculoFerroviario implements IVeiculoFerroviario{
 	/** Responsavel por obter o id
 	 * @return int
 	 */
-	public int getId() {
+	public  int getId() {
 		return id;
 	}
 	

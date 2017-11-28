@@ -3,11 +3,19 @@ package Telas.Vagao;
 import java.awt.*;
 import javax.swing.*;
 
-public class AdicionarVagao extends JFrame{
+import Telas.Interface.ITelas;
+
+public class AdicionarVagao extends JFrame implements ITelas{
 	
 	public AdicionarVagao() {
-		super("Adicionar Vagão"); // ajusta título
-		setSize(400, 100); 
+		super("Adicionar Vagão"); // ajusta título]
+		
+		// Código da tela
+	}
+
+	public JPanel GetPanel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
