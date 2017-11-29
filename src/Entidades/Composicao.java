@@ -11,7 +11,7 @@ public class Composicao implements IVeiculoFerroviario {
 	 */
 	protected String codigo;
 	
-	/** Identificador unico da Composicao 
+	/** Descricao da composicao
 	 */
 	protected String descricao;
 	

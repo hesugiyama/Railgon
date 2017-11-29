@@ -5,37 +5,21 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import Entidades.Locomotiva;
+import Telas.Comum.AbstractTable;
 
-public class LocomotivaTableModel extends AbstractTableModel {
+public class LocomotivaTableModel extends AbstractTable<Locomotiva> {
     
-    private static final int COL_ID = 0;
-    private static final int COL_Bitola = 1;
-    private static final int COL_Comprimento = 2;
-    private static final int COL_Classe = 3;
-    private static final int COL_Descricao = 4;
-    List<Locomotiva> linhas;
-    private String[] colunas = new String[]{"Id", "Bitola", "Comprimento", "Classe", "Descricao"};
+	private static final int COL_Classe = 0;
+	private static final int COL_Descricao = 1;
+    private static final int COL_Bitola = 2;
+    private static final int COL_Comprimento = 3;
     
-    public LocomotivaTableModel(List<Locomotiva> locomotivas){
-        this.linhas = new ArrayList<>(locomotivas);
+    public LocomotivaTableModel(List<Locomotiva> locomotivas, String[] colunasLocomotiva ){
+        super(new ArrayList<>(locomotivas), colunasLocomotiva);
     }
     
-    public int getRowCount(){
-        return linhas.size();
-    }
-    
-    public int getColumnCount(){
-        return colunas.length;
-    }
-    
-    public String getColumnName(int indexColuna){
-        return colunas[indexColuna];
-    }
     
     public Class getColumnClass(int columnIndex) {
-       if (columnIndex == COL_ID) {
-           return Integer.class;
-       }
        if(columnIndex == COL_Bitola){
            return Character.class;
        }
@@ -52,16 +36,10 @@ public class LocomotivaTableModel extends AbstractTableModel {
     public Object getValueAt(int row, int column) {
         Locomotiva l = linhas.get(row);
         
-        if(column == COL_ID) { return (Object) l.getId(); } else
-    	if(column == COL_Bitola) { return l.getBitola(); } else
+    	if(column == COL_Bitola) { return (Object) l.getBitola(); } else
         if(column == COL_Comprimento) { return l.getComprimento(); } else
         if(column == COL_Classe) { return l.getClasse(); } else
         if(column == COL_Descricao) { return l.getDescricao(); } return "";
     }
-    
-
-   public Locomotiva getLocomotiva(int indiceLinha) {
-       return linhas.get(indiceLinha);
-   }
     
 }

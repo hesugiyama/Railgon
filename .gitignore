@@ -6,3 +6,8 @@
 ./ferrovia/log/log1.dat
 ./ferrovia/log/logmirror.ctrl
 /bin/
+ferrovia/log/log.ctrl
+ferrovia/log/log1.dat
+ferrovia/log/logmirror.ctrl
+ferrovia/seg0/c701.dat
+ferrovia/seg0/c711.dat
