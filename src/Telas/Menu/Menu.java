@@ -28,8 +28,8 @@ public class Menu extends JFrame {
 	private JPanel panelListarVagao = telas.openListarVagao();
 	private JPanel panelAdicionarLocomotiva;
 	private JPanel panelListarLocomotiva = telas.openListarLocomotiva();
-	private JPanel panelAdicionarComposicao;
-	private JPanel panelListarComposicao;
+	private JPanel panelAdicionarComposicao = telas.openAdicionarComposicao();
+	private JPanel panelListarComposicao = telas.openListarComposicao();
 	
 	public Menu() {
 		
@@ -86,10 +86,12 @@ public class Menu extends JFrame {
 				panelBody = panelListarLocomotiva;	
 			break;
 			case "Nova Composição":
-				telas.openAdicionarComposicao();
+				getContentPane().removeAll();
+				panelBody = panelAdicionarComposicao;	
 			break;
 			case "Composições":
-				telas.openListarComposicao();
+				getContentPane().removeAll();
+				panelBody = panelListarComposicao;	
 			break;
 			case "Sobre":
 				telas.openSobre();

@@ -21,8 +21,8 @@ public class FactoryLayout {
 	 * @return void
 	 */
 	
-	public void openAdicionarVagao(){
-		new AdicionarVagao().setVisible(true);
+	public JPanel openAdicionarVagao(){
+		return new AdicionarVagao().GetPanel();
 	}
 	
 	/** Responsavel por exibir a tela de listar vag�o
@@ -52,8 +52,8 @@ public class FactoryLayout {
 	/** Responsavel por exibir a tela de adicionar composi��o
 	 * @return void
 	 */
-	public void openAdicionarComposicao(){
-		new AdicionarComposicao().setVisible(true);
+	public JPanel openAdicionarComposicao(){
+		return new AdicionarComposicao().GetPanel();
 	}
 
 	/** Responsavel por exibir a tela de listar composi��o

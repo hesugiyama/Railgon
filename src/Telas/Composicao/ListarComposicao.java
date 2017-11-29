@@ -51,7 +51,7 @@ public class ListarComposicao extends JFrame implements ITelas{
 		private void pesquisar() {
 			try{
 				c.connect();
-		        //lista = c.s
+		        lista = c.selectComposicoes();
 		        modelo = new ComposicaoTableModel(lista, colunas);
 		        tabela.setModel(modelo);
 			}

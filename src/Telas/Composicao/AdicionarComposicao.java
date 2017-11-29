@@ -17,8 +17,9 @@ import Entidades.Composicao;
 import Entidades.Locomotiva;
 import Repositorio.Controller;
 import Repositorio.Factory;
+import Telas.Interface.ITelas;
 
-public class AdicionarComposicao extends JFrame{
+public class AdicionarComposicao extends JFrame implements ITelas{
 	
 	private static Composicao compos = null;
 
@@ -27,6 +28,8 @@ public class AdicionarComposicao extends JFrame{
 	
 	private JList<VeiculoFerroviario> JLdisponiveis;
 	private JList<VeiculoFerroviario> JLAuxiliar;
+	
+	private JPanel JPrincipal;
 	
 	private JPanel JPhead;
 	private JPanel JPbody;
@@ -47,19 +50,19 @@ public class AdicionarComposicao extends JFrame{
 	private JButton JBnovo;
 	private JButton JBcancelar;
 	
-	public AdicionarComposicao() {
-		super("Adicionar Composição"); // ajusta título
+	public AdicionarComposicao(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		iniciaValores();
 		
+		JPrincipal = new JPanel();
+		JPrincipal.setLayout(new BorderLayout());
+		JPrincipal.add(JPhead, BorderLayout.NORTH);
+		JPrincipal.add(JPbody,BorderLayout.CENTER);
+		JPrincipal.add(JPfooter,BorderLayout.SOUTH);
 		
-		Container cp = getContentPane();
+		getContentPane().add(JPrincipal);
 		
-		cp.setLayout(new BorderLayout());
-		cp.add(JPhead, BorderLayout.NORTH);
-		cp.add(JPbody,BorderLayout.CENTER);
-		cp.add(JPfooter,BorderLayout.SOUTH);
 		pack();
 		
 		criaEventos();
@@ -348,5 +351,9 @@ public class AdicionarComposicao extends JFrame{
 	//implementação do método Novo
 	private void btnCancelar(){
 		dispose();
+	}
+
+	public JPanel GetPanel() {
+		return this.JPrincipal;
 	}
 }

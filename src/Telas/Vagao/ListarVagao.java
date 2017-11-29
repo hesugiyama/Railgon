@@ -69,17 +69,22 @@ public class ListarVagao extends JFrame implements ITelas{
         
         tabela.addKeyListener(new KeyListener(){
 			public void keyPressed(KeyEvent e) {
+				vagaoEditar = f.getVagao((String) tabela.getValueAt(tabela.getSelectedRow(), 0), (Double) tabela.getValueAt(tabela.getSelectedRow(), 2));
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
-					vagaoEditar = new Vagao((String) tabela.getValueAt(tabela.getSelectedRow(), 0), (Double) tabela.getValueAt(tabela.getSelectedRow(), 2));
                 	editarVagao(vagaoEditar);
 				}
 				if(e.getKeyCode() == KeyEvent.VK_DELETE){
 					int confirm = tela.openConfirm("Tem certeza que deseja excluir o vagão?");
 					if(confirm == 0){
-						tela.openAlertInfo("", "Excluído com sucesso.");
-						tela.openAlertWarning("", "SQN");
-					    c.connect();
-					    //c.
+						try{
+						    c.connect();
+						    c.remove(vagaoEditar);
+						    tela.openAlertInfo("", "Excluído com sucesso.");
+						    c.disconnect();
+						}
+						catch(Exception ex){
+							tela.openAlertError("ERRO AO EXCLUIR VAGÃO", ex.getMessage());
+						}
 					}
 				}
 				
@@ -108,7 +113,7 @@ public class ListarVagao extends JFrame implements ITelas{
 			tela.openAlertError("ERRO LISTAR VAGÕES", "Ocorreu um erro ao listar os vagões: " + e.getMessage());
 		}	
 		finally{			
-			//c.disconnect();
+			c.disconnect();
 		}
     }
 	
