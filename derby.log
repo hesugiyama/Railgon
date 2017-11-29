@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Wed Nov 29 17:06:54 BRST 2017:
- Inicializando o Derby vers√£o The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): inst√¢ncia a816c00e-0160-092c-b7f0-00000369f1b8
-no diret√≥rio de banco de dados /home/thiago/workspace/Railgon/ferrovia 
+Tue Nov 28 23:16:19 BRST 2017:
+ Inicializando o Derby vers„o The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): inst‚ncia a816c00e-0160-0558-8dfb-00000dc84328
+no diretÛrio de banco de dados C:\wks\Railgon\ferrovia 
 
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_131-8u131-b11-2ubuntu1.16.04.3-b11
-user.dir=/home/thiago/workspace/Railgon
-os.name=Linux
+java.runtime.version=1.8.0_151-b12
+user.dir=C:\wks\Railgon
+os.name=Windows 10
 os.arch=amd64
-os.version=4.4.0-93-generic
+os.version=10.0
 derby.system.home=null
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''
