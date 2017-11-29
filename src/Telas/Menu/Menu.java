@@ -26,7 +26,6 @@ public class Menu extends JFrame {
 	
 	private JPanel panelAdicionarVagao;
 	private JPanel panelListarVagao = telas.openListarVagao();
-	private JPanel panelAdicionarLocomotiva;
 	private JPanel panelListarLocomotiva = telas.openListarLocomotiva();
 	private JPanel panelAdicionarComposicao = telas.openAdicionarComposicao();
 	private JPanel panelListarComposicao = telas.openListarComposicao();

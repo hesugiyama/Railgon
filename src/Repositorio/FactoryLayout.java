@@ -2,15 +2,12 @@ package Repositorio;
 
 import Telas.Vagao.*;
 import Telas.Locomotiva.*;
-<<<<<<< HEAD
 import Entidades.Locomotiva;
-=======
 
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
->>>>>>> 9086c58ecfee9fa1817c2d00347d83ecbb52bbe4
 import Telas.Composicao.*;
 import Telas.Comum.Alert;
 import Telas.Comum.Confirm;
