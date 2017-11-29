@@ -6,8 +6,8 @@ import javax.swing.*;
 public class ListarLocomotiva extends JFrame{
 	
 	public ListarLocomotiva() {
-		super("Listar Locomotiva"); // ajusta título
-		setSize(400, 100); 
+		super("Listar Locomotiva"); // ajusta tï¿½tulo
+		setSize(400, 100);
 	}
-
+	
 }

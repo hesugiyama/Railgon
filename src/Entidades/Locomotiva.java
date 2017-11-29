@@ -86,7 +86,7 @@ public class Locomotiva extends VeiculoFerroviario{
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-
+		/*
 		sb.append("CLASSE..............: ");
 		sb.append(getClasse());
 		sb.append("\n");
@@ -107,6 +107,8 @@ public class Locomotiva extends VeiculoFerroviario{
 		sb.append("\n");
 		sb.append("DISTANCIA MAX BITOLA: ");
 		sb.append(getDistanciaMaxBitola());
+		*/
+		sb.append(getClasse());
 		
 		return sb.toString();
 	}

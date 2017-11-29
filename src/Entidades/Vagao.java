@@ -188,6 +188,7 @@ public class Vagao extends VeiculoFerroviario {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		/* 
 		sb.append("IDENTIFICACAO...: ");
 		sb.append(getIdentificacao());
 		sb.append("\n");
@@ -210,7 +211,9 @@ public class Vagao extends VeiculoFerroviario {
 		sb.append(getDistanciaMaxBitola());
 		sb.append("\n");
 		sb.append("PESO BITOLA.....: ");
-		sb.append(getPesoMaxBitola());		
+		sb.append(getPesoMaxBitola());
+		*/		
+		sb.append(getIdentificacao());
 		return sb.toString();
 	}
 	

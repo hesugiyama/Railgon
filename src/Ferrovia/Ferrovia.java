@@ -4,8 +4,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.apache.derby.impl.sql.catalog.SYSROUTINEPERMSRowFactory;
-
 import Entidades.*;
 import Repositorio.*;
 
@@ -16,18 +14,28 @@ public class Ferrovia {
 	
 	public static void main (String args[]){
 		
-		
 		Factory f = new Factory();
 		
+		Controller control = f.getController();
+		
+		control.connect();
+		
 		try{
-			Vagao v = f.getVagao("GHA80990", 80.90);
-			System.out.println(v);		
+			
+			Vagao v = control.selectVagao("ACG11111");		
+			
+			System.out.println(v.getComprimento()); //10.9
+			
+			/*ArrayList<Vagao> v = control.selectVagoes();
+			for(int i=0; i< v.size(); i++){
+				System.out.println(v.get(i));
+			}*/
+			
 		}catch(Exception e){
 			System.out.println(e.getMessage());
-		}
+		}	
 		
 		/*
-		  
 		//recebe a classe com o método de conexao
 		Connection conn = null;
 			
