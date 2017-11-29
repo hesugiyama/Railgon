@@ -2,6 +2,7 @@ package Repositorio;
 
 import Telas.Vagao.*;
 import Telas.Locomotiva.*;
+import Entidades.Locomotiva;
 import Telas.Composicao.*;
 import Telas.Outras.*;
 
