@@ -38,8 +38,8 @@ public class FactoryLayout {
 	/** Responsavel por exibir a tela de adicionar locomotiva
 	 * @return void
 	 */
-	public JPanel openAdicionarLocomotiva(){
-		return new AdicionarLocomotiva().GetPanel();
+	public void openAdicionarLocomotiva(){
+		new AdicionarLocomotiva().setVisible(true);;
 	}
 	
 	/** Responsavel por exibir a tela de listar locomotiva
