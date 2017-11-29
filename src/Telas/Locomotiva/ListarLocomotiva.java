@@ -16,31 +16,7 @@ import Telas.Vagao.VagaoTableModel;
 public class ListarLocomotiva extends JFrame implements ITelas{
 	
 	private JPanel painelFundo;
-<<<<<<< HEAD
-    //private JPanel painelBotoes;
-    private JTable tabela;
-    private JScrollPane barraRolagem;
-    private LocomotivaTableModel modelo;
-    List<Locomotiva> lista;
-    
-    public ListarLocomotiva() {
-        super("Listar Locomotiva"); // ajusta tï¿½tulo
-        criaJTable();
-        criaJanela();
-    }
-    
-    public void criaJanela(){
-        //painelBotoes = new JPanel();
-        barraRolagem = new JScrollPane(tabela);
-        painelFundo = new JPanel();
-        painelFundo.setLayout(new BorderLayout());
-        painelFundo.add(BorderLayout.CENTER, barraRolagem);
-        //painelFundo.add(BorderLayout.SOUTH, painelBotoes);
-        
-        getContentPane().add(painelFundo);
-        setSize(500, 320);
-       //setVisible(true);
-=======
+
 	private JTable tabela;
 	private JScrollPane barraRolagem;
 	private LocomotivaTableModel modelo;
@@ -57,23 +33,22 @@ public class ListarLocomotiva extends JFrame implements ITelas{
 		criaJanela();
 	}
 	
-	// Método responsável por criar a tela
+	// Mï¿½todo responsï¿½vel por criar a tela
 	public void criaJanela(){
 		barraRolagem = new JScrollPane(tabela);
-		painelFundo = new JPanel();
+		painelFundo = new JPanel(); 	
 		painelFundo.setLayout(new BorderLayout());
 		painelFundo.add(BorderLayout.CENTER, barraRolagem);
 		getContentPane().add(painelFundo);
 	}
 	
-	// Método responsável por criar a tabela e chamar o método que lista os dados
+	// Mï¿½todo responsï¿½vel por criar a tabela e chamar o mï¿½todo que lista os dados
 	private void criaJTable() {
         tabela = new JTable(modelo);
         pesquisar();
->>>>>>> 3ab690435642e21c5cf684b884fc173a79d512ad
     }
 	
-	// Método responsável por listar os dados do vagão e jogar na tabela
+	// Mï¿½todo responsï¿½vel por listar os dados do vagï¿½o e jogar na tabela
 	private void pesquisar() {
 		try{
 			c.connect();

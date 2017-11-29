@@ -12,25 +12,20 @@ import Telas.Comum.Alert;
 import Telas.Comum.Confirm;
 import Telas.Outras.*;
 
-/** Representação de uma Fabrica para chamada de telas
+/** Representaï¿½ï¿½o de uma Fabrica para chamada de telas
  * @author GGTRangers
  */
 public class FactoryLayout {
 	
-<<<<<<< HEAD
-		
-	public void openAdicionarVagao(){
-		new AdicionarVagao().setVisible(true);
-=======
-	/** Responsavel por exibir a tela de adicionar vagão
+	/** Responsavel por exibir a tela de adicionar vagï¿½o
 	 * @return void
 	 */
-	public JPanel openAdicionarVagao(){
-		return new AdicionarVagao().GetPanel();
->>>>>>> 3ab690435642e21c5cf684b884fc173a79d512ad
+	
+	public void openAdicionarVagao(){
+		new AdicionarVagao().setVisible(true);
 	}
 	
-	/** Responsavel por exibir a tela de listar vagão
+	/** Responsavel por exibir a tela de listar vagï¿½o
 	 * @return void
 	 */
 	/*public void openListarVagao(){
@@ -54,14 +49,14 @@ public class FactoryLayout {
 		return new ListarLocomotiva().GetPanel();
 	}
 	
-	/** Responsavel por exibir a tela de adicionar composição
+	/** Responsavel por exibir a tela de adicionar composiï¿½ï¿½o
 	 * @return void
 	 */
 	public JPanel openAdicionarComposicao(){
 		return new AdicionarComposicao().GetPanel();
 	}
 
-	/** Responsavel por exibir a tela de listar composição
+	/** Responsavel por exibir a tela de listar composiï¿½ï¿½o
 	 * @return void
 	 */
 	public JPanel openListarComposicao(){
@@ -83,7 +78,7 @@ public class FactoryLayout {
 		new Alert(0, title, message);
 	}
 	
-	/** Responsavel por exibir o alerta de informação
+	/** Responsavel por exibir o alerta de informaï¿½ï¿½o
 	 * @return void
 	 */
 	public void openAlertInfo(String title, String message){
@@ -97,14 +92,14 @@ public class FactoryLayout {
 		new Alert(2, title, message);
 	}
 	
-	/** Responsavel por exibir o alerta de questão
+	/** Responsavel por exibir o alerta de questï¿½o
 	 * @return void
 	 */
 	public void openAlertQuestion(String title, String message){
 		new Alert(3, title, message);
 	}
 	
-	/** Responsavel por exibir um "modal" de confirmação
+	/** Responsavel por exibir um "modal" de confirmaï¿½ï¿½o
 	 * @return void
 	 */
 	public int openConfirm(String message){
