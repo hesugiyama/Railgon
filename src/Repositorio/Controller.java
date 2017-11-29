@@ -15,6 +15,7 @@ import Entidades.Composicao;
  * @author GGTRangers
  */
 public class Controller {
+	
 
 	/* Responsavel por guardar a conexao com o banco
 	 */

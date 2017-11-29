@@ -6,6 +6,7 @@ import Telas.Composicao.*;
 import Telas.Outras.*;
 
 public class FactoryLayout {
+	
 		
 	public void openAdicionarVagao(){
 		new AdicionarVagao().setVisible(true);

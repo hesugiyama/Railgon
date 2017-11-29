@@ -83,6 +83,7 @@ public class Locomotiva extends VeiculoFerroviario{
 		this.pesoMax = pesoMax;
 	}
 
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
