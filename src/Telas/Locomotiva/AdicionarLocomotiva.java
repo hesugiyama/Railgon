@@ -14,6 +14,7 @@ import Entidades.Locomotiva;
 import Repositorio.Controller;
 import Repositorio.Factory;
 
+<<<<<<< HEAD
 public class AdicionarLocomotiva extends JFrame{
 	//declarando botões
 	private JButton Excluir;
@@ -26,6 +27,11 @@ public class AdicionarLocomotiva extends JFrame{
 	private JTextField campoPesomaxreb;
 	private JTextField campoBitola;
 	private JTextField campoComploc;
+=======
+import Telas.Interface.ITelas;
+
+public class AdicionarLocomotiva extends JFrame implements ITelas{
+>>>>>>> 9086c58ecfee9fa1817c2d00347d83ecbb52bbe4
 	
 	//declarando nome do campo
 	private JLabel Classe;
@@ -53,6 +59,7 @@ public class AdicionarLocomotiva extends JFrame{
 	//metodo que instancia todos campos, botões e chama as seções da pagina
 	public  AdicionarLocomotiva() {
 		super("Adicionar Locomotiva"); // ajusta título
+<<<<<<< HEAD
 		//setSize(400,100); 
 		setResizable(false);
 		
@@ -78,6 +85,16 @@ public class AdicionarLocomotiva extends JFrame{
 		cp.add(Jbody, BorderLayout.CENTER);
 		cp.add(Jfooter, BorderLayout.SOUTH);
 		pack();
+=======
+		
+		// Todo código aqui
+	}
+
+	@Override
+	public JPanel GetPanel() {
+		// TODO Auto-generated method stub
+		return null;
+>>>>>>> 9086c58ecfee9fa1817c2d00347d83ecbb52bbe4
 	}
 	//metodo da seção head da pagina onde contém classe e descrição da locomotiva
 	private void Jhead(){

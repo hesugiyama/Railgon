@@ -9,6 +9,7 @@ import Entidades.*;
  */
 public class Factory {
 	
+	
 	/** Responsavel por criar um novo Vagao
 	 * @return Retorna a instância de um Vagao
 	 */
