@@ -8,7 +8,8 @@ import java.sql.Statement;
 /** Realiza a conexao com o banco de dados
  * 	@author GGTRangers
  */
-public class Conexao{	
+public class Conexao{
+	
 	
 	/** Guarda a instancia da propria classe
 	 * 

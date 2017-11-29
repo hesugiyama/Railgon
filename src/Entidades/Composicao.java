@@ -9,7 +9,7 @@ public class Composicao implements IVeiculoFerroviario {
 	
 	/** Identificador unico da Composicao 
 	 */
-	protected String codigo;
+	protected int codigo;
 	
 	/** Descricao da composicao
 	 */
@@ -118,14 +118,14 @@ public class Composicao implements IVeiculoFerroviario {
 	/** Responsavel por obter o codigo da Composicao
 	 * @return String com o codigo da Composicao
 	 */
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 	
 	/** Responsavel por inserir o codigo da composicao
 	 * @param codigo 
 	 */
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	
@@ -260,18 +260,25 @@ public class Composicao implements IVeiculoFerroviario {
 		this.comprimento = comprimentoAux;
 	}
 	
+	public int teste(Locomotiva l){
+		return locomotivas.indexOf(l);
+	}
 	/** Responsavel por remover o objeto da composicao
 	 * @param l
 	 */
 	public void remove(Locomotiva l){
 		int pos = locomotivas.indexOf(l);
 		if(pos != -1){
-			double pesoAux = this.pesoMax - l.getPesoMaxBitola();
+			if(locomotivas.size() == 1){
+				throw new RuntimeException("A Composição não pode ficar sem Locomotiva!");
+			}
+			double pesoAux = this.pesoMax - l.getPesoMax();
 			if(pesoAux < this.pesoAtual){
 				throw new RuntimeException("A Locomotiva não pode ser removida: O peso dos vagoes ultrapassariam o limite!");
 			}
 			locomotivas.remove(pos);
 		}else{
+			//throw new RuntimeException(this.getClass().getName() + "@" + Integer.toHexString(hashCode()));
 			throw new RuntimeException("A Locomotiva não pertence a Composição");
 		}
 		this.comprimento-= l.getComprimento();
@@ -320,7 +327,6 @@ public class Composicao implements IVeiculoFerroviario {
 		sb.append("\n");
 		
 		return sb.toString();
-		
 	}
 	
 	@Override

@@ -22,6 +22,7 @@ import Telas.Vagao.VagaoTableModel;
 public class ListarLocomotiva extends JFrame implements ITelas{
 	
 	private JPanel painelFundo;
+
 	private JTable tabela;
 	private JScrollPane barraRolagem;
 	
@@ -40,16 +41,16 @@ public class ListarLocomotiva extends JFrame implements ITelas{
 		criaJanela();
 	}
 	
-	// Método responsável por criar a tela
+	// Mï¿½todo responsï¿½vel por criar a tela
 	public void criaJanela(){
 		barraRolagem = new JScrollPane(tabela);
-		painelFundo = new JPanel();
+		painelFundo = new JPanel(); 	
 		painelFundo.setLayout(new BorderLayout());
 		painelFundo.add(BorderLayout.CENTER, barraRolagem);
 		getContentPane().add(painelFundo);
 	}
 	
-	// Método responsável por criar a tabela e chamar o método que lista os dados
+	// Mï¿½todo responsï¿½vel por criar a tabela e chamar o mï¿½todo que lista os dados
 	private void criaJTable() {
         tabela = new JTable(modelo);
         tabela.addMouseListener(new MouseListener() {
@@ -104,8 +105,7 @@ public class ListarLocomotiva extends JFrame implements ITelas{
 	protected void EditarLocomotiva(Locomotiva locomotivaEditar) {
 		System.out.println(locomotivaEditar);
 	}
-	
-	// Método responsável por listar os dados do vagão e jogar na tabela
+
 	private void pesquisar() {
 		try{
 			c.connect();
