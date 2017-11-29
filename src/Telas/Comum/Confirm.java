@@ -13,15 +13,18 @@ import javax.swing.JOptionPane;
  */
 public class Confirm extends JFrame {
 	
-	private String message;
-	
+	private int retorno;
 	public Confirm(String message){
 		
 		Object[] options = { "Sim", "Não" };
-		JOptionPane.showOptionDialog(null, message,
+		retorno = JOptionPane.showOptionDialog(null, message,
 				"Confirmação", JOptionPane.YES_NO_OPTION,
 				JOptionPane.WARNING_MESSAGE, null, options,
 				options[0]);
 		
+	}
+	
+	public int getRetorno(){
+		return this.retorno;
 	}
 }

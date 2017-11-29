@@ -87,7 +87,7 @@ public class FactoryLayout {
 	/** Responsavel por exibir o alerta de warning
 	 * @return void
 	 */
-	public void openAlertWaring(String title, String message){
+	public void openAlertWarning(String title, String message){
 		new Alert(2, title, message);
 	}
 	
@@ -101,8 +101,8 @@ public class FactoryLayout {
 	/** Responsavel por exibir um "modal" de confirmação
 	 * @return void
 	 */
-	public void openConfirm(String message){
-		new Confirm(message);
+	public int openConfirm(String message){
+		return new Confirm(message).getRetorno();
 	}
 	
 }
