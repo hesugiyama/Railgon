@@ -9,6 +9,7 @@ import Entidades.Locomotiva;
 import Entidades.Vagao;
 import Repositorio.Controller;
 import Repositorio.Factory;
+import Repositorio.FactoryLayout;
 import Telas.Interface.ITelas;
 import Telas.Vagao.VagaoTableModel;
 
@@ -19,8 +20,12 @@ public class ListarLocomotiva extends JFrame implements ITelas{
 	private JScrollPane barraRolagem;
 	private LocomotivaTableModel modelo;
 	
+	private FactoryLayout tela = new FactoryLayout();
+    private Factory f = new Factory();
+    private Controller c = f.getController();
+	
 	List<Locomotiva> lista;
-	private String[] colunas = new String[]{"Id", "Bitola", "Comprimento", "Classe", "Descricao"};
+	private String[] colunas = new String[]{ "Classe", "Descricao", "Bitola", "Comprimento"};
 	
 	public ListarLocomotiva() {
 		criaJTable();
@@ -44,12 +49,18 @@ public class ListarLocomotiva extends JFrame implements ITelas{
 	
 	// Método responsável por listar os dados do vagão e jogar na tabela
 	private void pesquisar() {
-        Factory f = new Factory();
-        Controller c = f.getController();
-        c.connect();
-        lista = c.selectLocomotivas();
-        modelo = new LocomotivaTableModel(lista, colunas);
-        tabela.setModel(modelo);
+		try{
+			c.connect();
+	        lista = c.selectLocomotivas();
+	        modelo = new LocomotivaTableModel(lista, colunas);
+	        tabela.setModel(modelo);
+		}
+        catch(Exception e){
+        	tela.openAlertError("ERRO LISTAR LOCOMOTIVAS", "Ocorreu um erro ao listar as locomotivas: " + e.getMessage());
+        }
+		finally{
+			//c.desconnect();
+		}
     }
 	
 	public JPanel GetPanel(){
