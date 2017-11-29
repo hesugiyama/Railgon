@@ -52,8 +52,8 @@ public class FactoryLayout {
 	/** Responsavel por exibir a tela de adicionar composi��o
 	 * @return void
 	 */
-	public JPanel openAdicionarComposicao(){
-		return new AdicionarComposicao().GetPanel();
+	public void openAdicionarComposicao(){
+		new AdicionarComposicao().setVisible(true);
 	}
 
 	/** Responsavel por exibir a tela de listar composi��o
