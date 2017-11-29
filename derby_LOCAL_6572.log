@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Tue Nov 28 22:35:19 BRST 2017:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instância a816c00e-0160-0532-dcea-00000e2eb890
+Sat Nov 25 16:20:21 BRST 2017:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instância a816c00e-015f-f468-a98d-00000e43ced8
 no diretório de banco de dados C:\wks\Railgon\ferrovia 
 
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_151-b12
+java.runtime.version=1.8.0_121-b13
 user.dir=C:\wks\Railgon
 os.name=Windows 10
 os.arch=amd64
