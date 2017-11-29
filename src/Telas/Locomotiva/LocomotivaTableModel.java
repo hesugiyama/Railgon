@@ -13,6 +13,7 @@ public class LocomotivaTableModel extends AbstractTable<Locomotiva> {
 	private static final int COL_Descricao = 1;
     private static final int COL_Bitola = 2;
     private static final int COL_Comprimento = 3;
+    private static final int COL_PesoMaximo = 4;
     
     public LocomotivaTableModel(List<Locomotiva> locomotivas, String[] colunasLocomotiva ){
         super(new ArrayList<>(locomotivas), colunasLocomotiva);
@@ -20,10 +21,7 @@ public class LocomotivaTableModel extends AbstractTable<Locomotiva> {
     
     
     public Class getColumnClass(int columnIndex) {
-       if(columnIndex == COL_Bitola){
-           return Character.class;
-       }
-       if(columnIndex == COL_Comprimento){
+       if(columnIndex == COL_Comprimento || columnIndex == COL_PesoMaximo ){
            return Double.class;
        }
        if(columnIndex == COL_Classe){
@@ -39,7 +37,8 @@ public class LocomotivaTableModel extends AbstractTable<Locomotiva> {
     	if(column == COL_Bitola) { return (Object) l.getBitola(); } else
         if(column == COL_Comprimento) { return l.getComprimento(); } else
         if(column == COL_Classe) { return l.getClasse(); } else
-        if(column == COL_Descricao) { return l.getDescricao(); } return "";
+        if(column == COL_Descricao) { return l.getDescricao(); } else
+        if(column == COL_PesoMaximo) { return l.getPesoMax(); }; return "";
     }
     
 }

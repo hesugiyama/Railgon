@@ -53,7 +53,6 @@ public class ListarVagao extends JFrame implements ITelas{
 	// Método responsável por criar a tabela e chamar o método que lista os dados
 	private void criaJTable() {
         tabela = new JTable(modelo);
- 
         tabela.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if(e.getClickCount() == 2){
