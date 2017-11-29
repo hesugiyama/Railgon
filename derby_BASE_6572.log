@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Nov 16 18:11:39 BRST 2017:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instância a816c00e-015f-c675-5387-000003013fa8
+no diretório de banco de dados /home/thiago/workspace/Railgon/ferrovia 
+
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_131-8u131-b11-2ubuntu1.16.04.3-b11
+user.dir=/home/thiago/workspace/Railgon
+os.name=Linux
+os.arch=amd64
+os.version=4.4.0-93-generic
+derby.system.home=null
+Carregador de classe do banco de dados iniciado - derby.database.classpath=''

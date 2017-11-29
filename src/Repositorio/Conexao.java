@@ -32,17 +32,21 @@ public class Conexao{
 	 */
 	private static final String PASS = "app";
 	
+	private static FactoryLayout layout = new FactoryLayout();
+	
 	/** Realiza a conexao com o banco de dados
 	 * @param PATH Caminho onde esta o banco de dados
 	 * @param USER Usu√°rio do banco de dados
 	 * @param PASS Senha do usuario
 	 * @see DriverManager
 	 */
+	
 	private Conexao(){
 		try{
 			conn = DriverManager.getConnection(PATH, USER, PASS);
 		}catch(Exception e){
-			throw new RuntimeException("Erro ao carregar o Driver " + e.getMessage());
+			layout.openAlertError("ERRO DE CONEX√O", ("Erro ao carregar o Driver " + e.getMessage()));
+			throw new RuntimeException();
 		}
 	}
 	
@@ -56,7 +60,8 @@ public class Conexao{
 			}
 			return instance;
 		}catch(Exception e){
-			throw new RuntimeException("Erro ao pegar a instancia! " + e.getMessage());
+			layout.openAlertError("ERRO DE CONEX√O", ("Erro ao pegar a instancia! " + e.getMessage()));
+			throw new RuntimeException();
 		}		
 	}
 	
@@ -65,7 +70,7 @@ public class Conexao{
 	 */
 	public Connection On(){
 		if(conn == null){
-			throw new RuntimeException("Conex√£o n√£o realizada!");
+			layout.openAlertError("ERRO DE CONEX√O", ("Conex„o n„o realizada!"));
 		}
 		return conn;
 	} 
@@ -79,7 +84,8 @@ public class Conexao{
 			conn = null;
 			instance = null;
 		}catch(Exception e){
-			throw new RuntimeException("Erro ao encerrar conex√£o" + e.getMessage());
+			layout.openAlertError("ERRO DE CONEX√O", ("Erro ao encerrar conex„o" + e.getMessage()));
+			throw new RuntimeException();
 		}
 	}
 	/** Responsavel por criar o banco na primeira execucao
@@ -132,7 +138,8 @@ public class Conexao{
 			//insere as bitolas no banco e retorna o numero de linhas afetadas
 			pstmt.executeUpdate();
 		}catch(Exception e){
-			throw new RuntimeException("N√£o foi possivel criar as tabelas!" + e.getMessage());
+			layout.openAlertError("ERRO AO CRIAR TELAS", ("N„o foi possivel criar as tabelas!" + e.getMessage()));
+			throw new RuntimeException();
 		}				
 	}
 }
