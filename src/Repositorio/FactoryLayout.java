@@ -5,6 +5,7 @@ import Telas.Locomotiva.*;
 import Entidades.Locomotiva;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 
 import javax.swing.JPanel;
 
@@ -39,15 +40,22 @@ public class FactoryLayout {
 	/** Responsavel por exibir a tela de adicionar locomotiva
 	 * @return void
 	 */
-	public void openAdicionarLocomotiva(){
-		new AdicionarLocomotiva().setVisible(true);;
+	public void openAdicionarLocomotiva(LocomotivaTableModel modelo){
+		new AdicionarLocomotiva(modelo).setVisible(true);
+	}
+	
+	/** Responsavel por exibir a tela com os dados para atualizar a locomotiva
+	 * @return void
+	 */
+	public void openAtualizarLocomotiva(LocomotivaTableModel modelo, int linhas, Locomotiva locomotiva){
+		new AdicionarLocomotiva(modelo, linhas, locomotiva).setVisible(true);
 	}
 	
 	/** Responsavel por exibir a tela de listar locomotiva
 	 * @return void
 	 */
-	public JPanel openListarLocomotiva(){
-		return new ListarLocomotiva().GetPanel();
+	public ListarLocomotiva openListarLocomotiva(){
+		return new ListarLocomotiva();
 	}
 	
 	/** Responsavel por exibir a tela de adicionar composi��o

@@ -13,8 +13,14 @@ import com.jgoodies.forms.layout.FormLayout;
 import Entidades.Locomotiva;
 import Repositorio.Controller;
 import Repositorio.Factory;
+import Telas.Interface.ITelas;
 
 public class AdicionarLocomotiva extends JFrame{
+	
+	private LocomotivaTableModel modelo;
+	private Locomotiva locomotiva = null;
+	private int linha;
+	
 	//declarando botões
 	private JButton Excluir;
 	private JButton Salvar;
@@ -39,23 +45,27 @@ public class AdicionarLocomotiva extends JFrame{
 	JPanel Jbody;
 	JPanel Jfooter;
 	
+	//JPanel Jprincipal;
+	
 	//em caso tenha locomotiva adicionada, o botão Excluir irá aparecer na tela
 	//Setando campos da locomotiva para caso haja adicionado, irá poder excluir.
-	public AdicionarLocomotiva(Locomotiva l) {
-		this();
-		this.campoClasse.setText(String.valueOf(l.getClasse()));
-		this.campoDescricao.setText(String.valueOf(l.getDescricao()));
-		this.campoPesomaxreb.setText(String.valueOf(l.getPesoMax()));
-		this.campoBitola.setText(String.valueOf(l.getBitola()));
-		this.campoComploc.setText(String.valueOf(l.getComprimento()));
+	public AdicionarLocomotiva(LocomotivaTableModel md, int linhaSelecionada, Locomotiva l) {
+		this(md);
+		locomotiva = l;
+		linha = linhaSelecionada;
+		this.campoClasse.setText(String.valueOf(locomotiva.getClasse()));
+		this.campoDescricao.setText(String.valueOf(locomotiva.getDescricao()));
+		this.campoPesomaxreb.setText(String.valueOf(locomotiva.getPesoMax()));
+		this.campoBitola.setText(String.valueOf(locomotiva.getBitola()));
+		this.campoComploc.setText(String.valueOf(locomotiva.getComprimento()));
 		Excluir.setVisible(true);
 	}
 	//metodo que instancia todos campos, botões e chama as seções da pagina
-	public  AdicionarLocomotiva() {
-		super("Adicionar Locomotiva"); // ajusta título
+	public  AdicionarLocomotiva(LocomotivaTableModel md) {
+		//super("Adicionar Locomotiva"); // ajusta título
 		//setSize(400,100); 
-		setResizable(false);
-		
+		//setResizable(false);
+		modelo = md;
 		campoClasse = new JTextField();
 		campoDescricao = new JTextField();
 		campoPesomaxreb = new JTextField();
@@ -69,6 +79,7 @@ public class AdicionarLocomotiva extends JFrame{
 		Excluir = new JButton("Excluir");
 		Salvar = new JButton("Salvar");
 		Novo = new JButton("Novo");
+		//Jprincipal = new JPanel();
 		Jhead();
 		Jbody();
 		Jfooter();	
@@ -133,18 +144,21 @@ public class AdicionarLocomotiva extends JFrame{
 	//ação para o botão excluir 
 	ActionListener Excluir1 = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			Factory f = new Factory();
+			Controller c = f.getController();
 			try {
-				Factory f = new Factory();
-				Controller c = f.getController();
 				c.connect();
-				//c.remove(l);
-				//JOptionPane.showMessageDialog(null,"A locomotiva foi removida com sucesso!");
-				//Locomotiva l = c.selectLocomotiva("11111");
+				c.remove(locomotiva);
+				JOptionPane.showMessageDialog(null,"A locomotiva foi removida com sucesso!");
+				modelo.removeLocomotiva(linha);
 			}catch(Exception err){
 				JOptionPane.showMessageDialog(null, err.getMessage());
 				return;
+			} finally{
+				c.disconnect();
 			}
 			
+			dispose();
 		}
 	};
 	//açao para o botão salvar
@@ -187,19 +201,32 @@ public class AdicionarLocomotiva extends JFrame{
 			}
 			//ação para caso clique no botão salvar e todos os campos estejam certos
 			//conexão com o banco de dados, salvar no banco de dados e desconectar do banco
+			Factory f = new Factory();
+			Controller c = f.getController();
 			try {
-				Factory f = new Factory();
-				Controller c = f.getController();
 				Locomotiva l = f.getLocomotiva(bitola, classe, descricao, comploc, pesomaxreb);
 				c.connect();
-				c.create(l);//salvar no banco
-				JOptionPane.showMessageDialog(null,"A locomotiva foi salva com sucesso!");	
+				if(locomotiva == null){
+					c.create(l);//salvar no banco
+					JOptionPane.showMessageDialog(null,"A locomotiva foi salva com sucesso!");			
+					modelo.addLocomotiva(l);
+				}
+				else
+				{
+					c.update(l);
+					JOptionPane.showMessageDialog(null,"A locomotiva foi alterada com sucesso!");
+					modelo.updateLocomotiva(linha, l);
+				}
+				
 			}catch(Exception err){
 				JOptionPane.showMessageDialog(null,err.getMessage());	
 			}finally{
-				//c.disconnect();//desconectar do banco
+				c.disconnect();//desconectar do banco
 			}
+		
+			dispose();
 		}	
+		
 	};
 	//ação para o botão novo, limpa os campos
 	ActionListener Novo1 = new ActionListener() {
@@ -211,6 +238,11 @@ public class AdicionarLocomotiva extends JFrame{
 				campoComploc.setText(" ");
 		}
 	};
+
+	/*@Override
+	public JPanel GetPanel() {
+		return this.Jprincipal;
+	}*/
 }
 
 /*private void excecao() {

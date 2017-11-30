@@ -9,6 +9,7 @@ import Entidades.Vagao;
 import Repositorio.Controller;
 import Repositorio.Factory;
 import Repositorio.FactoryLayout;
+import Telas.Locomotiva.ListarLocomotiva;
 import Telas.Vagao.ListarVagao;
 import Telas.Vagao.VagaoTableModel;
 
@@ -26,9 +27,10 @@ public class Menu extends JFrame {
 	
 	private JPanel panelAdicionarVagao;
 	private JPanel panelListarVagao = telas.openListarVagao();
-	private JPanel panelListarLocomotiva = telas.openListarLocomotiva();
+	private ListarLocomotiva panelListarLocomotiva = telas.openListarLocomotiva();
 	private JPanel panelAdicionarComposicao = telas.openAdicionarComposicao();
 	private JPanel panelListarComposicao = telas.openListarComposicao();
+	//private JPanel panelAdicionarLocomotiva = telas.openAdicionarLocomotiva();
 	
 	public Menu() {
 		
@@ -78,11 +80,11 @@ public class Menu extends JFrame {
 				panelBody = panelListarVagao;	
 			break;
 			case "Nova Locomotiva":
-				telas.openAdicionarLocomotiva();
+				telas.openAdicionarLocomotiva(panelListarLocomotiva.GetModelo());
 			break;
 			case "Locomotivas":
 				getContentPane().removeAll();
-				panelBody = panelListarLocomotiva;	
+				panelBody = panelListarLocomotiva.GetPanel();	
 			break;
 			case "Nova Composição":
 				getContentPane().removeAll();
@@ -93,7 +95,7 @@ public class Menu extends JFrame {
 				panelBody = panelListarComposicao;	
 			break;
 			case "Sobre":
-				telas.openSobre();
+				 telas.openSobre();
 			break;
 			default:
 				telas.openAlertError("Osh", "ERRO");
