@@ -13,10 +13,12 @@ import com.jgoodies.forms.layout.FormLayout;
 import Entidades.Locomotiva;
 import Repositorio.Controller;
 import Repositorio.Factory;
+import Repositorio.FactoryLayout;
 import Telas.Interface.ITelas;
 
 public class AdicionarLocomotiva extends JFrame{
 	
+	//declarações necessárias para atualizar a tabela
 	private LocomotivaTableModel modelo;
 	private Locomotiva locomotiva = null;
 	private int linha;
@@ -45,6 +47,8 @@ public class AdicionarLocomotiva extends JFrame{
 	JPanel Jbody;
 	JPanel Jfooter;
 	
+	//declarando factory para chamada de telas.
+	FactoryLayout tela;
 	//JPanel Jprincipal;
 	
 	//em caso tenha locomotiva adicionada, o botão Excluir irá aparecer na tela
@@ -89,6 +93,7 @@ public class AdicionarLocomotiva extends JFrame{
 		cp.add(Jbody, BorderLayout.CENTER);
 		cp.add(Jfooter, BorderLayout.SOUTH);
 		pack();
+		tela = new FactoryLayout();
 	}
 	//metodo da seção head da pagina onde contém classe e descrição da locomotiva
 	private void Jhead(){
@@ -146,19 +151,21 @@ public class AdicionarLocomotiva extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			Factory f = new Factory();
 			Controller c = f.getController();
-			try {
-				c.connect();
-				c.remove(locomotiva);
-				JOptionPane.showMessageDialog(null,"A locomotiva foi removida com sucesso!");
-				modelo.removeLocomotiva(linha);
-			}catch(Exception err){
-				JOptionPane.showMessageDialog(null, err.getMessage());
-				return;
-			} finally{
-				c.disconnect();
+			int confirm = tela.openConfirm("Tem certeza que deseja excluir o locomotiva?");
+			if(confirm == 0){
+				try {
+					c.connect();
+					c.remove(locomotiva);
+					tela.openAlertInfo(null,"A locomotiva foi removida com sucesso!");
+					modelo.removeLocomotiva(linha);
+				}catch(Exception err){
+					tela.openAlertError(null, err.getMessage());
+				} finally{
+					c.disconnect();
+				}
+				
+				dispose();
 			}
-			
-			dispose();
 		}
 	};
 	//açao para o botão salvar
@@ -239,10 +246,6 @@ public class AdicionarLocomotiva extends JFrame{
 		}
 	};
 
-	/*@Override
-	public JPanel GetPanel() {
-		return this.Jprincipal;
-	}*/
 }
 
 /*private void excecao() {

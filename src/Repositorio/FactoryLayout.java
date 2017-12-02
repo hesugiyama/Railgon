@@ -68,8 +68,8 @@ public class FactoryLayout {
 	/** Responsavel por exibir a tela de listar composi��o
 	 * @return void
 	 */
-	public JPanel openListarComposicao(){
-		return new ListarComposicao().GetPanel();
+	public ListarComposicao openListarComposicao(){
+		return new ListarComposicao();
 	}
 
 	/** Responsavel por exibir a tela de sobre

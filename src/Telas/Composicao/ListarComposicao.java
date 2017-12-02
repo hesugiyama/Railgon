@@ -18,14 +18,14 @@ public class ListarComposicao extends JFrame implements ITelas{
 	private JPanel painelFundo;
 	private JTable tabela;
 	private JScrollPane barraRolagem;
-	private ComposicaoTableModel modelo;
 	
 	private FactoryLayout tela = new FactoryLayout();
     private Factory f = new Factory();
     private Controller c = f.getController();
 	
-	List<Composicao> lista;
+	private ComposicaoTableModel modelo;
 	private String[] colunas = new String[]{ "Código", "Descricao", "# Locomotiva", "# Vagões", "Peso Máximo", "Peso Atual"};
+	List<Composicao> lista;
 	
 	public ListarComposicao() {
 		criaJanela();

@@ -9,6 +9,7 @@ import Entidades.Vagao;
 import Repositorio.Controller;
 import Repositorio.Factory;
 import Repositorio.FactoryLayout;
+import Telas.Composicao.ListarComposicao;
 import Telas.Locomotiva.ListarLocomotiva;
 import Telas.Vagao.ListarVagao;
 import Telas.Vagao.VagaoTableModel;
@@ -29,8 +30,7 @@ public class Menu extends JFrame {
 	private JPanel panelListarVagao = telas.openListarVagao();
 	private ListarLocomotiva panelListarLocomotiva = telas.openListarLocomotiva();
 	private JPanel panelAdicionarComposicao = telas.openAdicionarComposicao();
-	private JPanel panelListarComposicao = telas.openListarComposicao();
-	//private JPanel panelAdicionarLocomotiva = telas.openAdicionarLocomotiva();
+	private ListarComposicao panelListarComposicao = telas.openListarComposicao();
 	
 	public Menu() {
 		
@@ -92,7 +92,7 @@ public class Menu extends JFrame {
 			break;
 			case "Composições":
 				getContentPane().removeAll();
-				panelBody = panelListarComposicao;	
+				panelBody = panelListarComposicao.GetPanel();	
 			break;
 			case "Sobre":
 				 telas.openSobre();

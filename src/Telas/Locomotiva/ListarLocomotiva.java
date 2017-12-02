@@ -22,7 +22,6 @@ import Telas.Vagao.VagaoTableModel;
 public class ListarLocomotiva extends JFrame implements ITelas{
 	
 	private JPanel painelFundo;
-
 	private JTable tabela;
 	private JScrollPane barraRolagem;
 	
@@ -61,13 +60,6 @@ public class ListarLocomotiva extends JFrame implements ITelas{
 						   (Double) tabela.getValueAt(tabela.getSelectedRow(), 3),  
 						   (Double) tabela.getValueAt(tabela.getSelectedRow(), 4));
         		if(e.getClickCount() == 2) {
-        			int linhaSelecionada = -1;
-                    linhaSelecionada = tabela.getSelectedRow();
-                    if (linhaSelecionada >= 0) {
-                        tela.openAtualizarLocomotiva(modelo, linhaSelecionada, locomotivaEditar);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Ã‰ necessÃ¡rio selecionar uma linha.");
-                    }
         			EditarLocomotiva(locomotivaEditar);
         		}
         	}
@@ -78,27 +70,21 @@ public class ListarLocomotiva extends JFrame implements ITelas{
         });
 		tabela.addKeyListener(new KeyListener(){
 			public void keyPressed(KeyEvent e) {
-				locomotivaEditar = f.getLocomotiva(tabela.getValueAt(tabela.getSelectedRow(),2).toString(),
-						   (Integer) tabela.getValueAt(tabela.getSelectedRow(), 0),
-						   (String) tabela.getValueAt(tabela.getSelectedRow(), 1),
-						   (Double) tabela.getValueAt(tabela.getSelectedRow(), 3),  
-						   (Double) tabela.getValueAt(tabela.getSelectedRow(), 4));
+				try{
+					locomotivaEditar = f.getLocomotiva(tabela.getValueAt(tabela.getSelectedRow(),2).toString(),
+							   (Integer) tabela.getValueAt(tabela.getSelectedRow(), 0),
+							   (String) tabela.getValueAt(tabela.getSelectedRow(), 1),
+							   (Double) tabela.getValueAt(tabela.getSelectedRow(), 3),  
+							   (Double) tabela.getValueAt(tabela.getSelectedRow(), 4));
+					}
+					catch(Exception ex){
+						tela.openAlertError("ERRO AO SELECIONAR LINHA", "Selecione a linha inteira.");
+					}
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					EditarLocomotiva(locomotivaEditar);
 				}
 				if(e.getKeyCode() == KeyEvent.VK_DELETE){
-					int confirm = tela.openConfirm("Tem certeza que deseja excluir o locomotiva?");
-					if(confirm == 0){
-						try {
-							c.connect();
-							c.remove(locomotivaEditar);
-							tela.openAlertInfo("", "Excluído com sucesso.");
-						} catch (Exception e2) {
-							tela.openAlertError("ERRO AO EXCLUIR LOCOMOTIVA", e2.getMessage());
-						} finally{
-							c.disconnect();
-						}
-					}
+					ExcluirLocomotiva(locomotivaEditar);
 				}
 				
 			}
@@ -111,7 +97,41 @@ public class ListarLocomotiva extends JFrame implements ITelas{
     }
 	
 	protected void EditarLocomotiva(Locomotiva locomotivaEditar) {
-		System.out.println(locomotivaEditar);
+		try {
+			int linhaSelecionada = -1;
+	        linhaSelecionada = tabela.getSelectedRow();
+		        if (linhaSelecionada > 0) {
+		            tela.openAtualizarLocomotiva(modelo, linhaSelecionada, locomotivaEditar);
+		        }
+		} catch (Exception e) {
+			tela.openAlertError(null, e.getMessage());
+		}
+		
+	}
+	
+	protected void ExcluirLocomotiva(Locomotiva locomotivaEditar) {
+		try {
+			int linhaSelecionada = -1;
+	        linhaSelecionada = tabela.getSelectedRow();
+		        if (linhaSelecionada > 0) {
+		        	int confirm = tela.openConfirm("Tem certeza que deseja excluir o locomotiva?");
+					if(confirm == 0){
+						try {
+							c.connect();
+							c.remove(locomotivaEditar);
+							tela.openAlertInfo("", "Excluído com sucesso.");
+							modelo.removeLocomotiva( tabela.getSelectedRow());
+						} catch (Exception e2) {
+							tela.openAlertError("ERRO AO EXCLUIR LOCOMOTIVA", e2.getMessage());
+						} finally{
+							c.disconnect();
+						}
+					}
+		        }
+		} catch (Exception e) {
+			tela.openAlertError(null, e.getMessage());
+		}
+		
 	}
 
 	private void pesquisar() {
