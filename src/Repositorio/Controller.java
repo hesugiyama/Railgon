@@ -203,6 +203,53 @@ public class Controller {
 		}
 	}
 	
+	public ArrayList<Vagao> selectVagoesComposicao( int codigo){
+		try{
+			PreparedStatement pstmt;
+			ResultSet rs;
+			
+			ArrayList<Vagao> vagoes = new ArrayList<>();
+			String sql = "SELECT V.ID, V.IDENTIFICACAO,V.COMPRIMENTO, CV.ORDEM FROM VAGAO V INNER JOIN COMPOSICAO_VAGAO CV ON CV.CODVAGAO = V.IDENTIFICACAO WHERE CV.CODCOMPOSICAO = ? ORDER BY CV.ORDEM";
+			Factory f = new Factory();		
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, codigo);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Vagao v = f.getVagao(rs.getString(4), rs.getDouble(3));
+				v.setOrdemComposicao(rs.getInt(4));
+				v.setId(rs.getInt(1));
+				vagoes.add(v);
+			}
+			return vagoes;
+		}
+		catch(Exception e){
+			throw new RuntimeException("Não foi possivel resgatar os vagoes da Composição! " + e.getMessage());
+		}
+	}
+	
+	public ArrayList<Locomotiva> selectLocomotivasComposicao( int codigo){
+		try{
+			PreparedStatement pstmt;
+			ResultSet rs;
+			
+			ArrayList<Locomotiva> locomotiva = new ArrayList<>();
+			String sql = "SELECTL.ID, L.BITOLA, L.CLASSE, L.DESCRICAO, L.COMPRIMENTO, L.PESOMAXIMO, CL.ORDEM FROM LOCOMOTIVA L INNER JOIN COMPOSICAO_LOCOMOTIVA CL ON CL.CODCOMPOSICAO = ? ORDER BY CL.ORDEM";
+			Factory f = new Factory();		
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery(sql);
+			while(rs.next()){
+				Locomotiva l = f.getLocomotiva(rs.getString(2), rs.getInt(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6));
+				l.setOrdemComposicao(rs.getInt(7));
+				l.setId(rs.getInt(1));
+				locomotiva.add(l);
+			}
+			return locomotiva;
+		}
+		catch(Exception e){
+			throw new RuntimeException("Não foi possivel resgatar as Locomotivas da Composicao! " + e.getMessage());
+		}
+	}
+	
 	/** Responsavel por obter um Vagao do banco a partir da sua identificacao 
 	 * @param identificacao
 	 * @return Retorna um Vagao preenchido com dados do banco 
@@ -372,57 +419,134 @@ public class Controller {
 		}
 	}
 	
-	/* UPDATE COMPOSICAO - TAMANHO DA TRETA
-	 * 
-	 * ATUALIZAR DADOS
-	 * SE TIVER MAIS ELEMENTOS QUE NO BANCO, INSERIR
-	 * SE TIVER MENOS ELEMENTOS QUE NO BANCO , APAGAR
+	/** Responsavel por atualizar uma composição, apagando, atualizando e inserindo os elementos na composição 
+	 * @param c
+	 * @return Retorna 1 se criou a composição e 2 se atualizou
 	 */
-	/*
-	public int updateComposicao(Composicao c){
+	public int update(Composicao c){
+		String sqlUpdateComposicao  = "UPDATE COMPOSICAO SET DESCRICAO = ?, BITOLA = ?, QTDVAGAO = ?, QTDLOCOMOTIVA = ?, COMPRIMENTO = ? WHERE ID = ? ";
+		String sqlUpdateVagao       = "UPDATE COMPOSICAO_VAGAO SET ORDEM = ? WHERE CODCOMPOSICAO = ? AND CODVAGAO = ?";
+		String sqlUpdateLocomotiva  = "UPDATE COMPOSICAO_LOCOMOTIVA SET ORDEM = ? WHERE CODCOMPOSICAO = ? AND CODLOCOMOTIVA = ?";
+		
+		String sqlDeleteVagao       = "DELETE FROM COMPOSICAO_VAGAO WHERE CODCOMPOSICAO = ? AND CODVAGAO = ?";
+		String sqlDeleteLocomotiva  = "DELETE FROM COMPOSICAO_LOCOMOTIVA WHERE CODCOMPOSICAO = ? AND CODLOCOMOTIVA = ?";
+		
+		String sqlInsertVagao       = "INSERT INTO COMPOSICAO_VAGAO(CODCOMPOSICAO, CODVAGAO,ORDEM) VALUES (?,?,?)";
+		String sqlInsertLocomotiva  = "INSERT INTO COMPOSICAO_LOCOMOTIVA(CODCOMPOSICAO,CODLOCOMOTIVA,ORDEM) VALUES (?,?,?)";
 		
 		try {
-			
-			String sqlC  = "UPDATE COMPOSICAO SET DESCRICAO = ?, BITOLA = ?, QTDVAGAO = ?, QTDLOCOMOTIVA = ?, COMPRIMENTO = ? WHERE ID = ? ";
-			String sqlV  = "UPDATE COMPOSICAO_VAGAO SET ORDEM = ? WHERE CODCOMPOSICAO = ? AND CODVAGAO = ?";
-			String sqlL  = "UPDATE COMPOSICAO_LOCOMOTIVA SET ORDEM = ? WHERE CODCOMPOSICAO = ? AND CODLOCOMOTIVA = ?";
+			PreparedStatement pstmt;
+			Composicao Caux;
+			ArrayList<Locomotiva> ALlocomotivaAux;
+			ArrayList<Locomotiva> ALlocomotiva;
+			ArrayList<Vagao> ALvagaoAux;			
+			ArrayList<Vagao> ALvagao;
 
-			double cod = 0.0;
+			try{
+				Caux = selectComposicao(c.getCodigo());
+			}catch(Exception e){
+				create(c);
+				return 1;
+			}			
 			
-			pstmt = conn.prepareStatement(sqlC);
-			pstmt.setString(1,c.getDescricao());
-			pstmt.setString(2,String.valueOf(c.getBitola()));
-			pstmt.setInt(3,c.getQtdVagao());
-			pstmt.setInt(4,c.getQtdLocomotiva());
-			pstmt.setDouble(5,c.getComprimento());
-			pstmt.executeUpdate();			
+			ALlocomotivaAux  = Caux.getLocomotivas();
+			ALvagaoAux       = Caux.getVagoes();
 			
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(SQLid);
-			while(rs.next()){
-				cod = rs.getDouble(1);
+			ALlocomotiva     = c.getLocomotivas();
+			ALvagao          = c.getVagoes();
+			
+			// A lista de locomotivas do banco é diferente da composicao que foi passada
+			if(!ALlocomotivaAux.equals(ALlocomotiva)){
+				
+				//atualiza os dados da composicao
+				pstmt = conn.prepareStatement(sqlUpdateComposicao);
+				pstmt.setString(1, c.getDescricao());
+				pstmt.setString(2, String.valueOf(c.getBitola()));
+				pstmt.setInt(3, c.getQtdVagao());
+				pstmt.setDouble(5, c.getComprimento());
+				pstmt.setInt(6, c.getCodigo());
+				pstmt.executeUpdate();
+				
+				
+				//percorre as locomotivas que estao no banco
+				for(int i=0; i < ALlocomotivaAux.size(); i++){
+					//se a lista que foi passada NAO tem uma locomotiva do banco, exclui do banco
+					if(!ALlocomotiva.contains(ALlocomotivaAux.get(i))){
+						
+						//remover locomotiva
+						pstmt = conn.prepareStatement(sqlDeleteLocomotiva);
+						pstmt.setInt(1,c.getCodigo());
+						pstmt.setInt(1,ALlocomotiva.get(i).getClasse());						
+						pstmt.executeUpdate();
+					}
+				}
+				
+				//percorre as locomotivas que foram passadas
+				for(int i =0; i < ALlocomotiva.size();i++){
+					//se as locomotivas que foram passadas NÃO estam no banco, insere no banco
+					if(!ALlocomotivaAux.contains(ALlocomotiva.get(i))){
+						
+						//insere locomotiva
+						pstmt = conn.prepareStatement(sqlInsertLocomotiva);
+						pstmt.setInt(1,c.getCodigo());
+						pstmt.setInt(2,ALlocomotiva.get(i).getClasse());
+						pstmt.setInt(3,ALlocomotiva.get(i).getOrdemComposicao());						
+						pstmt.executeUpdate();
+					}else{
+						
+						//atualiza locomotiva
+						pstmt = conn.prepareStatement(sqlUpdateLocomotiva);
+						pstmt.setInt(1,ALlocomotiva.get(i).getOrdemComposicao());
+						pstmt.setInt(2,c.getCodigo());
+						pstmt.setInt(3,ALlocomotiva.get(i).getClasse());
+						pstmt.executeUpdate();
+					}
+				}
 			}
 			
-			for(int i=0; i < c.getVagoes().size();i++){
-				pstmt = conn.prepareStatement(sqlV);
-				pstmt.setInt(1, (int) cod);
-				pstmt.setString(2, String.valueOf(c.getVagoes().get(i).getIdentificacao()));
-				pstmt.setInt(3,i);
-				pstmt.executeUpdate();
+			// A lista de vagões do banco é diferente da composicao que foi passada
+			if(!ALvagaoAux.equals(ALvagao)){
+				
+				//percorre os vagões que estao no banco
+				for(int i=0; i < ALvagaoAux.size(); i++){
+					//se a lista que foi passada NAO tem um vagão do banco, exclui do banco
+					if(!ALvagao.contains(ALvagaoAux.get(i))){
+						
+						//remover vagão
+						pstmt = conn.prepareStatement(sqlDeleteVagao);
+						pstmt.setInt(1,c.getCodigo());
+						pstmt.setString(1,ALvagao.get(i).getIdentificacao());						
+						pstmt.executeUpdate();
+					}
+				}
+				
+				//percorre os vagões que foram passados
+				for(int i =0; i < ALvagao.size();i++){
+					//se os vagões que foram passadas NÃO estam no banco, insere no banco
+					if(!ALvagaoAux.contains(ALvagao.get(i))){
+						
+						//insere vagão
+						pstmt = conn.prepareStatement(sqlInsertVagao);
+						pstmt.setInt(1,c.getCodigo());
+						pstmt.setString(2,ALvagao.get(i).getIdentificacao());
+						pstmt.setInt(3,ALvagao.get(i).getOrdemComposicao());						
+						pstmt.executeUpdate();
+					}else{
+						
+						//atualiza vagão
+						pstmt = conn.prepareStatement(sqlUpdateVagao);
+						pstmt.setInt(1,ALvagao.get(i).getOrdemComposicao());
+						pstmt.setInt(2,c.getCodigo());
+						pstmt.setString(3,ALvagao.get(i).getIdentificacao());
+						pstmt.executeUpdate();
+					}
+				}
 			}
-			
-			for(int i=0; i < c.getLocomotivas().size();i++){
-				pstmt = conn.prepareStatement(sqlL);
-				pstmt.setInt(1, (int) cod);
-				pstmt.setInt(2, c.getLocomotivas().get(i).getClasse());
-				pstmt.setInt(3, i);
-				pstmt.executeUpdate();
-			} 
+			return 2;
 		}catch (Exception e) {
-			throw new RuntimeException("NÃO FOI POSSIVEL ATUALIZAR O VAGÃO: " + v.getIdentificacao() + " " + e.getMessage());
+			throw new RuntimeException("NÃO FOI POSSIVEL ATUALIZAR A COMPOSIÇÃO: " + c.getCodigo() + " " + e.getMessage());
 		}
 	}
-	*/
 	
 	/** Responsavel por remover o Vagão da base de dados
 	 * @param v Vagão a ser removido
@@ -495,8 +619,7 @@ public class Controller {
 			
 			if(auxV+auxL+auxC == 3){
 				return 1; 
-			}
-
+			}			
 			throw new RuntimeException("ERRO AO APAGAR COMPOSICAO");
 		
 		} catch (Exception e) {

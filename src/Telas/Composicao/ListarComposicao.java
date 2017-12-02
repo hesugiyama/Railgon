@@ -24,7 +24,7 @@ public class ListarComposicao extends JFrame implements ITelas{
     private Controller c = f.getController();
 	
 	private ComposicaoTableModel modelo;
-	private String[] colunas = new String[]{ "CÛdigo", "Descricao", "# Locomotiva", "# Vagıes", "Peso M·ximo", "Peso Atual"};
+	private String[] colunas = new String[]{ "C√≥digo", "Descricao", "# Locomotiva", "# Vag√µes", "Peso M√°ximo", "Peso Atual"};
 	List<Composicao> lista;
 	
 	public ListarComposicao() {
@@ -32,7 +32,7 @@ public class ListarComposicao extends JFrame implements ITelas{
 		criaJTable();
 	}
 
-	// MÈtodo respons·vel por criar a tela
+	// M√©todo respons√°vel por criar a tela
 		public void criaJanela(){
 			barraRolagem = new JScrollPane(tabela);
 			painelFundo = new JPanel();
@@ -41,13 +41,13 @@ public class ListarComposicao extends JFrame implements ITelas{
 			getContentPane().add(painelFundo);
 		}
 		
-		// MÈtodo respons·vel por criar a tabela e chamar o mÈtodo que lista os dados
+		// M√©todo respons√°vel por criar a tabela e chamar o m√©todo que lista os dados
 		private void criaJTable() {
 	        tabela = new JTable(modelo);
 	        pesquisar();
 	    }
 		
-		// MÈtodo respons·vel por listar os dados do vag„o e jogar na tabela
+		// M√©todo respons√°vel por listar os dados do vag√£o e jogar na tabela
 		private void pesquisar() {
 			try{
 				c.connect();
@@ -56,7 +56,7 @@ public class ListarComposicao extends JFrame implements ITelas{
 		        tabela.setModel(modelo);
 			}
 	        catch(Exception e){
-	        	tela.openAlertError("ERRO LISTAR COMPOSI«’ES", "Ocorreu um erro ao listar as composiÁıes: " + e.getMessage());
+	        	tela.openAlertError("ERRO LISTAR COMPOSI√á√ïES", "Ocorreu um erro ao listar as composi√ß√µes: " + e.getMessage());
 	        }
 			finally{
 				//c.desconnect();
@@ -65,6 +65,10 @@ public class ListarComposicao extends JFrame implements ITelas{
 		
 		public JPanel GetPanel(){
 			return this.painelFundo;
+		}
+		
+		public ComposicaoTableModel GetModelo(){
+			return this.modelo;
 		}
 	
 }

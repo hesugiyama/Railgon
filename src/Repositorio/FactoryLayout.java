@@ -2,10 +2,7 @@ package Repositorio;
 
 import Telas.Vagao.*;
 import Telas.Locomotiva.*;
-import Entidades.Locomotiva;
-
-import java.awt.BorderLayout;
-import java.awt.Container;
+import Entidades.*;
 
 import javax.swing.JPanel;
 
@@ -14,12 +11,12 @@ import Telas.Comum.Alert;
 import Telas.Comum.Confirm;
 import Telas.Outras.*;
 
-/** Representa��o de uma Fabrica para chamada de telas
+/** Representação de uma Fabrica para chamada de telas
  * @author GGTRangers
  */
 public class FactoryLayout {
 	
-	/** Responsavel por exibir a tela de adicionar vag�o
+	/** Responsavel por exibir a tela de adicionar vagão
 	 * @return void
 	 */
 	
@@ -27,7 +24,7 @@ public class FactoryLayout {
 		return new AdicionarVagao().GetPanel();
 	}
 	
-	/** Responsavel por exibir a tela de listar vag�o
+	/** Responsavel por exibir a tela de listar vagão
 	 * @return void
 	 */
 	/*public void openListarVagao(){
@@ -58,14 +55,23 @@ public class FactoryLayout {
 		return new ListarLocomotiva();
 	}
 	
-	/** Responsavel por exibir a tela de adicionar composi��o
+	/** Responsavel por exibir a tela de adicionar composição
 	 * @return void
 	 */
-	public JPanel openAdicionarComposicao(){
-		return new AdicionarComposicao().GetPanel();
+	public void openAdicionarComposicao(ComposicaoTableModel modelo){
+		new AdicionarComposicao(modelo).setVisible(true);
+	}
+	
+	/** Responsavel por abrir a tela da composicao com os dados já informados
+	 * @param modelo
+	 * @param linhas
+	 * @param c
+	 */
+	public void openAtualizarLocomotiva(ComposicaoTableModel modelo, int linhas, Composicao c){
+		new AdicionarComposicao(modelo, linhas, c).setVisible(true);;
 	}
 
-	/** Responsavel por exibir a tela de listar composi��o
+	/** Responsavel por exibir a tela de listar composição
 	 * @return void
 	 */
 	public ListarComposicao openListarComposicao(){
@@ -75,8 +81,8 @@ public class FactoryLayout {
 	/** Responsavel por exibir a tela de sobre
 	 * @return void
 	 */
-	public void openSobre(){
-		new Sobre().setVisible(true);
+	public Sobre openSobre(){
+		return new Sobre();
 	}
 	
 

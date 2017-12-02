@@ -1,7 +1,6 @@
 package Telas.Menu;
 
 import java.awt.event.*;
-import java.util.List;
 
 import javax.swing.*;
 
@@ -11,17 +10,16 @@ import Repositorio.Factory;
 import Repositorio.FactoryLayout;
 import Telas.Composicao.ListarComposicao;
 import Telas.Locomotiva.ListarLocomotiva;
-import Telas.Vagao.ListarVagao;
-import Telas.Vagao.VagaoTableModel;
+import Telas.Outras.Sobre;
 
 
 public class Menu extends JFrame {
 	
 	// Ordem: Nome do item - Icone do Item - Letra sublinhada
-	// Quando passamos nulo, na hora em que deverÌamos passar as novas informaÁıes de item, ele coloca uma linha separadora
-	private static String sVagao[] = {"Novo Vag„o", "res/newVagao.gif", null, null, "Vagıes", "res/listaVagao.gif", null};
+	// Quando passamos nulo, na hora em que dever√≠amos passar as novas informa√ß√µes de item, ele coloca uma linha separadora
+	private static String sVagao[] = {"Novo Vag√£o", "res/newVagao.gif", null, null, "Vag√µes", "res/listaVagao.gif", null};
 	private static String sLocomotiva[] = {"Nova Locomotiva", "res/newLocomotiva.gif", null, null, "Locomotivas", "res/listaLocomotiva.gif", null};
-	private static String sComposicao[] = {"Nova ComposiÁ„o", "res/newComposicao.gif", null, null, "ComposiÁıes", "res/listaComposicao.gif", null};
+	private static String sComposicao[] = {"Nova Composi√ß√£o", "res/newComposicao.gif", null, null, "Composi√ß√µes", "res/listaComposicao.gif", null};
 	private static String sSistema[] = {"Sobre", "res/sobre.gif", null, null, "Sair", "res/listaComposicao.gif", null};
 	
 	FactoryLayout telas = new FactoryLayout();
@@ -34,19 +32,19 @@ public class Menu extends JFrame {
 	
 	public Menu() {
 		
-		// Construtor passando tÌtulo
+		// Construtor passando t√≠tulo
 		super("Railgon");
 		
 		// Instanciando o menu
 		JMenuBar mb = new JMenuBar();
 		
-		// Instanciando respons·vel para olhar o objeto quando esse for clicado.
+		// Instanciando respons√°vel para olhar o objeto quando esse for clicado.
 		MenuHandler mh = new MenuHandler();
 		
-		// Adicionando as opÁoes no Menu, sendo Nome da opÁ„o, letra sublinhada, conjunto de itens que conter· nela e 
-		mb.add(MenuBuilder.newMenu("Vag„o", 'V', sVagao, mh));
+		// Adicionando as op√ßoes no Menu, sendo Nome da op√ß√£o, letra sublinhada, conjunto de itens que conter√° nela e 
+		mb.add(MenuBuilder.newMenu("Vag√£o", 'V', sVagao, mh));
 		mb.add(MenuBuilder.newMenu("Locomotiva", 'L', sLocomotiva, mh));
-		mb.add(MenuBuilder.newMenu("ComposiÁ„o", 'C', sComposicao, mh));
+		mb.add(MenuBuilder.newMenu("Composi√ß√£o", 'C', sComposicao, mh));
 		mb.add(MenuBuilder.newMenu("Sistema", 'S', sSistema, mh));
 		
 		// Setando o menu
@@ -54,11 +52,14 @@ public class Menu extends JFrame {
 
 		//panelListarVagao = telas.openListarVagao();
 		
-		// Definindo que ao clicar no X para fechar a aplicaÁ„o, o programa se encerra de fato.
+		// Definindo que ao clicar no X para fechar a aplica√ß√£o, o programa se encerra de fato.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		// Setando o tamanho m·ximo da tela
+		// Setando o tamanho m√°ximo da tela
 		setExtendedState(this.MAXIMIZED_BOTH);
+		
+		//Chama a tela da aplica√ß√£o
+		getContentPane().add(panelSobre.GetPanel());
 		
 		//panelListarVagao.add(telas.openListarVagao());
 	}
@@ -72,10 +73,10 @@ public class Menu extends JFrame {
 			case "Sair":
 				System.exit(0);
 			break;
-			case "Novo Vag„o":
+			case "Novo Vag√£o":
 				panelBody = panelAdicionarVagao;
 			break;
-			case "Vagıes":
+			case "Vag√µes":
 				getContentPane().removeAll();
 				panelBody = panelListarVagao;	
 			break;
@@ -86,16 +87,16 @@ public class Menu extends JFrame {
 				getContentPane().removeAll();
 				panelBody = panelListarLocomotiva.GetPanel();	
 			break;
-			case "Nova ComposiÁ„o":
-				getContentPane().removeAll();
-				panelBody = panelAdicionarComposicao;	
+			case "Nova Composi√ß√£o":
+				telas.openAdicionarComposicao(panelListarComposicao.GetModelo());	
 			break;
-			case "ComposiÁıes":
+			case "Composi√ß√µes":
 				getContentPane().removeAll();
 				panelBody = panelListarComposicao.GetPanel();	
 			break;
 			case "Sobre":
-				 telas.openSobre();
+				getContentPane().removeAll();
+				panelBody = panelSobre.GetPanel();
 			break;
 			default:
 				telas.openAlertError("Osh", "ERRO");
