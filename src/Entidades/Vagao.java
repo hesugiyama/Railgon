@@ -188,37 +188,14 @@ public class Vagao extends VeiculoFerroviario {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		/* 
-		sb.append("IDENTIFICACAO...: ");
-		sb.append(getIdentificacao());
-		sb.append("\n");
-		sb.append("PROPRIETARIO....: ");
-		sb.append(getProprietario());
-		sb.append("\n");
-		sb.append("BITOLA..........: ");
-		sb.append(getBitola());
-		sb.append("\n");
-		sb.append("TIPO............: ");
-		sb.append(getTipo());
-		sb.append("\n");
-		sb.append("SUBTIPO.........: ");
-		sb.append(getSubTipo());
-		sb.append("\n");
-		sb.append("COMPRIMENTO.....: ");
-		sb.append(getComprimento());
-		sb.append("\n");
-		sb.append("DISTANCIA BITOLA: ");
-		sb.append(getDistanciaMaxBitola());
-		sb.append("\n");
-		sb.append("PESO BITOLA.....: ");
-		sb.append(getPesoMaxBitola());
-		*/		
+		sb.append("V|");
 		sb.append(getIdentificacao());
 		return sb.toString();
 	}
-	
+
 	@Override
-	public void save() {
-		
+	public int compareTo(VeiculoFerroviario vf) {
+		Vagao v = (Vagao) vf;
+		return v.getIdentificacao().compareTo(this.identificacao);
 	}
 }

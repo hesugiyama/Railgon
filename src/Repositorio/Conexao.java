@@ -45,7 +45,7 @@ public class Conexao{
 		try{
 			conn = DriverManager.getConnection(PATH, USER, PASS);
 		}catch(Exception e){
-			layout.openAlertError("ERRO DE CONEXÃO", ("Erro ao carregar o Driver " + e.getMessage()));
+			layout.openAlertError("ERRO DE CONEXï¿½O", ("Erro ao carregar o Driver " + e.getMessage()));
 			throw new RuntimeException();
 		}
 	}
@@ -60,7 +60,7 @@ public class Conexao{
 			}
 			return instance;
 		}catch(Exception e){
-			layout.openAlertError("ERRO DE CONEXÃO", ("Erro ao pegar a instancia! " + e.getMessage()));
+			layout.openAlertError("ERRO DE CONEXï¿½O", ("Erro ao pegar a instancia! " + e.getMessage()));
 			throw new RuntimeException();
 		}		
 	}
@@ -70,7 +70,7 @@ public class Conexao{
 	 */
 	public Connection On(){
 		if(conn == null){
-			layout.openAlertError("ERRO DE CONEXÃO", ("Conexão não realizada!"));
+			layout.openAlertError("ERRO DE CONEXï¿½O", ("Conexï¿½o nï¿½o realizada!"));
 		}
 		return conn;
 	} 
@@ -84,7 +84,7 @@ public class Conexao{
 			conn = null;
 			instance = null;
 		}catch(Exception e){
-			layout.openAlertError("ERRO DE CONEXÃO", ("Erro ao encerrar conexão" + e.getMessage()));
+			layout.openAlertError("ERRO DE CONEXï¿½O", ("Erro ao encerrar conexï¿½o" + e.getMessage()));
 			throw new RuntimeException();
 		}
 	}
@@ -138,7 +138,7 @@ public class Conexao{
 			//insere as bitolas no banco e retorna o numero de linhas afetadas
 			pstmt.executeUpdate();
 		}catch(Exception e){
-			layout.openAlertError("ERRO AO CRIAR TELAS", ("Não foi possivel criar as tabelas!" + e.getMessage()));
+			layout.openAlertError("ERRO AO CRIAR TELAS", ("Nï¿½o foi possivel criar as tabelas!" + e.getMessage()));
 			throw new RuntimeException();
 		}				
 	}

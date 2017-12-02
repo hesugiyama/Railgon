@@ -1,11 +1,13 @@
 package Entidades;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /** Representacao de uma Composicao
  * @author GGTRangers
  */
-public class Composicao implements IVeiculoFerroviario {
+public class Composicao implements Comparable<Composicao> {
 	
 	/** Identificador unico da Composicao 
 	 */
@@ -294,7 +296,7 @@ public class Composicao implements IVeiculoFerroviario {
 		if(pos != -1){
 			vagoes.remove(pos);
 		}else{
-			throw new RuntimeException("O Vagão não pertence a Composicão");
+			throw new RuntimeException("O Vagão não pertence a Composicão!");
 		}
 		this.comprimento-= v.getComprimento();
 		this.pesoAtual-= v.getPesoMaxBitola();
@@ -304,34 +306,20 @@ public class Composicao implements IVeiculoFerroviario {
 	public String toString(){
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("DESCRICAO......: ");
+		sb.append("C| ");
 		sb.append(getDescricao());
-		sb.append("\n");
-		sb.append("BITOLA.........: ");
-		sb.append(getBitola());		
-		sb.append("\n");
-		sb.append("COMPRIMENTO....: ");
-		sb.append(getComprimento());
-		sb.append("\n");
-		sb.append("PESO ATUAL.....: ");
-		sb.append(getPesoAtual());
-		sb.append("\n");
-		sb.append("PESO MAXIMO....: ");
-		sb.append(getPesoMax());
-		sb.append("\n");
-		sb.append("QTD LOCOMOTIVAS: ");
-		sb.append(getQtdLocomotiva());
-		sb.append("\n");
-		sb.append("QTD VAGOES.....: ");
-		sb.append(getQtdVagao());
-		sb.append("\n");
-		
 		return sb.toString();
 	}
-	
+
 	@Override
-	public void save() {
-		 
+	public int compareTo(Composicao c) {
+		if(c.getCodigo() > this.codigo){
+			return 1;
+		}else if(c.getCodigo() < this.codigo){
+			return -1;
+		}else{
+			return 0;
+		}
 	}
 }
  

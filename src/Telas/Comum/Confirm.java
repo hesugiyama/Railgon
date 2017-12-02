@@ -7,8 +7,8 @@ import javax.swing.JOptionPane;
  * 
  * @author GGTRangers
  * 
- * Classe responsável pela criação de um modal de confirmação.
- * A tela é apenas de sim ou não e é obrigatório passar uma mensagem.
+ * Classe responsï¿½vel pela criaï¿½ï¿½o de um modal de confirmaï¿½ï¿½o.
+ * A tela ï¿½ apenas de sim ou nï¿½o e ï¿½ obrigatï¿½rio passar uma mensagem.
  *
  */
 public class Confirm extends JFrame {
@@ -16,9 +16,9 @@ public class Confirm extends JFrame {
 	private int retorno;
 	public Confirm(String message){
 		
-		Object[] options = { "Sim", "Não" };
+		Object[] options = { "Sim", "NÃ£o" };
 		retorno = JOptionPane.showOptionDialog(null, message,
-				"Confirmação", JOptionPane.YES_NO_OPTION,
+				"ConfirmaÃ§Ã£o", JOptionPane.YES_NO_OPTION,
 				JOptionPane.WARNING_MESSAGE, null, options,
 				options[0]);
 		

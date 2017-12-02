@@ -25,14 +25,14 @@ public class ListarComposicao extends JFrame implements ITelas{
     private Controller c = f.getController();
 	
 	List<Composicao> lista;
-	private String[] colunas = new String[]{ "Código", "Descricao", "# Locomotiva", "# Vagões", "Peso Máximo", "Peso Atual"};
+	private String[] colunas = new String[]{ "CÃ³digo", "Descricao", "# Locomotiva", "# VagÃµes", "Peso MÃ¡ximo", "Peso Atual"};
 	
 	public ListarComposicao() {
 		criaJanela();
 		criaJTable();
 	}
 
-	// Método responsável por criar a tela
+	// Mï¿½todo responsï¿½vel por criar a tela
 		public void criaJanela(){
 			barraRolagem = new JScrollPane(tabela);
 			painelFundo = new JPanel();
@@ -41,13 +41,13 @@ public class ListarComposicao extends JFrame implements ITelas{
 			getContentPane().add(painelFundo);
 		}
 		
-		// Método responsável por criar a tabela e chamar o método que lista os dados
+		// Mï¿½todo responsï¿½vel por criar a tabela e chamar o mï¿½todo que lista os dados
 		private void criaJTable() {
 	        tabela = new JTable(modelo);
 	        pesquisar();
 	    }
 		
-		// Método responsável por listar os dados do vagão e jogar na tabela
+		// Mï¿½todo responsï¿½vel por listar os dados do vagï¿½o e jogar na tabela
 		private void pesquisar() {
 			try{
 				c.connect();
@@ -56,7 +56,7 @@ public class ListarComposicao extends JFrame implements ITelas{
 		        tabela.setModel(modelo);
 			}
 	        catch(Exception e){
-	        	tela.openAlertError("ERRO LISTAR COMPOSIÇÕES", "Ocorreu um erro ao listar as composições: " + e.getMessage());
+	        	tela.openAlertError("ERRO LISTAR COMPOSIï¿½ï¿½ES", "Ocorreu um erro ao listar as composiï¿½ï¿½es: " + e.getMessage());
 	        }
 			finally{
 				//c.desconnect();
@@ -65,6 +65,10 @@ public class ListarComposicao extends JFrame implements ITelas{
 		
 		public JPanel GetPanel(){
 			return this.painelFundo;
+		}
+		
+		public ComposicaoTableModel GetModelo(){
+			return this.modelo;
 		}
 	
 }

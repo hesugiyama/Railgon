@@ -44,7 +44,18 @@ public class ComposicaoTableModel extends AbstractTable<Composicao>{
     	if(column == COL_Comprimento) { return (Object) composicao.getComprimento(); } else
     	if(column == COL_PesoMax) { return (Object) composicao.getPesoMax(); } else
     	if(column == COL_PesoAtual) { return (Object) composicao.getPesoAtual(); } else return "";
-    		
+    }
+    
+    public void addComposicao(Composicao c) {
+        linhas.add(c);
+        int ultimoIndice = getRowCount() - 1;
+        fireTableRowsInserted(ultimoIndice, ultimoIndice);
+    }
+    
+    public void removeComposicao(int indiceLinha) {
+        linhas.remove(indiceLinha);
+        fireTableRowsDeleted(indiceLinha, indiceLinha);
+
     }
     
 }

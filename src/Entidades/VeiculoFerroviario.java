@@ -3,7 +3,7 @@ package Entidades;
 /** Representacao de caracteristicas comuns entre os Vagoes e as Locomotivas
  * @author GGTRangers
  */
-public abstract class VeiculoFerroviario implements IVeiculoFerroviario{
+public abstract class VeiculoFerroviario implements Comparable<VeiculoFerroviario>{
 	
 	/** Bitola usado por todos os Vagoes
 	 */
@@ -143,4 +143,9 @@ public abstract class VeiculoFerroviario implements IVeiculoFerroviario{
 	public double getDistanciaMaxBitola() {
 		return bitola.getDistancia();
 	}
+	
+	@Override
+	public abstract int compareTo(VeiculoFerroviario vf);	
+	
 }
+

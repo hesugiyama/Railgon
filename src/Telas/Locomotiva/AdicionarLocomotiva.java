@@ -3,7 +3,6 @@ package Telas.Locomotiva;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.GridLayout;
 import javax.swing.*;
 //import javax.swing.text.MaskFormatter;
 
@@ -13,7 +12,6 @@ import com.jgoodies.forms.layout.FormLayout;
 import Entidades.Locomotiva;
 import Repositorio.Controller;
 import Repositorio.Factory;
-import Telas.Interface.ITelas;
 
 public class AdicionarLocomotiva extends JFrame{
 	
@@ -21,7 +19,7 @@ public class AdicionarLocomotiva extends JFrame{
 	private Locomotiva locomotiva = null;
 	private int linha;
 	
-	//declarando botões
+	//declarando botoes
 	private JButton Excluir;
 	private JButton Salvar;
 	private JButton Novo;
@@ -40,15 +38,13 @@ public class AdicionarLocomotiva extends JFrame{
 	private JLabel Bitola;
 	private JLabel Comploc;
 	
-	//declarando seções da pagina
+	//declarando secoes da pagina
 	JPanel Jhead;
 	JPanel Jbody;
 	JPanel Jfooter;
 	
-	//JPanel Jprincipal;
-	
-	//em caso tenha locomotiva adicionada, o botão Excluir irá aparecer na tela
-	//Setando campos da locomotiva para caso haja adicionado, irá poder excluir.
+	//em caso tenha locomotiva adicionada, o botÃ£o Excluir ira aparecer na tela
+	//Setando campos da locomotiva para caso haja adicionado, ira poder excluir.
 	public AdicionarLocomotiva(LocomotivaTableModel md, int linhaSelecionada, Locomotiva l) {
 		this(md);
 		locomotiva = l;
@@ -60,11 +56,8 @@ public class AdicionarLocomotiva extends JFrame{
 		this.campoComploc.setText(String.valueOf(locomotiva.getComprimento()));
 		Excluir.setVisible(true);
 	}
-	//metodo que instancia todos campos, botões e chama as seções da pagina
+	//metodo que instancia todos campos, botoes e chama as secoes da pagina
 	public  AdicionarLocomotiva(LocomotivaTableModel md) {
-		//super("Adicionar Locomotiva"); // ajusta título
-		//setSize(400,100); 
-		//setResizable(false);
 		modelo = md;
 		campoClasse = new JTextField();
 		campoDescricao = new JTextField();
@@ -72,14 +65,18 @@ public class AdicionarLocomotiva extends JFrame{
 		campoBitola = new JTextField();
 		campoComploc = new JTextField();
 		Classe = new JLabel("Classe:");
-		Descricao = new JLabel("Descrição:");
-		Pesomaxreb = new JLabel("Peso Máximo Rebocável(toneladas):");
+		Descricao = new JLabel("DescriÃ§Ã£o:");
+		Pesomaxreb = new JLabel("Peso MÃ¡ximo RebocÃ¡vel (t):");
 		Bitola = new JLabel("Bitola:");
-		Comploc = new JLabel ("Comprimento da locomotiva(Metros):");
+		Comploc = new JLabel ("Comprimento da locomotiva (m):");
 		Excluir = new JButton("Excluir");
 		Salvar = new JButton("Salvar");
 		Novo = new JButton("Novo");
-		//Jprincipal = new JPanel();
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setLocation(450, 300);
+		setResizable(false);
+		
 		Jhead();
 		Jbody();
 		Jfooter();	
@@ -90,7 +87,7 @@ public class AdicionarLocomotiva extends JFrame{
 		cp.add(Jfooter, BorderLayout.SOUTH);
 		pack();
 	}
-	//metodo da seção head da pagina onde contém classe e descrição da locomotiva
+	//metodo da secao head da pagina onde contï¿½m classe e descricao da locomotiva
 	private void Jhead(){
 		FormLayout layouthead = new FormLayout(
 				"pref, 5dlu, 50dlu, 20dlu, min,pref, 5dlu, 50dlu, 5dlu, min", // colunas
@@ -108,7 +105,7 @@ public class AdicionarLocomotiva extends JFrame{
 		campoDescricao = new JTextField();
 		Jhead.add(campoDescricao, cc.xyw(3,3,5));
 	}
-	//seção body da pagina onde contem peso maximo rebocavel, bitola e comprimento da locomotiva
+	//seï¿½ï¿½o body da pagina onde contem peso maximo rebocavel, bitola e comprimento da locomotiva
 	private void Jbody() {
 		FormLayout layoutbody = new FormLayout(
 				"pref, 5dlu, 50dlu, 5dlu, min,", // colunas
@@ -122,7 +119,7 @@ public class AdicionarLocomotiva extends JFrame{
 		campoComploc = new JTextField();
 		Jbody.add(campoComploc, cc.xy(3,5));
 	}
-	//seção footer, onde contém os botões da pagina
+	//seï¿½ï¿½o footer, onde contï¿½m os botï¿½es da pagina
 	private void Jfooter() {
 		FormLayout layoutfooter = new FormLayout(
 				"pref, 5dlu, 42dlu, 5dlu, min,", // colunas
@@ -141,7 +138,7 @@ public class AdicionarLocomotiva extends JFrame{
 		Novo.addActionListener(Novo1);
 		Excluir.addActionListener(Excluir1);
 	}
-	//ação para o botão excluir 
+	//aï¿½ï¿½o para o botï¿½o excluir 
 	ActionListener Excluir1 = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			Factory f = new Factory();
@@ -161,7 +158,7 @@ public class AdicionarLocomotiva extends JFrame{
 			dispose();
 		}
 	};
-	//açao para o botão salvar
+	//acao para o botao salvar
 	ActionListener Salvar1 = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			int classe = 0;
@@ -190,17 +187,17 @@ public class AdicionarLocomotiva extends JFrame{
 			}
 			String bitola = campoBitola.getText();
 			String descricao = campoDescricao.getText();
-			//exceção para caso o campo esteja vazio
+			//excecao para caso o campo esteja vazio
 			if(descricao.isEmpty()) {
-				JOptionPane.showMessageDialog(null,"Preencha a Descrição, a locomotiva não pode ser salva sem preencher!");
+				JOptionPane.showMessageDialog(null,"Preencha a Descriï¿½ï¿½o, a locomotiva nï¿½o pode ser salva sem preencher!");
 					return;
-			//exceção para caso o campo esteja vazio
+			//excecao para caso o campo esteja vazio
 			}else if(bitola.isEmpty()) {
-				JOptionPane.showMessageDialog(null,"Preencha o campo Bitola, a locomotiva não pode ser salva sem preencher!");
+				JOptionPane.showMessageDialog(null,"Preencha o campo Bitola, a locomotiva nï¿½o pode ser salva sem preencher!");
 					return;
 			}
-			//ação para caso clique no botão salvar e todos os campos estejam certos
-			//conexão com o banco de dados, salvar no banco de dados e desconectar do banco
+			//acao para caso clique no botao salvar e todos os campos estejam certos
+			//conexao com o banco de dados, salvar no banco de dados e desconectar do banco
 			Factory f = new Factory();
 			Controller c = f.getController();
 			try {
@@ -228,7 +225,7 @@ public class AdicionarLocomotiva extends JFrame{
 		}	
 		
 	};
-	//ação para o botão novo, limpa os campos
+	//acao para o botao novo, limpa os campos
 	ActionListener Novo1 = new ActionListener() {
 		  public void actionPerformed(ActionEvent e) {
 				campoClasse.setText(" ");
@@ -238,11 +235,6 @@ public class AdicionarLocomotiva extends JFrame{
 				campoComploc.setText(" ");
 		}
 	};
-
-	/*@Override
-	public JPanel GetPanel() {
-		return this.Jprincipal;
-	}*/
 }
 
 /*private void excecao() {

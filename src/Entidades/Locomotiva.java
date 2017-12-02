@@ -83,40 +83,34 @@ public class Locomotiva extends VeiculoFerroviario{
 		this.pesoMax = pesoMax;
 	}
 
-	
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		/*
-		sb.append("CLASSE..............: ");
-		sb.append(getClasse());
-		sb.append("\n");
-		sb.append("DESCRICAO...........: ");
-		sb.append(getDescricao());
-		sb.append("\n");
-		sb.append("COMPRIMENTO.........: ");
-		sb.append(getComprimento());
-		sb.append("\n");
-		sb.append("PESO MAX:...........: ");
-		sb.append(getPesoMax());
-		sb.append("\n");
-		sb.append("BITOLA..............: ");
-		sb.append(getBitola());
-		sb.append("\n");
-		sb.append("PESO MAX BITOLA:....: ");
-		sb.append(getPesoMaxBitola());
-		sb.append("\n");
-		sb.append("DISTANCIA MAX BITOLA: ");
-		sb.append(getDistanciaMaxBitola());
-		*/
-		sb.append(getClasse());
 		
+		StringBuilder sb = new StringBuilder();
+		sb.append("L|");
+		sb.append(getClasse());				
 		return sb.toString();
 	}
-	
+
+	public int compareToTeste(Locomotiva l) {
+		if(l.getClasse() > this.classe){
+			return 1;
+		}else if(l.getClasse() < this.classe){
+			return -1;
+		}else{
+			return 0;
+		}
+	}
+
 	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
+	public int compareTo(VeiculoFerroviario vf){
+		Locomotiva l = (Locomotiva) vf;
+		if(l.getClasse() > this.classe){
+			return 1;
+		}else if(l.getClasse() < this.classe){
+			return -1;
+		}else{
+			return 0;
+		}
 	}
 }
