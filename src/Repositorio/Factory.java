@@ -52,6 +52,13 @@ public class Factory {
 		return new Composicao(l,v,descricao);
 	}
 	
+	/** Responsavel por criar uma nova Composicao
+	 * @return Retorna a instancia de uma Composicao
+	 */
+	public Composicao getComposicao() {
+		return new Composicao();
+	}
+	
 	/** Responsavel por criar a instancia da Controller 
 	 * @return Retorna a instancia de um Controller
 	 */

@@ -50,7 +50,12 @@ public class Composicao implements Comparable<Composicao> {
 	 */
 	private static final double MAXCOMPRIMENTO = 2000;
 	
-	/** Construtor da Composicao
+	/** Construtor Default da Composicao
+	 */
+	public Composicao(){
+		
+	}
+	/** Construtor da Composicao passando uma locomotiva e uma descricao
 	 */
 	public Composicao(Locomotiva l, String descricao ){
 		add(l);
@@ -269,8 +274,9 @@ public class Composicao implements Comparable<Composicao> {
 	 * @param l
 	 */
 	public void remove(Locomotiva l){
-		int pos = locomotivas.indexOf(l);
-		if(pos != -1){
+		//se existe vagão dentro da composição
+		if(vagoes.size() > 0){
+			//se só existe uma locomotiva na composição
 			if(locomotivas.size() == 1){
 				throw new RuntimeException("A Composição não pode ficar sem Locomotiva!");
 			}
@@ -278,11 +284,17 @@ public class Composicao implements Comparable<Composicao> {
 			if(pesoAux < this.pesoAtual){
 				throw new RuntimeException("A Locomotiva não pode ser removida: O peso dos vagoes ultrapassariam o limite!");
 			}
-			locomotivas.remove(pos);
-		}else{
-			//throw new RuntimeException(this.getClass().getName() + "@" + Integer.toHexString(hashCode()));
+		//a locomotiva não existe na composicao
+		}else if(!locomotivas.contains(l)){
 			throw new RuntimeException("A Locomotiva não pertence a Composição");
+		}else{
+			locomotivas.remove(l);
 		}
+		
+		if(locomotivas.size() == 0){
+			this.bitola = ' ';
+		}
+		
 		this.comprimento-= l.getComprimento();
 		this.pesoMax -= l.getPesoMax();
 	}

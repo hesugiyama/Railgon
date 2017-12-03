@@ -10,6 +10,7 @@ public class Sobre extends JFrame{
 
 	private JLabel JLtitulo;
 	private JLabel JLlogo;
+	private JLabel JLautores;
 	
 	private JTextArea JTPdescricao;
 	
@@ -43,10 +44,10 @@ public class Sobre extends JFrame{
 		JPbody   = new JPanel();
 		JPfooter = new JPanel();
 		
-		JPbody.setLayout(null);
-		
 		JTPdescricao = new JTextArea();
-		JLlogo = new JLabel();
+		
+		JLlogo    = new JLabel();
+		JLautores = new JLabel("2017 - RAILGON© - Gabriel Traldi | Henrique Sugiyama | Leonardo Simionatto | Tiago Silva");
 		
 		JLlogo.setBounds(0,0,700,500);
 		ImageIcon imgIcon = new ImageIcon("res/LogoRailgon.png");
@@ -64,6 +65,7 @@ public class Sobre extends JFrame{
 		JPhead.add(JLtitulo);		
 		JPlogo.add(JLlogo);		
 		JPbody.add(JTPdescricao);
+		JPfooter.add(JLautores);
 	}
 
 	public JPanel GetPanel() {
