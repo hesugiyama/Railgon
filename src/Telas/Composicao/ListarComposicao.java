@@ -6,30 +6,30 @@ import java.util.List;
 import javax.swing.*;
 
 import Entidades.Composicao;
-import Entidades.Locomotiva;
+import Telas.Interface.ITelas;
+
 import Repositorio.Controller;
 import Repositorio.Factory;
 import Repositorio.FactoryLayout;
-import Telas.Interface.ITelas;
-import Telas.Locomotiva.LocomotivaTableModel;
 
-public class ListarComposicao extends JFrame implements ITelas{
+public class ListarComposicao extends JFrame implements ITelas<ComposicaoTableModel>{
 	
 	private JPanel painelFundo;
 	private JTable tabela;
 	private JScrollPane barraRolagem;
 	
+	private ComposicaoTableModel modelo;
+	
 	private FactoryLayout tela = new FactoryLayout();
     private Factory f = new Factory();
     private Controller c = f.getController();
 	
-	private ComposicaoTableModel modelo;
-	private String[] colunas = new String[]{ "C√≥digo", "Descricao", "# Locomotiva", "# Vag√µes", "Peso M√°ximo", "Peso Atual"};
 	List<Composicao> lista;
+	private String[] colunas = new String[]{ "CÛdigo", "DescriÁ„o", "# Locomotiva", "# Vagıes", "Peso M·ximo", "Peso Atual"};
 	
 	public ListarComposicao() {
-		criaJanela();
 		criaJTable();
+		criaJanela();
 	}
 
 	// M√©todo respons√°vel por criar a tela

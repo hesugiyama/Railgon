@@ -62,10 +62,12 @@ public class AdicionarLocomotiva extends JFrame{
 		this.campoBitola.setText(String.valueOf(locomotiva.getBitola()));
 		this.campoComploc.setText(String.valueOf(locomotiva.getComprimento()));
 		Excluir.setVisible(true);
+		this.setTitle("Alterar Locomotiva");
 	}
 	//metodo que instancia todos campos, botões e chama as seções da pagina
 	public  AdicionarLocomotiva(LocomotivaTableModel md) {
-		//super("Adicionar Locomotiva"); // ajusta título
+		super(); // ajusta título
+		this.setTitle("Adicionar Locomotiva");
 		//setSize(400,100); 
 		//setResizable(false);
 		modelo = md;
@@ -84,7 +86,7 @@ public class AdicionarLocomotiva extends JFrame{
 		Novo = new JButton("Novo");
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setLocation(450, 300);
+		setLocation(470, 200);
 		setResizable(false);
 		
 		Jhead();

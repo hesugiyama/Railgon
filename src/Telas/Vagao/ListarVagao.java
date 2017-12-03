@@ -18,7 +18,7 @@ import Repositorio.FactoryLayout;
 import Telas.Comum.Confirm;
 import Telas.Interface.ITelas;
 
-public class ListarVagao extends JFrame implements ITelas{
+public class ListarVagao extends JFrame implements ITelas<VagaoTableModel>{
 	
 	private JPanel painelFundo;
 	private JTable tabela;
@@ -119,6 +119,11 @@ public class ListarVagao extends JFrame implements ITelas{
 	
 	public JPanel GetPanel(){
 		return this.painelFundo;
+	}
+
+	@Override
+	public VagaoTableModel GetModelo() {
+		return this.modelo;
 	}
 	
 }

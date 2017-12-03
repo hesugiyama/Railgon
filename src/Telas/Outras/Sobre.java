@@ -6,7 +6,7 @@ import javax.swing.border.TitledBorder;
 
 import Telas.Interface.ITelas;
 
-public class Sobre extends JFrame implements ITelas{
+public class Sobre extends JFrame{
 
 	private JLabel JLtitulo;
 	private JLabel JLlogo;
@@ -66,7 +66,6 @@ public class Sobre extends JFrame implements ITelas{
 		JPbody.add(JTPdescricao);
 	}
 
-	@Override
 	public JPanel GetPanel() {
 		// TODO Auto-generated method stub
 		return JPprincipal;

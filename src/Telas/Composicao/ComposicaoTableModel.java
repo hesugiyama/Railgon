@@ -5,11 +5,15 @@ import java.util.List;
 
 import Entidades.Composicao;
 import Entidades.Locomotiva;
-
 import Telas.Comum.AbstractTable;
 
 public class ComposicaoTableModel extends AbstractTable<Composicao>{
 	
+	/** Model da tabela de composição.
+	 * 
+	 */
+	
+	// Variáveis dos indices das colunas. Utilizada para facilitar legibilidade do código.
 	private static final int COL_Codigo = 0;
 	private static final int COL_Descricao = 1;
     private static final int COL_Locomotiva = 2;
@@ -18,11 +22,18 @@ public class ComposicaoTableModel extends AbstractTable<Composicao>{
     private static final int COL_PesoMax = 5;
     private static final int COL_PesoAtual = 6;
     
+    /** Construtor
+     * 
+     * @param Lista das composições
+     * @param Colunas da tabela
+     */
     public ComposicaoTableModel(List<Composicao> composicao, String[] colunasComposicao ){
         super(new ArrayList<>(composicao), colunasComposicao);
     }
     
-    
+    /** Método que pega o tipo de classe de cada coluna. Necessário para o componente
+     *  retorna a classe específica dacoluna
+     */
     public Class getColumnClass(int columnIndex) {
        if(columnIndex == COL_Codigo || columnIndex == COL_Descricao){
            return String.class;
@@ -33,7 +44,9 @@ public class ComposicaoTableModel extends AbstractTable<Composicao>{
        return Double.class;
    }
     
-    
+    /** Método responsável por pegar o conteúdo de cada coluna. Necessário para o componente
+     *  retorna um Objeto
+     */
     public Object getValueAt(int row, int column) {
         Composicao composicao = linhas.get(row);
         		
@@ -43,15 +56,32 @@ public class ComposicaoTableModel extends AbstractTable<Composicao>{
     	if(column == COL_Vagoes) { return (Object) composicao.getVagoes().size(); } else
     	if(column == COL_Comprimento) { return (Object) composicao.getComprimento(); } else
     	if(column == COL_PesoMax) { return (Object) composicao.getPesoMax(); } else
-    	if(column == COL_PesoAtual) { return (Object) composicao.getPesoAtual(); } else return "";
+    	if(column == COL_PesoAtual) { return (Object) composicao.getPesoAtual(); } return "";
     }
     
+    /** Método que adiciona uma nova linha na tabela. Chamado após a inserção.
+     * 
+     * @param Objeto do tipo composição
+     */
     public void addComposicao(Composicao c) {
         linhas.add(c);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
     }
     
+    /** Método que altera uma linha na tabela. Chamado após a alteração.
+     * 
+     * @param indice da linha alterada
+     */
+    public void updateComposicao(int indiceLinha, Composicao composicao) {
+        linhas.set(indiceLinha, composicao);
+        fireTableRowsUpdated(indiceLinha, indiceLinha);
+    }
+    
+    /** Método que remove uma linha na tabela. Chamado após a exclusão.
+     * 
+     * @param indice da linha excluída
+     */
     public void removeComposicao(int indiceLinha) {
         linhas.remove(indiceLinha);
         fireTableRowsDeleted(indiceLinha, indiceLinha);

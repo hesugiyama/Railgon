@@ -5,7 +5,7 @@ import javax.swing.*;
 
 import Telas.Interface.ITelas;
 
-public class AdicionarVagao extends JFrame implements ITelas{
+public class AdicionarVagao extends JFrame{
 	
 	public AdicionarVagao() {
 		super("Adicionar Vagão"); // ajusta título]

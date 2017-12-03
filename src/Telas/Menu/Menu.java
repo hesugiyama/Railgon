@@ -11,23 +11,22 @@ import Repositorio.FactoryLayout;
 import Telas.Composicao.ListarComposicao;
 import Telas.Locomotiva.ListarLocomotiva;
 import Telas.Outras.Sobre;
+import Telas.Vagao.ListarVagao;
 
 
 public class Menu extends JFrame {
 	
 	// Ordem: Nome do item - Icone do Item - Letra sublinhada
 	// Quando passamos nulo, na hora em que dever√≠amos passar as novas informa√ß√µes de item, ele coloca uma linha separadora
-	private static String sVagao[] = {"Novo Vag√£o", "res/newVagao.gif", null, null, "Vag√µes", "res/listaVagao.gif", null};
+	private static String sVagao[] = {"Novo Vag„o", "res/newVagao.gif", null, null, "Vagıes", "res/listaVagao.gif", null};
 	private static String sLocomotiva[] = {"Nova Locomotiva", "res/newLocomotiva.gif", null, null, "Locomotivas", "res/listaLocomotiva.gif", null};
-	private static String sComposicao[] = {"Nova Composi√ß√£o", "res/newComposicao.gif", null, null, "Composi√ß√µes", "res/listaComposicao.gif", null};
+	private static String sComposicao[] = {"Nova ComposiÁ„o", "res/newComposicao.gif", null, null, "ComposiÁıes", "res/listaComposicao.gif", null};
 	private static String sSistema[] = {"Sobre", "res/sobre.gif", null, null, "Sair", "res/listaComposicao.gif", null};
 	
 	FactoryLayout telas = new FactoryLayout();
 	
-	private JPanel panelAdicionarVagao;
-	private JPanel panelListarVagao = telas.openListarVagao();
+	private ListarVagao panelListarVagao = telas.openListarVagao();
 	private ListarLocomotiva panelListarLocomotiva = telas.openListarLocomotiva();
-	private JPanel panelAdicionarComposicao = telas.openAdicionarComposicao();
 	private ListarComposicao panelListarComposicao = telas.openListarComposicao();
 	
 	public Menu() {
@@ -42,9 +41,9 @@ public class Menu extends JFrame {
 		MenuHandler mh = new MenuHandler();
 		
 		// Adicionando as op√ßoes no Menu, sendo Nome da op√ß√£o, letra sublinhada, conjunto de itens que conter√° nela e 
-		mb.add(MenuBuilder.newMenu("Vag√£o", 'V', sVagao, mh));
+		mb.add(MenuBuilder.newMenu("Vag„o", 'V', sVagao, mh));
 		mb.add(MenuBuilder.newMenu("Locomotiva", 'L', sLocomotiva, mh));
-		mb.add(MenuBuilder.newMenu("Composi√ß√£o", 'C', sComposicao, mh));
+		mb.add(MenuBuilder.newMenu("ComposiÁ„o", 'C', sComposicao, mh));
 		mb.add(MenuBuilder.newMenu("Sistema", 'S', sSistema, mh));
 		
 		// Setando o menu
@@ -59,7 +58,7 @@ public class Menu extends JFrame {
 		setExtendedState(this.MAXIMIZED_BOTH);
 		
 		//Chama a tela da aplica√ß√£o
-		getContentPane().add(panelSobre.GetPanel());
+		//getContentPane().add(panelSobre.GetPanel());
 		
 		//panelListarVagao.add(telas.openListarVagao());
 	}
@@ -73,12 +72,12 @@ public class Menu extends JFrame {
 			case "Sair":
 				System.exit(0);
 			break;
-			case "Novo Vag√£o":
-				panelBody = panelAdicionarVagao;
+			case "Novo Vag„o":
+				//telas.openAdicionarVagao(panelListarVagao.GetModelo());
 			break;
-			case "Vag√µes":
+			case "Vagıes":
 				getContentPane().removeAll();
-				panelBody = panelListarVagao;	
+				panelBody = panelListarVagao.GetPanel();	
 			break;
 			case "Nova Locomotiva":
 				telas.openAdicionarLocomotiva(panelListarLocomotiva.GetModelo());
@@ -87,16 +86,16 @@ public class Menu extends JFrame {
 				getContentPane().removeAll();
 				panelBody = panelListarLocomotiva.GetPanel();	
 			break;
-			case "Nova Composi√ß√£o":
+			case "Nova ComposiÁ„o":
 				telas.openAdicionarComposicao(panelListarComposicao.GetModelo());	
 			break;
-			case "Composi√ß√µes":
+			case "ComposiÁıes":
 				getContentPane().removeAll();
 				panelBody = panelListarComposicao.GetPanel();	
 			break;
 			case "Sobre":
 				getContentPane().removeAll();
-				panelBody = panelSobre.GetPanel();
+				//panelBody = panelSobre.GetPanel();
 			break;
 			default:
 				telas.openAlertError("Osh", "ERRO");

@@ -38,7 +38,7 @@ public class LocomotivaTableModel extends AbstractTable<Locomotiva> {
         if(column == COL_Comprimento) { return l.getComprimento(); } else
         if(column == COL_Classe) { return l.getClasse(); } else
         if(column == COL_Descricao) { return l.getDescricao(); } else
-        if(column == COL_PesoMaximo) { return l.getPesoMax(); }; return "";
+        if(column == COL_PesoMaximo) { return l.getPesoMax(); } return "";
     }
     
     public void addLocomotiva(Locomotiva locomotiva) {

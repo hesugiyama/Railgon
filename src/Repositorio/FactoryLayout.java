@@ -30,8 +30,8 @@ public class FactoryLayout {
 	/*public void openListarVagao(){
 		new ListarVagao().setVisible(true);
 	}*/
-	public JPanel openListarVagao(){
-		return new ListarVagao().GetPanel();
+	public ListarVagao openListarVagao(){
+		return new ListarVagao();
 	}
 	
 	/** Responsavel por exibir a tela de adicionar locomotiva

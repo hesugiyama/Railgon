@@ -10,16 +10,15 @@ import java.util.List;
 import javax.swing.*;
 
 import Entidades.Locomotiva;
-import Entidades.Vagao;
+
 import Repositorio.Controller;
 import Repositorio.Factory;
 import Repositorio.FactoryLayout;
-import Telas.Comum.Confirm;
+
 import Telas.Interface.ITelas;
-import Telas.Vagao.VagaoTableModel;
 
 
-public class ListarLocomotiva extends JFrame implements ITelas{
+public class ListarLocomotiva extends JFrame implements ITelas<LocomotivaTableModel>{
 	
 	private JPanel painelFundo;
 	private JTable tabela;

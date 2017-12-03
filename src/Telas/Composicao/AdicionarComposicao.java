@@ -18,7 +18,7 @@ import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
-public class AdicionarComposicao extends JFrame implements ITelas{
+public class AdicionarComposicao extends JFrame{
 	
 	private ComposicaoTableModel modelo;
 	private int linha;
@@ -67,7 +67,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 		modelo = md;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setLocation(300, 150);
+		setLocation(300, 100);
 		setResizable(false);
 		
 		iniciaValores();
@@ -101,7 +101,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 		ArrayList<Vagao> ALVagoes = null;
 		ArrayList<Locomotiva> ALLocomotivas = null;
 		
-		//não foi passada uma instancia
+		//nÃ£o foi passada uma instancia
 		if(compos == null){
 			Factory fact = new Factory();
 			Controller control = fact.getController();
@@ -141,9 +141,9 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 		JLdisponiveis.setModel(DLMdisponiveis);
 		JLAuxiliar.setModel(DLMauxiliar);
 
-		JLbComposicao  = new JLabel("Composição:");
-		JLbDisponiveis = new JLabel("Disponíveis:");
-		JLbNome		   = new JLabel("Nome da Composição:");
+		JLbComposicao  = new JLabel("ComposiÃ§Ã£o:");
+		JLbDisponiveis = new JLabel("DisponÃ­veis:");
+		JLbNome		   = new JLabel("Nome da ComposiÃ§Ã£o:");
 		
 		JTFnome = new JTextField();
 		
@@ -156,7 +156,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 		JBcancelar = new JButton("CANCELAR");
 		JBBuscar = new JButton("PESQUISAR");
 		
-		//chama os métodos de cada painel para construir seus componentes 
+		//chama os mÃ©todos de cada painel para construir seus componentes 
 		iniciaHead();
 		iniciaBody();
 		iniciaFooter();
@@ -172,7 +172,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 		CellConstraints cc = new CellConstraints();
 		
 		JPhead = new JPanel(layout);
-		JPhead.setBorder( new TitledBorder("Composição"));
+		JPhead.setBorder( new TitledBorder("ComposiÃ§Ã£o"));
 		JPhead.add(JLbNome,cc.xy(2,2));
 		JPhead.add(JTFnome,cc.xy(4, 2));
 		JPhead.add(JBBuscar,cc.xy(6, 2));
@@ -215,7 +215,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 		JPfooter.add(JBnovo, cc.xy(7,2));
 	}
 	
-	/** Valida se os campos da tela estão certos
+	/** Valida se os campos da tela estÃ£o certos
 	 * @return true se estiver certo e false se estiver errado
 	 */
 	protected boolean validacao(){
@@ -233,7 +233,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 		return aux;
 	}
 	
-	//dispara a criação de eventos na aplicação
+	//dispara a criaÃ§Ã£o de eventos na aplicaÃ§Ã£o
 	protected void criaEventos(){
 		
 		JLdisponiveis.addMouseListener(new MouseAdapter() {
@@ -245,7 +245,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 					}
 					catch(Exception e){
 						Vagao aux = (Vagao) JLdisponiveis.getSelectedValue();
-						fLayout.openAlertInfo("tela de vagão", "Aguardando implementação");
+						fLayout.openAlertInfo("tela de vagÃ£o", "Aguardando implementaÃ§Ã£o");
 						//fLayout.openAtualizarVagao(null,0,aux);
 					}
 				}
@@ -260,7 +260,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 						fLayout.openAtualizarLocomotiva(null,0, aux);
 					}catch(Exception e){
 						Vagao aux = (Vagao) JLAuxiliar.getSelectedValue();
-						fLayout.openAlertInfo("tela de vagão", "Aguardando implementação");
+						fLayout.openAlertInfo("tela de vagÃ£o", "Aguardando implementaÃ§Ã£o");
 						//fLayout.openAtualizarVagao(null,0,aux);
 					}
 				}
@@ -279,42 +279,42 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 				btnRemove();
 			}
 		});
-		//chama o método EXCLUIR
+		//chama o mÃ©todo EXCLUIR
 		JBexcluir.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				btnExcluir(); // método que realiza (re)ação
+				btnExcluir(); // mÃ©todo que realiza (re)aÃ§Ã£o
 			}
 		});
-		//chama o método SALVAR 
+		//chama o mÃ©todo SALVAR 
 		JBsalvar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				btnSalvar(); // método que realiza (re)ação
+				btnSalvar(); // mÃ©todo que realiza (re)aÃ§Ã£o
 			}
 		});
-		//chama o método NOVO
+		//chama o mÃ©todo NOVO
 		JBnovo.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				btnNovo(); // método que realiza (re)ação
+				btnNovo(); // mÃ©todo que realiza (re)aÃ§Ã£o
 			}
 		});
-		//chama o método CANCELAR
+		//chama o mÃ©todo CANCELAR
 		JBcancelar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				btnCancelar(); // método que realiza (re)ação
+				btnCancelar(); // mÃ©todo que realiza (re)aÃ§Ã£o
 			}
 		});
 	}
 	
-	//implementação do método voltar
+	//implementaÃ§Ã£o do mÃ©todo voltar
 	private void btnAdd(){
 		try{
-			//se tentar inserir um vagão sem locomotiva
+			//se tentar inserir um vagÃ£o sem locomotiva
 			if(JLdisponiveis.isSelectionEmpty()){				
-				fLayout.openAlertInfo("SELEÇÃO VAZIA","É necessário selecionar um elemento disponível!");
+				fLayout.openAlertInfo("SELEÃ‡ÃƒO VAZIA","Ã‰ necessÃ¡rio selecionar um elemento disponÃ­vel!");
 				return;
 			}
 			
-			//posicao do vagao na lista e o próprio vagão
+			//posicao do vagao na lista e o prÃ³prio vagÃ£o
 			int pos = JLdisponiveis.getSelectedIndex();
 			VeiculoFerroviario vf = JLdisponiveis.getSelectedValue();
 			
@@ -325,7 +325,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 					Factory f = new Factory();
 					String descricao = JTFnome.getText();
 					compos = f.getComposicao(l, descricao);
-				//se ja existe uma composição, adiciona a locomotiva
+				//se ja existe uma composiÃ§Ã£o, adiciona a locomotiva
 				}else{
 					compos.add(l);
 				}
@@ -338,7 +338,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 			//tira o elemento da lista
 			DLMdisponiveis.remove(pos);
 			
-			//adiciona o elemnto na lista de elementos da composição
+			//adiciona o elemnto na lista de elementos da composiÃ§Ã£o
 			DLMauxiliar.addElement(vf);
 			JLAuxiliar.setModel(DLMauxiliar);
 		}
@@ -347,11 +347,11 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 		}
 	}
 	
-	//implementação do método de remover da composicao
+	//implementaÃ§Ã£o do mÃ©todo de remover da composicao
 	protected void btnRemove(){
 		if(!JLAuxiliar.isSelectionEmpty()){
 			
-			//seleciona a posição do elemento selecionado e o próprio elemento
+			//seleciona a posiÃ§Ã£o do elemento selecionado e o prÃ³prio elemento
 			int posElement = JLAuxiliar.getSelectedIndex();
 			VeiculoFerroviario element = JLAuxiliar.getSelectedValue();
 			Factory f = new Factory();
@@ -361,7 +361,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 			if(element instanceof Locomotiva){
 				Locomotiva l = (Locomotiva) element;
 				
-				//remove de fato a locomotiva da composição
+				//remove de fato a locomotiva da composiÃ§Ã£o
 				try{
 					compos.remove(l);
 				}catch(Exception e){
@@ -372,7 +372,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 			}else{
 				Vagao v = (Vagao) element;
 				
-				//remove de fato o vagão da composição
+				//remove de fato o vagÃ£o da composiÃ§Ã£o
 				try{
 					compos.remove(v);
 				}catch(Exception e){
@@ -388,17 +388,17 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 			control.disconnect();
 			
 		}else{
-			fLayout.openAlertInfo("SELEÇÃO VAZIA","Selecione um componente para retirar da composição");
+			fLayout.openAlertInfo("SELEÃ‡ÃƒO VAZIA","Selecione um componente para retirar da composiÃ§Ã£o");
 		}
 	}
 	
-	//implementação do método Excluir
+	//implementaÃ§Ã£o do mÃ©todo Excluir
 	private void btnExcluir(){
 		Factory f = new Factory();
 		Controller control = f.getController();
 		control.connect();
 		
-		int resp = fLayout.openConfirm("Deseja remover a composição?\nOs elementos ficaram dispobíveis para serem usados por outras composições.");
+		int resp = fLayout.openConfirm("Deseja remover a composiÃ§Ã£o?\nOs elementos ficaram dispobÃ­veis para serem usados por outras composiÃ§Ãµes.");
 		
 		//clicou em SIM na tela
 		if(resp==0){
@@ -412,7 +412,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 		}
 	}
 	
-	//implementação do método Salvar
+	//implementaÃ§Ã£o do mÃ©todo Salvar
 	private void btnSalvar(){
 		
 		compos.setDescricao(JTFnome.getText());
@@ -430,14 +430,14 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 			
 			modelo.addComposicao(compos);
 			
-			fLayout.openAlertInfo("SUCESSO", "A COMPOSIÇÃO FOI SALVA COM SUCESSO!");
+			fLayout.openAlertInfo("SUCESSO", "A COMPOSIÃ‡ÃƒO FOI SALVA COM SUCESSO!");
 			dispose();
 		}catch(Exception e){
 			fLayout.openAlertError("ERRO AO SALVAR", e.getMessage());
 		}
 	}
 	
-	//implementação do método Novo
+	//implementaÃ§Ã£o do mÃ©todo Novo
 	private void btnNovo(){
 		compos = null;
 		JTFnome.setText("");
@@ -448,7 +448,7 @@ public class AdicionarComposicao extends JFrame implements ITelas{
 		DLMauxiliar.removeAllElements();
 	}
 	
-	//implementação do método Novo
+	//implementaÃ§Ã£o do mÃ©todo Novo
 	private void btnCancelar(){
 		dispose();
 	}
