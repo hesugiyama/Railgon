@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 import Entidades.Locomotiva;
+import Entidades.VeiculoFerroviario;
 import Repositorio.Controller;
 import Repositorio.Factory;
 
@@ -28,8 +29,10 @@ public class AdicionarLocomotiva extends JFrame{
 	private JTextField campoClasse;
 	private JTextField campoDescricao;
 	private JTextField campoPesomaxreb;
-	private JTextField campoBitola;
 	private JTextField campoComploc;
+	
+	private JComboBox<VeiculoFerroviario.Bitola> JCBbitola;
+	private DefaultComboBoxModel<VeiculoFerroviario.Bitola> DCBMbitola;
 	
 	//declarando nome do campo
 	private JLabel Classe;
@@ -52,7 +55,7 @@ public class AdicionarLocomotiva extends JFrame{
 		this.campoClasse.setText(String.valueOf(locomotiva.getClasse()));
 		this.campoDescricao.setText(String.valueOf(locomotiva.getDescricao()));
 		this.campoPesomaxreb.setText(String.valueOf(locomotiva.getPesoMax()));
-		this.campoBitola.setText(String.valueOf(locomotiva.getBitola()));
+		this.JCBbitola.setSelectedItem( VeiculoFerroviario.Bitola.valueOf(String.valueOf(locomotiva.getBitola())));		
 		this.campoComploc.setText(String.valueOf(locomotiva.getComprimento()));
 		Excluir.setVisible(true);
 	}
@@ -62,7 +65,6 @@ public class AdicionarLocomotiva extends JFrame{
 		campoClasse = new JTextField();
 		campoDescricao = new JTextField();
 		campoPesomaxreb = new JTextField();
-		campoBitola = new JTextField();
 		campoComploc = new JTextField();
 		Classe = new JLabel("Classe:");
 		Descricao = new JLabel("Descrição:");
@@ -72,6 +74,10 @@ public class AdicionarLocomotiva extends JFrame{
 		Excluir = new JButton("Excluir");
 		Salvar = new JButton("Salvar");
 		Novo = new JButton("Novo");
+		
+		DCBMbitola = new DefaultComboBoxModel<>(VeiculoFerroviario.Bitola.values());
+		JCBbitola = new JComboBox<>();
+		JCBbitola.setModel(DCBMbitola);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocation(450, 300);
@@ -99,8 +105,7 @@ public class AdicionarLocomotiva extends JFrame{
 		campoClasse = new JTextField();;
 		Jhead.add(campoClasse, cc.xy(3, 1));
 		Jhead.add(Bitola, cc.xy(5, 1));
-		campoBitola = new JTextField();
-		Jhead.add(campoBitola, cc.xy(8,1));
+		Jhead.add(JCBbitola, cc.xy(8,1));
 		Jhead.add(Descricao, cc.xy(1, 3));
 		campoDescricao = new JTextField();
 		Jhead.add(campoDescricao, cc.xyw(3,3,5));
@@ -185,7 +190,7 @@ public class AdicionarLocomotiva extends JFrame{
 				JOptionPane.showMessageDialog(null,"O campo Comprimento da locomotiva necessita ser preenchido corretamente!");
 					return;
 			}
-			String bitola = campoBitola.getText();
+			String bitola = JCBbitola.getName();
 			String descricao = campoDescricao.getText();
 			//excecao para caso o campo esteja vazio
 			if(descricao.isEmpty()) {
@@ -231,7 +236,7 @@ public class AdicionarLocomotiva extends JFrame{
 				campoClasse.setText(" ");
 				campoDescricao.setText(" ");
 				campoPesomaxreb.setText(" ");
-				campoBitola.setText(" ");
+				JCBbitola.setSelectedItem(null);
 				campoComploc.setText(" ");
 		}
 	};
