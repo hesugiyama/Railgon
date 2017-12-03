@@ -1,11 +1,16 @@
 package Telas.Composicao;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.*;
 
 import Entidades.Composicao;
+import Entidades.Locomotiva;
 import Telas.Interface.ITelas;
 
 import Repositorio.Controller;
@@ -19,6 +24,7 @@ public class ListarComposicao extends JFrame implements ITelas<ComposicaoTableMo
 	private JScrollPane barraRolagem;
 	
 	private ComposicaoTableModel modelo;
+	private int codigoComposicao;
 	
 	private FactoryLayout tela = new FactoryLayout();
     private Factory f = new Factory();
@@ -41,13 +47,49 @@ public class ListarComposicao extends JFrame implements ITelas<ComposicaoTableMo
 			getContentPane().add(painelFundo);
 		}
 		
-		// MÃ©todo responsÃ¡vel por criar a tabela e chamar o mÃ©todo que lista os dados
+		// Método responsável por criar a tabela e chamar o mÃ©todo que lista os dados
 		private void criaJTable() {
 	        tabela = new JTable(modelo);
+	        
+	        tabela.addMouseListener(new MouseListener() {
+	        	public void mouseClicked(MouseEvent e) {
+	        		codigoComposicao = (Integer) tabela.getValueAt(tabela.getSelectedRow(), 0);
+	        		if(e.getClickCount() == 2) {
+	        			EditarComposicao(codigoComposicao);
+	        		}
+	        	}
+	        	
+	        	public void mousePressed(MouseEvent e) { /* System.out.println("Mouse pressed"); */ }
+	            public void mouseReleased(MouseEvent e) { /* System.out.println("Mouse Released"); */ }
+	          	public void mouseEntered(MouseEvent e) { /* System.out.println("Mouse Entered"); */ }
+	            public void mouseExited(MouseEvent e) { /* System.out.println("Mouse exited"); */ }
+	        });
+	   
+			tabela.addKeyListener(new KeyListener(){
+				public void keyPressed(KeyEvent e) {
+					try{
+						codigoComposicao = (Integer) tabela.getValueAt(tabela.getSelectedRow(), 0);
+						}
+						catch(Exception ex){
+							tela.openAlertError("ERRO AO SELECIONAR LINHA", "Selecione a linha inteira.");
+						}
+					if(e.getKeyCode() == KeyEvent.VK_ENTER){
+						EditarComposicao(codigoComposicao);
+					}
+					if(e.getKeyCode() == KeyEvent.VK_DELETE){
+						ExcluirComposicao(codigoComposicao);
+					}
+					
+				}
+				public void keyReleased(KeyEvent e) {}
+				public void keyTyped(KeyEvent e) {}
+	        	
+	        });
+	        
 	        pesquisar();
 	    }
 		
-		// MÃ©todo responsÃ¡vel por listar os dados do vagÃ£o e jogar na tabela
+		// Método responsável por listar os dados do vagão e jogar na tabela
 		private void pesquisar() {
 			try{
 				c.connect();
@@ -56,12 +98,50 @@ public class ListarComposicao extends JFrame implements ITelas<ComposicaoTableMo
 		        tabela.setModel(modelo);
 			}
 	        catch(Exception e){
-	        	tela.openAlertError("ERRO LISTAR COMPOSIÃ‡Ã•ES", "Ocorreu um erro ao listar as composiÃ§Ãµes: " + e.getMessage());
+	        	tela.openAlertError("ERRO LISTAR COMPOSIÇÕES", "Ocorreu um erro ao listar as composições: " + e.getMessage());
 	        }
 			finally{
 				//c.desconnect();
 			}
 	    }
+		
+		protected void EditarComposicao(int codigoComposicao) {
+			try {
+				int linhaSelecionada = -1;
+		        linhaSelecionada = tabela.getSelectedRow();
+			        if (linhaSelecionada > 0) {
+			            //tela.openAtualizarComposicao(modelo, linhaSelecionada, codigoComposicao);
+			        }
+			} catch (Exception e) {
+				tela.openAlertError(null, e.getMessage());
+			}
+			
+		}
+		
+		protected void ExcluirComposicao(int codigoComposicao) {
+			try {
+				int linhaSelecionada = -1;
+		        linhaSelecionada = tabela.getSelectedRow();
+			        if (linhaSelecionada > 0) {
+			        	int confirm = tela.openConfirm("Tem certeza que deseja excluir a composição?");
+						if(confirm == 0){
+							try {
+								c.connect();
+								//c.removeId(codigoComposicao);
+								tela.openAlertInfo("", "Excluído com sucesso.");
+								modelo.removeComposicao(tabela.getSelectedRow());
+							} catch (Exception ex) {
+								tela.openAlertError("ERRO AO EXCLUIR COMPOSICAO", ex.getMessage());
+							} finally{
+								c.disconnect();
+							}
+						}
+			        }
+			} catch (Exception e) {
+				tela.openAlertError(null, e.getMessage());
+			}
+			
+		}
 		
 		public JPanel GetPanel(){
 			return this.painelFundo;

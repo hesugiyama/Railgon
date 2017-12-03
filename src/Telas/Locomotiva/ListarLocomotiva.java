@@ -51,6 +51,7 @@ public class ListarLocomotiva extends JFrame implements ITelas<LocomotivaTableMo
 	// M�todo respons�vel por criar a tabela e chamar o m�todo que lista os dados
 	private void criaJTable() {
         tabela = new JTable(modelo);
+        
         tabela.addMouseListener(new MouseListener() {
         	public void mouseClicked(MouseEvent e) {
         		locomotivaEditar = f.getLocomotiva(tabela.getValueAt(tabela.getSelectedRow(),2).toString(),
@@ -113,7 +114,7 @@ public class ListarLocomotiva extends JFrame implements ITelas<LocomotivaTableMo
 			int linhaSelecionada = -1;
 	        linhaSelecionada = tabela.getSelectedRow();
 		        if (linhaSelecionada > 0) {
-		        	int confirm = tela.openConfirm("Tem certeza que deseja excluir o locomotiva?");
+		        	int confirm = tela.openConfirm("Tem certeza que deseja excluir a locomotiva?");
 					if(confirm == 0){
 						try {
 							c.connect();
