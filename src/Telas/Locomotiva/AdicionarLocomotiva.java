@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 //import javax.swing.text.MaskFormatter;
+import javax.swing.border.TitledBorder;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -18,31 +19,34 @@ import Telas.Interface.ITelas;
 
 public class AdicionarLocomotiva extends JFrame{
 	
-	//declara√ß√µes necess√°rias para atualizar a tabela
+	//declaraÁıes necess·rias para atualizar a tabela
 	private LocomotivaTableModel modelo;
 	private Locomotiva locomotiva = null;
 	private int linha;
 	
-	//declarando bot√µes
-	private JButton Excluir;
-	private JButton Salvar;
-	private JButton Novo;
+	//declarando botıes
+	private JButton JBExcluir;
+	private JButton JBSalvar;
+	private JButton JBNovo;
+	private JButton JBCancelar;
 	
 	//declarando campos de texto
-	private JTextField campoClasse;
-	private JTextField campoDescricao;
-	private JTextField campoPesomaxreb;
-	private JTextField campoComploc;
+	private JTextField JTcampoClasse;
+	private JTextField JTcampoDescricao;
+	private JTextField JTcampoPesomaxreb;
+	private JTextField JTcampoComploc;
 	
 	private JComboBox<VeiculoFerroviario.Bitola> JCBbitola;
 	private DefaultComboBoxModel<VeiculoFerroviario.Bitola> DCBMbitola;
 	
 	//declarando nome do campo
-	private JLabel Classe;
-	private JLabel Descricao;
-	private JLabel Pesomaxreb;
-	private JLabel Bitola;
-	private JLabel Comploc;
+	private JLabel JLClasse;
+	private JLabel JLDescricao;
+	private JLabel JLPesomaxreb;
+	private JLabel JLBitola;
+	private JLabel JLComploc;
+	private JLabel JLimg;
+	private JLabel JLlocomotiva;
 	
 	//declarando se√ß√µes da pagina
 	JPanel Jhead;
@@ -50,25 +54,26 @@ public class AdicionarLocomotiva extends JFrame{
 	JPanel Jfooter;
 	
 	//declarando factory para chamada de telas.
-	FactoryLayout tela;
+	private FactoryLayout fLayout = new FactoryLayout();
 	//JPanel Jprincipal;
 	
 	public AdicionarLocomotiva(Locomotiva l) {
 		this();
 		locomotiva = l;
-		this.campoClasse.setText(String.valueOf(locomotiva.getClasse()));
-		this.campoDescricao.setText(String.valueOf(locomotiva.getDescricao()));
-		this.campoPesomaxreb.setText(String.valueOf(locomotiva.getPesoMax()));
+		this.JTcampoClasse.setText(String.valueOf(locomotiva.getClasse()));
+		this.JTcampoDescricao.setText(String.valueOf(locomotiva.getDescricao()));
+		this.JTcampoPesomaxreb.setText(String.valueOf(locomotiva.getPesoMax()));
 		this.JCBbitola.setSelectedItem( VeiculoFerroviario.Bitola.valueOf(String.valueOf(locomotiva.getBitola())));		
-		this.campoComploc.setText(String.valueOf(locomotiva.getComprimento()));
-		this.campoClasse.setEditable(false);
-		this.campoDescricao.setEditable(false);
-		this.campoPesomaxreb.setEditable(false);
+		this.JTcampoComploc.setText(String.valueOf(locomotiva.getComprimento()));
+		this.JTcampoClasse.setEditable(false);
+		this.JTcampoDescricao.setEditable(false);
+		this.JTcampoPesomaxreb.setEditable(false);
 		this.JCBbitola.setEnabled(false);
-		this.campoComploc.setEditable(false);
-		Excluir.setVisible(false);
-		Salvar.setVisible(false);
-		Novo.setVisible(false);
+		this.JTcampoComploc.setEditable(false);
+		JBExcluir.setVisible(false);
+		JBSalvar.setVisible(false);
+		JBNovo.setVisible(false);
+		JBCancelar.setVisible(false);
 		this.setTitle(l.getDescricao());
 	}
 	
@@ -78,44 +83,49 @@ public class AdicionarLocomotiva extends JFrame{
 		this(md);
 		locomotiva = l;
 		linha = linhaSelecionada;
-		this.campoClasse.setText(String.valueOf(locomotiva.getClasse()));
-		this.campoDescricao.setText(String.valueOf(locomotiva.getDescricao()));
-		this.campoPesomaxreb.setText(String.valueOf(locomotiva.getPesoMax()));
+		this.JTcampoClasse.setText(String.valueOf(locomotiva.getClasse()));
+		this.JTcampoDescricao.setText(String.valueOf(locomotiva.getDescricao()));
+		this.JTcampoPesomaxreb.setText(String.valueOf(locomotiva.getPesoMax()));
 		this.JCBbitola.setSelectedItem( VeiculoFerroviario.Bitola.valueOf(String.valueOf(locomotiva.getBitola())));		
-		this.campoComploc.setText(String.valueOf(locomotiva.getComprimento()));
-		Excluir.setVisible(true);
+		this.JTcampoComploc.setText(String.valueOf(locomotiva.getComprimento()));
+		JBExcluir.setVisible(true);
 		this.setTitle("Alterar Locomotiva");
 	}
 	
 	//metodo que instancia todos campos, bot√µes e chama as se√ß√µes da pagina
 	public  AdicionarLocomotiva(LocomotivaTableModel md) {
 		this(); // ajusta tÌtulo
+		modelo = md;
 		this.setTitle("Adicionar Locomotiva");
 	}
 	
 	public  AdicionarLocomotiva() {
-		super(); // ajusta t√≠tulo
-		//setSize(400,100); 
-		//setResizable(false);
-		campoClasse = new JTextField();
-		campoDescricao = new JTextField();
-		campoPesomaxreb = new JTextField();
-		campoComploc = new JTextField();
-		Classe = new JLabel("Classe:");
-		Descricao = new JLabel("DescriÁ„o:");
-		Pesomaxreb = new JLabel("Peso M·ximo Reboc·vel (t):");
-		Bitola = new JLabel("Bitola:");
-		Comploc = new JLabel ("Comprimento da locomotiva (m):");
-		Excluir = new JButton("Excluir");
-		Salvar = new JButton("Salvar");
-		Novo = new JButton("Novo");
+		super();
+		JTcampoClasse = new JTextField();
+		JTcampoDescricao = new JTextField();
+		JTcampoPesomaxreb = new JTextField();
+		JTcampoComploc = new JTextField();
+		JTcampoClasse = new JTextField();
+		JTcampoDescricao = new JTextField();
+		JTcampoPesomaxreb = new JTextField();
+		JTcampoComploc = new JTextField();
+		JLClasse = new JLabel("Classe:");
+		JLDescricao = new JLabel("DescriÁ„o:");
+		JLPesomaxreb = new JLabel("Peso Maximo Rebocavel (t):");
+		JLBitola = new JLabel("Bitola:");
+		JLComploc = new JLabel ("Comprimento da locomotiva (m):");
+		JLlocomotiva = new JLabel("Locomotiva");
+		JBExcluir = new JButton("Excluir");
+		JBSalvar = new JButton("Salvar");
+		JBNovo = new JButton("Novo");
+		JBCancelar = new JButton("Cancelar");
 		
 		DCBMbitola = new DefaultComboBoxModel<>(VeiculoFerroviario.Bitola.values());
 		JCBbitola = new JComboBox<>();
 		JCBbitola.setModel(DCBMbitola);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setLocation(470, 200);
+		setLocation(450, 300);
 		setResizable(false);
 		
 		Jhead();
@@ -127,72 +137,93 @@ public class AdicionarLocomotiva extends JFrame{
 		cp.add(Jbody, BorderLayout.CENTER);
 		cp.add(Jfooter, BorderLayout.SOUTH);
 		pack();
-		tela = new FactoryLayout();
 	}
-	//metodo da se√ß√£o head da pagina onde cont√©m classe e descri√ß√£o da locomotiva
+	
 	private void Jhead(){
 		FormLayout layouthead = new FormLayout(
-				"pref, 5dlu, 50dlu, 20dlu, min,pref, 5dlu, 50dlu, 5dlu, min", // colunas
-				"pref, 2dlu, pref, 2dlu, pref"); // linha
+				"60dlu, pref, pref, 5dlu,pref ", // colunas
+				"5dlu, pref, 5dlu"); // linha
 		//layouthead.setRowGroups(new int[][] { { 7, 1, 5 } });
 		Jhead = new JPanel(layouthead);
+		Jhead.setBorder(new TitledBorder(" "));
 		CellConstraints cc = new CellConstraints();
-		Jhead.add(Classe, cc.xy(1, 1));
-		campoClasse = new JTextField();;
-		Jhead.add(campoClasse, cc.xy(3, 1));
-		Jhead.add(Bitola, cc.xy(5, 1));
-		Jhead.add(JCBbitola, cc.xy(8,1));
-		Jhead.add(Descricao, cc.xy(1, 3));
-		campoDescricao = new JTextField();
-		Jhead.add(campoDescricao, cc.xyw(3,3,5));
+		JLimg    = new JLabel();
+		JLimg.setBounds(0,0,50,50);
+		ImageIcon imgIcon = new ImageIcon("res/locomotiva.png");
+		Image img = imgIcon.getImage().getScaledInstance(JLimg.getWidth(),JLimg.getHeight(), Image.SCALE_DEFAULT);
+		JLimg.setIcon(new ImageIcon(img));
+		Jhead.add(JLimg,cc.xy(2,2));
+		Font Font1 = new Font("Arial", Font.BOLD, 24);
+		JLlocomotiva.setFont(Font1);
+		Jhead.add(JLlocomotiva,cc.xy(5,2));	
 	}
-	//se√ß√£o body da pagina onde contem peso maximo rebocavel, bitola e comprimento da locomotiva
+	//seÁ„o body da pagina onde contÈm todos os campos da locomotiva//
 	private void Jbody() {
 		FormLayout layoutbody = new FormLayout(
-				"pref, 5dlu, 50dlu, 5dlu, min,", // colunas
-				"pref, 3dlu, pref, 3dlu, pref"); // linha
+				"5dlu, pref, pref, 5dlu, 50dlu, 20dlu, min,pref, 5dlu, 50dlu, 5dlu, min", // colunas
+				"pref, 3dlu, pref, 3dlu, pref, pref, 3dlu, pref, 3dlu, pref"); // linha
 		//layoutbody.setRowGroups(new int[][] { { 1, 3, 5 } });
 		Jbody = new JPanel(layoutbody);
+		Jbody.setBorder(new TitledBorder(" "));
 		CellConstraints cc = new CellConstraints();
-		Jbody.add(Pesomaxreb, cc.xy(1, 1));
-		Jbody.add(campoPesomaxreb, cc.xy(3, 1));
-		Jbody.add(Comploc, cc.xy(1,5));
-		campoComploc = new JTextField();
-		Jbody.add(campoComploc, cc.xy(3,5));
+		Jbody.add(JLClasse, cc.xy(3, 1));
+		JTcampoClasse = new JTextField();;
+		Jbody.add(JTcampoClasse, cc.xy(5, 1));
+		Jbody.add(JLBitola, cc.xy(7, 1));
+		Jbody.add(JCBbitola, cc.xy(10,1));
+		Jbody.add(JLDescricao, cc.xy(3, 3));
+		Jbody.add(JTcampoDescricao, cc.xyw(5,3,6));
+		Jbody.add(JLPesomaxreb, cc.xy(3, 5));
+		Jbody.add(JTcampoPesomaxreb, cc.xy(5, 5));
+		Jbody.add(JLComploc, cc.xy(3,8));
+		Jbody.add(JTcampoComploc, cc.xy(5,8));
 	}
-	//se√ß√£o footer, onde cont√©m os bot√µes da pagina
+	//SeÁ„o footer, onde contÈm os botıes da aplicaÁ„o//
 	private void Jfooter() {
 		FormLayout layoutfooter = new FormLayout(
-				"pref, 5dlu, 42dlu, 5dlu, min,", // colunas
+				"5dlu, pref,5dlu, pref, 5dlu,pref, 5dlu,pref, min,pref", // colunas
 				"pref, 5dlu, pref, 5dlu, pref"); // linha
 		//layoutbody.setRowGroups(new int[][] { { 1, 3, 5 } });
 		Jfooter = new JPanel(layoutfooter);
+		Jfooter.setBorder(new TitledBorder(" "));
 		CellConstraints cc = new CellConstraints();
-		Salvar = new JButton("Salvar");
-		Jfooter.add(Salvar, cc.xy(1,3));
-		Novo = new JButton("Novo");
-		Jfooter.add(Novo,cc.xy(3, 3 ));
-		Excluir = new JButton("Excluir");
-		Excluir.setVisible(false);
-		Jfooter.add(Excluir,cc.xy(5,3));
-		Salvar.addActionListener(Salvar1);
-		Novo.addActionListener(Novo1);
-		Excluir.addActionListener(Excluir1);
+		JBSalvar = new JButton("Salvar");
+		Jfooter.add(JBSalvar, cc.xy(6,3));
+		JBNovo = new JButton("Novo");
+		Jfooter.add(JBNovo,cc.xy(8, 3 ));
+		JBExcluir = new JButton("Excluir");
+		JBExcluir.setEnabled(false);
+		Jfooter.add(JBExcluir,cc.xy(4,3));
+		JBCancelar = new JButton("Cancelar");
+		Jfooter.add(JBCancelar,cc.xy(2, 3));
+		JBCancelar.addActionListener(Cancelar1);
+		JBExcluir.addActionListener(Excluir1);
+		JBSalvar.addActionListener(Salvar1);
+		JBNovo.addActionListener(Novo1);
 	}
-	//a√ß√£o para o bot√£o excluir 
+	
+	//AÁ„o para o bot„o Cancelar//
+		ActionListener Cancelar1 = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		};
+	
+	//AÁ„o para o bot„o excluir 
 	ActionListener Excluir1 = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			Factory f = new Factory();
 			Controller c = f.getController();
-			int confirm = tela.openConfirm("Tem certeza que deseja excluir o locomotiva?");
+			int confirm = fLayout.openConfirm("Tem certeza que deseja excluir o locomotiva?");
 			if(confirm == 0){
 				try {
 					c.connect();
 					c.remove(locomotiva);
-					tela.openAlertInfo(null,"A locomotiva foi removida com sucesso!");
+					fLayout.openAlertInfo(null,"A locomotiva foi removida com sucesso!");
 					modelo.removeLocomotiva(linha);
 				}catch(Exception err){
-					tela.openAlertError(null, err.getMessage());
+					fLayout.openAlertError(null, err.getMessage());
+					return;
 				} finally{
 					c.disconnect();
 				}
@@ -201,7 +232,7 @@ public class AdicionarLocomotiva extends JFrame{
 			}
 		}
 	};
-	//a√ßao para o bot√£o salvar
+	//AÁ„o para o bot„o salvar
 	ActionListener Salvar1 = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			int classe = 0;
@@ -209,38 +240,38 @@ public class AdicionarLocomotiva extends JFrame{
 			double comploc = 0;
 			//tratamento de erro de campo vazio e  preenchimento do usuario no campo classe
 			try {
-				classe  = Integer.parseInt(campoClasse.getText().trim());
+				classe  = Integer.parseInt(JTcampoClasse.getText().trim());
 			}catch(NumberFormatException err ){
-				JOptionPane.showMessageDialog(null,"O campo classe necessita ser preenchido corretamentes!");
+				JOptionPane.showMessageDialog(null,"O campo classe necessita ser preenchido corretamente!");
 					return;
 			}
 			//tratamento de erro de campo vazio e preenchimento do usuario no campo peso maximo rebocavel
 			try {
-				pesomaxreb = Double.parseDouble(campoPesomaxreb.getText());
+				pesomaxreb = Double.parseDouble(JTcampoPesomaxreb.getText());
 			}catch(NumberFormatException err ){
 				JOptionPane.showMessageDialog(null,"O campo peso necessita ser preenchido corretamente!");
 					return;
 			}
 			//tratamento de erro de campo vazio e preenchimento do usuario no campo comprimento da locomotiva
 			try {
-				 comploc = Double.parseDouble(campoComploc.getText());
+				 comploc = Double.parseDouble(JTcampoComploc.getText());
 			}catch(NumberFormatException err ){
 				JOptionPane.showMessageDialog(null,"O campo Comprimento da locomotiva necessita ser preenchido corretamente!");
 					return;
 			}
-			String bitola = JCBbitola.getName();
-			String descricao = campoDescricao.getText();
-			//exce√ß√£o para caso o campo esteja vazio
+			VeiculoFerroviario.Bitola bitola = (Entidades.VeiculoFerroviario.Bitola) JCBbitola.getSelectedItem();
+			String descricao = JTcampoDescricao.getText();;
+			//excecao para caso o campo esteja vazio
 			if(descricao.isEmpty()) {
-				JOptionPane.showMessageDialog(null,"Preencha a Descri√ß√£o, a locomotiva n√£o pode ser salva sem preencher!");
+				JOptionPane.showMessageDialog(null,"Preencha a DescriÁ„o, a locomotiva n√£o pode ser salva sem preencher!");
 					return;
 			//exce√ß√£o para caso o campo esteja vazio
-			}else if(bitola.isEmpty()) {
-				JOptionPane.showMessageDialog(null,"Preencha o campo Bitola, a locomotiva n√£o pode ser salva sem preencher!");
-					return;
+			}else if( JCBbitola.getSelectedIndex() == -1) {
+				fLayout.openAlertWarning("Bitola","Bitola necessita ser preenchido corretamente!");
+				return;
 			}
-			//a√ß√£o para caso clique no bot√£o salvar e todos os campos estejam certos
-			//conex√£o com o banco de dados, salvar no banco de dados e desconectar do banco
+			//acao para caso clique no botao salvar e todos os campos estejam certos
+			//conexao com o banco de dados, salvar no banco de dados e desconectar do banco
 			Factory f = new Factory();
 			Controller c = f.getController();
 			try {
@@ -259,7 +290,7 @@ public class AdicionarLocomotiva extends JFrame{
 				}
 				
 			}catch(Exception err){
-				JOptionPane.showMessageDialog(null,err.getMessage());	
+				fLayout.openAlertError("Erro",err.getMessage());
 			}finally{
 				c.disconnect();//desconectar do banco
 			}
@@ -271,11 +302,11 @@ public class AdicionarLocomotiva extends JFrame{
 	//a√ß√£o para o bot√£o novo, limpa os campos
 	ActionListener Novo1 = new ActionListener() {
 		  public void actionPerformed(ActionEvent e) {
-				campoClasse.setText(" ");
-				campoDescricao.setText(" ");
-				campoPesomaxreb.setText(" ");
-				JCBbitola.setSelectedItem(null);
-				campoComploc.setText(" ");
+			  	JTcampoClasse.setText(" ");
+			  	JTcampoDescricao.setText(" ");
+			  	JTcampoPesomaxreb.setText(" ");
+				JCBbitola.getSelectedItem();
+				JTcampoComploc.setText(" ");
 		}
 	};
 }

@@ -33,13 +33,6 @@ public class FactoryLayout {
 	/** Responsavel por exibir a tela com os dados para visualizar a locomotiva
 	 * @return void
 	 */
-	/*public void openVisualizarVagao(Vagao vagao){
-		new AdicionarLocomotiva(vagao).setVisible(true);
-	}*/
-	
-	/** Responsavel por exibir a tela com os dados para visualizar a locomotiva
-	 * @return void
-	 */
 	public void openVisualizarVagao(Vagao vagao){
 		//new AdicionarVagao(vagao).setVisible(true);
 	}
@@ -47,9 +40,6 @@ public class FactoryLayout {
 	/** Responsavel por exibir a tela de listar vagão
 	 * @return void
 	 */
-	/*public void openListarVagao(){
-		new ListarVagao().setVisible(true);
-	}*/
 	public ListarVagao openListarVagao(){
 		return new ListarVagao();
 	}

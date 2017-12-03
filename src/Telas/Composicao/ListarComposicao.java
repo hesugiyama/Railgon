@@ -31,7 +31,7 @@ public class ListarComposicao extends JFrame implements ITelas<ComposicaoTableMo
     private Controller c = f.getController();
 	
 	List<Composicao> lista;
-	private String[] colunas = new String[]{ "Código", "Descrição", "# Locomotiva", "# Vagões", "Peso Máximo", "Peso Atual"};
+	private String[] colunas = new String[]{ "Código", "Descrição", "Bitola", "# Locomotiva", "# Vagões", "Comprimento", "Peso Máximo", "Peso Atual"};
 	
 	public ListarComposicao() {
 		criaJTable();

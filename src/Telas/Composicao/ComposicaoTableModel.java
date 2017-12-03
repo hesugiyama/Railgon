@@ -16,11 +16,12 @@ public class ComposicaoTableModel extends AbstractTable<Composicao>{
 	// Variáveis dos indices das colunas. Utilizada para facilitar legibilidade do código.
 	private static final int COL_Codigo = 0;
 	private static final int COL_Descricao = 1;
-    private static final int COL_Locomotiva = 2;
-    private static final int COL_Vagoes = 3;
-    private static final int COL_Comprimento = 4;
-    private static final int COL_PesoMax = 5;
-    private static final int COL_PesoAtual = 6;
+	private static final int COL_Bitola = 2;
+    private static final int COL_Locomotiva = 3;
+    private static final int COL_Vagoes = 4;
+    private static final int COL_Comprimento = 5;
+    private static final int COL_PesoMax = 6;
+    private static final int COL_PesoAtual = 7;
     
     /** Construtor
      * 
@@ -41,6 +42,8 @@ public class ComposicaoTableModel extends AbstractTable<Composicao>{
        if(columnIndex == COL_Locomotiva || columnIndex == COL_Vagoes){
            return Integer.class;
        }
+       if(columnIndex == COL_Bitola)
+    	   return Character.class;
        return Double.class;
    }
     
@@ -52,6 +55,7 @@ public class ComposicaoTableModel extends AbstractTable<Composicao>{
         		
     	if(column == COL_Codigo) { return composicao.getCodigo(); } else
     	if(column == COL_Descricao) { return composicao.getDescricao(); } else
+    	if(column == COL_Bitola) { return composicao.getBitola(); } else
     	if(column == COL_Locomotiva) { return (Object) composicao.getLocomotivas().size(); } else
     	if(column == COL_Vagoes) { return (Object) composicao.getVagoes().size(); } else
     	if(column == COL_Comprimento) { return (Object) composicao.getComprimento(); } else
