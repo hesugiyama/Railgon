@@ -18,7 +18,7 @@ public class Locomotiva extends VeiculoFerroviario{
 	 */
 	protected double pesoMax;	
 	
-	/** Responsavel por instancial uma Locomotiva
+	/** Responsavel por instanciar uma Locomotiva
 	 * @param bitola
 	 * @param classe
 	 * @param descricao
@@ -87,7 +87,7 @@ public class Locomotiva extends VeiculoFerroviario{
 	public String toString() {
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("L|");
+		sb.append("L | ");
 		sb.append(getClasse());				
 		return sb.toString();
 	}

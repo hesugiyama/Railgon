@@ -28,6 +28,7 @@ public class Menu extends JFrame {
 	private ListarVagao panelListarVagao = telas.openListarVagao();
 	private ListarLocomotiva panelListarLocomotiva = telas.openListarLocomotiva();
 	private ListarComposicao panelListarComposicao = telas.openListarComposicao();
+	private Sobre panelSobre = telas.openSobre();
 	
 	public Menu() {
 		
@@ -73,7 +74,7 @@ public class Menu extends JFrame {
 				System.exit(0);
 			break;
 			case "Novo Vagão":
-				//telas.openAdicionarVagao(panelListarVagao.GetModelo());
+				telas.openAdicionarVagao(panelListarVagao.GetModelo());
 			break;
 			case "Vagões":
 				getContentPane().removeAll();
@@ -95,7 +96,7 @@ public class Menu extends JFrame {
 			break;
 			case "Sobre":
 				getContentPane().removeAll();
-				//panelBody = panelSobre.GetPanel();
+				panelBody = panelSobre.GetPanel();
 			break;
 			default:
 				telas.openAlertError("Osh", "ERRO");

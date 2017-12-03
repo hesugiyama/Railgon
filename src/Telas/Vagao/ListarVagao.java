@@ -98,7 +98,15 @@ public class ListarVagao extends JFrame implements ITelas<VagaoTableModel>{
     }
 	
 	protected void editarVagao(Vagao vagaoEditar) {
-		System.out.println(vagaoEditar);
+		try {
+			int linhaSelecionada = -1;
+	        linhaSelecionada = tabela.getSelectedRow();
+		        if (linhaSelecionada >= 0) {
+		            tela.openAtualizarVagao(modelo, linhaSelecionada, vagaoEditar);
+		        }
+		} catch (Exception e) {
+			tela.openAlertError(null, e.getMessage());
+		}
 	}
 
 	// Método responsável por listar os dados do vagão e jogar na tabela

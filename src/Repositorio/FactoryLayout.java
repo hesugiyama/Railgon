@@ -19,9 +19,29 @@ public class FactoryLayout {
 	/** Responsavel por exibir a tela de adicionar vagão
 	 * @return void
 	 */
+	public void openAdicionarVagao(VagaoTableModel modelo){
+		new AdicionarVagao(modelo).setVisible(true);
+	}
 	
-	public JPanel openAdicionarVagao(){
-		return new AdicionarVagao().GetPanel();
+	/** Responsavel por exibir a tela com os dados para atualizar o vagao
+	 * @return void
+	 */
+	public void openAtualizarVagao(VagaoTableModel modelo, int linhas, Vagao vagao){
+		new AdicionarVagao(modelo, linhas, vagao).setVisible(true);
+	}
+	
+	/** Responsavel por exibir a tela com os dados para visualizar a locomotiva
+	 * @return void
+	 */
+	/*public void openVisualizarVagao(Vagao vagao){
+		new AdicionarLocomotiva(vagao).setVisible(true);
+	}*/
+	
+	/** Responsavel por exibir a tela com os dados para visualizar a locomotiva
+	 * @return void
+	 */
+	public void openVisualizarVagao(Vagao vagao){
+		//new AdicionarVagao(vagao).setVisible(true);
 	}
 	
 	/** Responsavel por exibir a tela de listar vagão
@@ -46,6 +66,13 @@ public class FactoryLayout {
 	 */
 	public void openAtualizarLocomotiva(LocomotivaTableModel modelo, int linhas, Locomotiva locomotiva){
 		new AdicionarLocomotiva(modelo, linhas, locomotiva).setVisible(true);
+	}
+	
+	/** Responsavel por exibir a tela com os dados para visualizar a locomotiva
+	 * @return void
+	 */
+	public void openVisualizarLocomotiva(Locomotiva locomotiva){
+		new AdicionarLocomotiva(locomotiva).setVisible(true);
 	}
 	
 	/** Responsavel por exibir a tela de listar locomotiva

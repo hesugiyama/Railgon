@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
+import Entidades.Locomotiva;
 import Entidades.Vagao;
 import Entidades.Vagao.Tipo;
 import Telas.Comum.AbstractTable;
@@ -54,5 +55,19 @@ public class VagaoTableModel extends AbstractTable<Vagao> {
 		if(column == COL_Identificacao) { return v.getIdentificacao(); } return "";
 	}
 	
-	
+	public void addVagao(Vagao vagao) {
+        linhas.add(vagao);
+        int ultimoIndice = getRowCount() - 1;
+        fireTableRowsInserted(ultimoIndice, ultimoIndice);
+    }
+    
+    public void updateVagao(int indiceLinha, Vagao vagao) {
+        linhas.set(indiceLinha, vagao);
+        fireTableRowsUpdated(indiceLinha, indiceLinha);
+    }
+
+    public void removeVagao(int indiceLinha) {
+        linhas.remove(indiceLinha);
+        fireTableRowsDeleted(indiceLinha, indiceLinha);
+    }
 }

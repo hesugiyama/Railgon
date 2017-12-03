@@ -316,12 +316,11 @@ public class AdicionarComposicao extends JFrame{
 				if(evt.getClickCount() == 2){
 					try{
 						Locomotiva aux = (Locomotiva) JLdisponiveis.getSelectedValue();
-						fLayout.openAtualizarLocomotiva(null,0,aux);
+						fLayout.openVisualizarLocomotiva(aux);
 					}
 					catch(Exception e){
 						Vagao aux = (Vagao) JLdisponiveis.getSelectedValue();
-						fLayout.openAlertInfo("tela de vagão", "Aguardando implementação");
-						//fLayout.openAtualizarVagao(null,0,aux);
+						fLayout.openVisualizarVagao(aux);
 					}
 				}
 			}
@@ -332,11 +331,10 @@ public class AdicionarComposicao extends JFrame{
 				if(evt.getClickCount() == 2){
 					try{
 						Locomotiva aux = (Locomotiva) JLAuxiliar.getSelectedValue();
-						fLayout.openAtualizarLocomotiva(null,0, aux);
+						fLayout.openVisualizarLocomotiva(aux);
 					}catch(Exception e){
 						Vagao aux = (Vagao) JLAuxiliar.getSelectedValue();
-						fLayout.openAlertInfo("tela de vagão", "Aguardando implementação");
-						//fLayout.openAtualizarVagao(null,0,aux);
+						fLayout.openVisualizarVagao(aux);
 					}
 				}					
 			}
@@ -537,7 +535,4 @@ public class AdicionarComposicao extends JFrame{
 		dispose();
 	}
 
-	public JPanel GetPanel() {
-		return this.JPrincipal;
-	}
 }

@@ -188,7 +188,7 @@ public class Vagao extends VeiculoFerroviario {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("V|");
+		sb.append("V | ");
 		sb.append(getIdentificacao());
 		return sb.toString();
 	}

@@ -53,6 +53,25 @@ public class AdicionarLocomotiva extends JFrame{
 	FactoryLayout tela;
 	//JPanel Jprincipal;
 	
+	public AdicionarLocomotiva(Locomotiva l) {
+		this();
+		locomotiva = l;
+		this.campoClasse.setText(String.valueOf(locomotiva.getClasse()));
+		this.campoDescricao.setText(String.valueOf(locomotiva.getDescricao()));
+		this.campoPesomaxreb.setText(String.valueOf(locomotiva.getPesoMax()));
+		this.JCBbitola.setSelectedItem( VeiculoFerroviario.Bitola.valueOf(String.valueOf(locomotiva.getBitola())));		
+		this.campoComploc.setText(String.valueOf(locomotiva.getComprimento()));
+		this.campoClasse.setEditable(false);
+		this.campoDescricao.setEditable(false);
+		this.campoPesomaxreb.setEditable(false);
+		this.JCBbitola.setEnabled(false);
+		this.campoComploc.setEditable(false);
+		Excluir.setVisible(false);
+		Salvar.setVisible(false);
+		Novo.setVisible(false);
+		this.setTitle(l.getDescricao());
+	}
+	
 	//em caso tenha locomotiva adicionada, o botão Excluir irá aparecer na tela
 	//Setando campos da locomotiva para caso haja adicionado, irá poder excluir.
 	public AdicionarLocomotiva(LocomotivaTableModel md, int linhaSelecionada, Locomotiva l) {
@@ -67,20 +86,24 @@ public class AdicionarLocomotiva extends JFrame{
 		Excluir.setVisible(true);
 		this.setTitle("Alterar Locomotiva");
 	}
+	
 	//metodo que instancia todos campos, botões e chama as seções da pagina
 	public  AdicionarLocomotiva(LocomotivaTableModel md) {
-		super(); // ajusta título
+		this(); // ajusta t�tulo
 		this.setTitle("Adicionar Locomotiva");
+	}
+	
+	public  AdicionarLocomotiva() {
+		super(); // ajusta título
 		//setSize(400,100); 
 		//setResizable(false);
-		modelo = md;
 		campoClasse = new JTextField();
 		campoDescricao = new JTextField();
 		campoPesomaxreb = new JTextField();
 		campoComploc = new JTextField();
 		Classe = new JLabel("Classe:");
-		Descricao = new JLabel("Descrição:");
-		Pesomaxreb = new JLabel("Peso Máximo Rebocável (t):");
+		Descricao = new JLabel("Descri��o:");
+		Pesomaxreb = new JLabel("Peso M�ximo Reboc�vel (t):");
 		Bitola = new JLabel("Bitola:");
 		Comploc = new JLabel ("Comprimento da locomotiva (m):");
 		Excluir = new JButton("Excluir");

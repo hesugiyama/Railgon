@@ -55,6 +55,5 @@ public class LocomotivaTableModel extends AbstractTable<Locomotiva> {
     public void removeLocomotiva(int indiceLinha) {
         linhas.remove(indiceLinha);
         fireTableRowsDeleted(indiceLinha, indiceLinha);
-
     }
 }
